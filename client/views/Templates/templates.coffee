@@ -1,8 +1,8 @@
-###
-Template['allTemplates'].onRendered -> (
-
+Template['templates'].onRendered -> (
+  $('.ui.dropdown')
+    .dropdown()
 )
-###
+
 
 Template['templates'].helpers(
 )

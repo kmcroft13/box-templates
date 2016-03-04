@@ -1,9 +1,10 @@
 Meteor.methods({
-  addTemplate: (templateName, active, folderName, folderId) -> (
+  addTemplate: (templateName, active, folderName, folderId, templateDescription) -> (
     check(templateName, Match.Any)
     check(active, Match.Any)
     check(folderName, Match.Any)
     check(folderId, Match.Any)
+    check(templateDescription, Match.Any)
 
     newTemplateId = Template.insert({
       name: templateName,
@@ -11,7 +12,8 @@ Meteor.methods({
       createdAt: new Date(),
       owner: Meteor.userId(),
       folderName: folderName,
-      folderId: folderId
+      folderId: folderId,
+      description: templateDescription
     })
     newTemplateId
 

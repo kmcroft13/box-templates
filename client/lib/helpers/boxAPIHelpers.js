@@ -1,5 +1,6 @@
 
 
+
 Template.createTemplate.onRendered(function() {
     var boxSelect = new BoxSelect();
     // Register a success callback handler

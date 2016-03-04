@@ -2,36 +2,38 @@
 
 <div class="ui text container">
   <div class="ui text">
-      <h1 class="ui dividing header">Choose Template</h1>
-      <p>Choose a template from the dropdown to get started.
+      <h1 class="ui dividing header">
+        <div class="ui inline dropdown">
+          <div class="text">Choose Template...</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="ui icon search input">
+              <i class="search icon"></i>
+              <input type="text" placeholder="Search templates...">
+            </div>
+            <div class="divider"></div>
+            {{#each privateTemplates}}
+              <div class="item">
+                {{name}}
+                <span class="description">Private</span>
+              </div>
+            {{/ each}}
+          </div>
+        </div>
+      </h1>
+      <p>Select a template above to get started
       </p>
   </div>
 </div>
 
 <br><br>
 
-{{#if privateTemplates}}
   <div class="ui text container">
-    <table class="ui selectable unstackable table single line table">
-      <thead>
-        <tr><th>Name</th>
-        <th>Folder</th>
-        <th>Created</th>
-        <th>Remove</th>
-      </tr></thead>
-      <tbody>
-        {{#each privateTemplates}}
-          {{> privateTemplate}}
-        {{/ each}}
-      </tbody>
-    </table>
+    <div class="content">
+
+    </div>
   </div>
   {{> confirmModal}}
-{{else}}
-  <div class="ui large labeled icon vertical menu">
-    <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
-  </div>
-{{/if}}
 </template>
 
 

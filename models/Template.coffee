@@ -7,6 +7,9 @@ root.Template.attachSchema(
     name:
       type: String
 
+    description:
+      type: String
+
     active:
       type: Boolean
 

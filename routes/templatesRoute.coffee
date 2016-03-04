@@ -9,7 +9,7 @@ Router.map ->
         Meteor.subscribe 'Template'
       ]
     data: ->
-        privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {createdAt: 1}})
+        privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
 
 
   @route 'managePrivate',
