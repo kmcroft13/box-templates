@@ -1,0 +1,31 @@
+<template name="navbar">
+  <div class="ui borderless main menu">
+    <div class="ui container">
+      <div href="#" class="header item">
+        <img class="logo" src="/images/logo.png">
+        Folder Templates
+      </div>
+      {{#if isLoggedIn}}
+      <a href="/templates" class="item">Your Templates</a>
+      <a href="/template/create" class="item">Create New</a>
+      {{/if}}
+      {{#if isLoggedIn}}
+      <a href="#" class="ui right floated dropdown item">
+        <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
+        <div class="text"> {{currentUser.profile.fullName}}</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">Link Item</div>
+          <div class="item">Link Item</div>
+          <div class="divider"></div>
+          <div class="header">Logout</div>
+        </div>
+      </a>
+      {{else}}
+      <a href="/sign-in" class="ui right floated item">
+        <div class="text">Login</div>
+      </a>
+      {{/if}}
+    </div>
+  </div>
+</template>

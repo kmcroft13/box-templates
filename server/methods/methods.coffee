@@ -1,0 +1,57 @@
+Meteor.methods({
+  addTemplate: (templateName, active, folderName, folderId) -> (
+    check(templateName, Match.Any)
+    check(active, Match.Any)
+    check(folderName, Match.Any)
+    check(folderId, Match.Any)
+
+    newTemplateId = Template.insert({
+      name: templateName,
+      active: active,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      folderName: folderName,
+      folderId: folderId
+    })
+    newTemplateId
+
+    console.log("New Template (" + templateName + ") Created: " + newTemplateId)
+),
+
+  deleteTask: (templateId) -> (
+    check(templateId, Match.Any)
+
+    ###
+    var template = Template.findOne(templateId)
+    if template.private && template.owner !== Meteor.userId() (
+      # If the task is private, make sure only the owner can delete it
+      throw new Meteor.Error("not-authorized");
+    )
+    ###
+
+    Template.remove(templateId)
+    console.log("Template Removed: " + templateId)
+ ),
+
+###
+ setChecked: function (taskId, setChecked) {
+   Tasks.update(taskId, { $set: { checked: setChecked} });
+   var task = Tasks.findOne(taskId);
+   if (task.private && task.owner !== Meteor.userId()) {
+     // If the task is private, make sure only the owner can check it off
+     throw new Meteor.Error("not-authorized");
+   }
+ },
+
+  setPrivate: function (taskId, setToPrivate) {
+    var task = Tasks.findOne(taskId);
+
+    // Make sure only the task owner can make a task private
+    if (task.owner !== Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Tasks.update(taskId, { $set: { private: setToPrivate } });
+  }
+###
+})

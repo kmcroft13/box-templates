@@ -1,0 +1,17 @@
+<template name="home">
+  <div class="ui text container">
+    <div class="ui center aligned header">
+      <h1>welcome</h1>
+    </div>
+
+    <div class="ui text">
+      {{#if isLoggedIn}}
+        <h3 class="ui centered header">
+          <b><a href="/templates">view your templates</a></b> or <b><a href="/template/create">create a new one</a></b> to get started</h3>
+      {{else}}
+        <h3 class="ui centered header"><b><a href="/sign-in">login</a></b> to get started</h3>
+      {{/if}}
+    </div>
+  </div>
+
+</template>

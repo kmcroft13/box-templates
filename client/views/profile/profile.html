@@ -1,0 +1,45 @@
+<template name="profile">
+
+  <div class="ui text container">
+
+    <div class="ui icon info message">
+      <i class="warning icon"></i>
+      The infomation on this page is captured from Box. Any updates you make in Box will be synced next time you login.
+    </div>
+    <br>
+
+    <div class="ui text">
+        <h1 class="ui dividing header"><img class="ui avatar image header" src="{{currentUser.profile.avatar}}"> {{currentUser.profile.fullName}}</h1>
+    </div>
+  </div>
+
+<br>
+
+  <div class="ui text container">
+
+    <div class="ui items">
+
+      <div class="item">
+        <div class="content">
+          <a class="header">Enterprise</a>
+          <div class="description">
+            <p>{{currentUser.profile.boxEntName}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="content">
+          <a class="header">Role</a>
+          <div class="description">
+            <p>{{currentUser.profile.boxRole}}</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</template>
