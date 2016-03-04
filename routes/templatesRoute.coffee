@@ -1,7 +1,19 @@
 Router.map ->
 
-  @route 'allTemplates',
+
+  @route 'templates',
     path: '/templates'
+    layout: 'basicLayout'
+    waitOn: ->
+      [
+        Meteor.subscribe 'Template'
+      ]
+    data: ->
+        privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {createdAt: 1}})
+
+
+  @route 'managePrivate',
+    path: '/manage/private'
     layout: 'basicLayout'
     waitOn: ->
       [

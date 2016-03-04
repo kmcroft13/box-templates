@@ -1,0 +1,76 @@
+<template name="managePrivate">
+
+<div class="ui text container">
+  <div class="ui text">
+      <h1 class="ui dividing header">Your Templates</h1>
+      <div class="overlay">
+        <div class="ui labeled icon vertical menu">
+          <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
+        </div>
+      </div>
+      <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
+        made available to you. Only Administrators can manage Enterprise Templates. You can also see
+        and manage <b>Private Templates</b> which you have created.
+      </p>
+  </div>
+</div>
+
+<br><br>
+
+{{#if privateTemplates}}
+  <div class="ui text container">
+    <table class="ui selectable unstackable table single line table">
+      <thead>
+        <tr><th>Name</th>
+        <th>Folder</th>
+        <th>Created</th>
+        <th>Remove</th>
+      </tr></thead>
+      <tbody>
+        {{#each privateTemplates}}
+          {{> privateTemplate}}
+        {{/ each}}
+      </tbody>
+    </table>
+  </div>
+  {{> deleteModal}}
+{{else}}
+  <div class="ui large labeled icon vertical menu">
+    <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
+  </div>
+{{/if}}
+</template>
+
+
+<template name="privateTemplate">
+  <tr>
+    <td><a href="/template/{{_id}}/view">{{name}}</a></td>
+    <td>{{folderName}}</td>
+    <td>{{shortDate createdAt}}</td>
+    {{#if isLoggedIn}}<td><button class="ui compact negative button delete">Remove</button></td>{{/if}}
+  </tr>
+</template>
+
+<template name="deleteModal">
+  <div class="ui basic modal">
+    <div class="centered header">
+      Delete Template
+    </div>
+    <div class="content">
+      <div class="description">
+        <p>You will be unable to use this Template from now on.  Are you sure you want to delete?</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui inverted buttons">
+        <div class="ui basic inverted button cancel">
+          Cancel
+        </div>
+        <div class="ui red basic inverted button approve">
+          <i class="remove icon"></i>
+          Delete
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

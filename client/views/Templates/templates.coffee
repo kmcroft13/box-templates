@@ -4,11 +4,11 @@ Template['allTemplates'].onRendered -> (
 )
 ###
 
-Template['allTemplates'].helpers(
+Template['templates'].helpers(
 )
 
 
-Template['allTemplates'].events(
+Template['templates'].events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)
     $('.ui.basic.modal')
@@ -25,7 +25,7 @@ Template['allTemplates'].events(
 )
 
 
-Template['deleteModal'].events(
+Template['confirmModal'].events(
   'click .cancel': ->
     $('.ui.basic.modal')
       .modal('hide')

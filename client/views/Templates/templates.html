@@ -1,16 +1,9 @@
-<template name="allTemplates">
+<template name="templates">
 
 <div class="ui text container">
   <div class="ui text">
-      <h1 class="ui dividing header">Your Templates</h1>
-      <div class="overlay">
-        <div class="ui labeled icon vertical menu">
-          <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
-        </div>
-      </div>
-      <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
-        made available to you. Only Administrators can manage Enterprise Templates. You can also see
-        and manage <b>Private Templates</b> which you have created.
+      <h1 class="ui dividing header">Choose Template</h1>
+      <p>Choose a template from the dropdown to get started.
       </p>
   </div>
 </div>
@@ -33,7 +26,7 @@
       </tbody>
     </table>
   </div>
-  {{> deleteModal}}
+  {{> confirmModal}}
 {{else}}
   <div class="ui large labeled icon vertical menu">
     <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
@@ -42,16 +35,7 @@
 </template>
 
 
-<template name="privateTemplate">
-  <tr>
-    <td><a href="/template/{{_id}}/view">{{name}}</a></td>
-    <td>{{folderName}}</td>
-    <td>{{shortDate createdAt}}</td>
-    {{#if isLoggedIn}}<td><button class="ui compact negative button delete">Remove</button></td>{{/if}}
-  </tr>
-</template>
-
-<template name="deleteModal">
+<template name="confirmModal">
   <div class="ui basic modal">
     <div class="centered header">
       Delete Template
