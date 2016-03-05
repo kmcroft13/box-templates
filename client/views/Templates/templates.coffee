@@ -9,6 +9,12 @@ Template['templates'].helpers(
 
 
 Template['templates'].events(
+
+  'click .dropdown-item': (evt, tpl) ->
+    console.log(this.name + " (" + this._id + ") selected");
+    description = this.description
+    $("#description").text(description)
+
   'click .delete': ->
     Session.set('templateToDelete', this._id)
     $('.ui.basic.modal')

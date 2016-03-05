@@ -42,3 +42,4 @@ useraccounts:core
 useraccounts:iron-routing
 accounts-box
 momentjs:moment
+force-ssl

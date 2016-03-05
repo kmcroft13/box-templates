@@ -1,39 +1,39 @@
 <template name="templates">
-
-<div class="ui text container">
-  <div class="ui text">
-      <h1 class="ui dividing header">
-        <div class="ui inline dropdown">
-          <div class="text">Choose Template...</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="ui icon search input">
-              <i class="search icon"></i>
-              <input type="text" placeholder="Search templates...">
-            </div>
-            <div class="divider"></div>
-            {{#each privateTemplates}}
-              <div class="item">
-                {{name}}
-                <span class="description">Private</span>
+<div id="content">
+  <div class="ui text container">
+    <div class="ui text">
+        <div class="ui dividing header">
+          <div class="ui dropdown">
+            <div class="text"><h2>Choose Template...</h2></div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="ui icon search input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search templates...">
               </div>
-            {{/ each}}
+              <div class="divider"></div>
+              {{#each privateTemplates}}
+                <div class="item dropdown-item">
+                  {{name}}
+                  <span class="description">Private</span>
+                </div>
+              {{/ each}}
+            </div>
           </div>
         </div>
-      </h1>
-      <p>Select a template above to get started
-      </p>
-  </div>
-</div>
-
-<br><br>
-
-  <div class="ui text container">
-    <div class="content">
-
+        <p id="description">Select a template above to get started</p>
     </div>
   </div>
-  {{> confirmModal}}
+
+  <br><br>
+
+    <div class="ui text container">
+      <div class="content">
+
+      </div>
+    </div>
+    {{> confirmModal}}
+</div>
 </template>
 
 

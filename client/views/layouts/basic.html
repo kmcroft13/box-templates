@@ -1,8 +1,12 @@
 <template name="basicLayout">
-  <br>
+  <div></div>
   {{> navbar}}
-  <br><br>
-  {{> yield}}
 
-  {{>footer}}
+  <br><br>
+
+  <div class="wrapper">
+    {{> yield}}
+
+    {{>footer}}
+  </div>
 </template>

@@ -1,68 +1,68 @@
 <template name="createTemplate">
-
-<div class="ui text container">
-  <div class="ui text">
-    <h1 class="ui dividing header">Create Template</h1>
-    <p>Create a new private Folder Template. <b>Private Templates</b> are available
-      only to you and cannot be used by other members of your organization.
-    </p>
-  </div>
-</div>
-
-<br>
-
-<div class="ui text container">
-
-  <div class="hidden ui positive floating message">
-    <i class="close icon"></i>
-    <div class="header">
-      Success!
+<div id="content">
+  <div class="ui text container">
+    <div class="ui text">
+      <h1 class="ui dividing header">Create Template</h1>
+      <p>Create a new private Folder Template. <b>Private Templates</b> are available
+        only to you and cannot be used by other members of your organization.
+      </p>
     </div>
-    <p><b><span id="templateName"></span></b> was successfully created</p>
   </div>
 
-  <div class="hidden ui negative floating message">
-    <i class="close icon"></i>
-    <div class="header">
-      Something went wrong
-    </div>
-    <p><b><span id="errorDesc"></span>.</b> Please try again.</p>
-  </div>
+  <br>
 
-<br>
+  <div class="ui text container">
 
-  <form class="ui form">
-    <div class="field">
-      <label>Template Name</label>
-      <input type="text" name="templateName" placeholder="Template Name">
-    </div>
-    <div class="field">
-      <label>Description</label>
-      <textarea rows="2" name="templateDescription" placeholder="Description"></textarea>
-    </div>
-    <div class="field">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="active" tabindex="0" class="hidden">
-        <label>Active</label>
+    <div class="hidden ui positive floating message">
+      <i class="close icon"></i>
+      <div class="header">
+        Success!
       </div>
+      <p><b><span id="templateName"></span></b> was successfully created</p>
     </div>
 
-    <div class="field">
-      <label>Folder Name</label>
-      <div class="ui equal width grid">
-        <div class="column">
-          <input type="text" name="folderName" placeholder="Choose folder from Box..." readonly="">
-          <input type="text" name="folderId" readonly="" hidden="">
-        </div>
-        <div class="column">
-          <div id="box-select" data-link-type="shared" data-multiselect="false" data-client-id="8tbfrpmfguuywx6u61jqyoaopt5itvdf"></div>
+    <div class="hidden ui negative floating message">
+      <i class="close icon"></i>
+      <div class="header">
+        Something went wrong
+      </div>
+      <p><b><span id="errorDesc"></span>.</b> Please try again.</p>
+    </div>
+
+  <br>
+
+    <form class="ui form">
+      <div class="field">
+        <label>Template Name</label>
+        <input type="text" name="templateName" placeholder="Template Name">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea rows="2" name="templateDescription" placeholder="Description"></textarea>
+      </div>
+      <div class="field">
+        <div class="ui toggle checkbox">
+          <input type="checkbox" name="active" tabindex="0" class="hidden">
+          <label>Active</label>
         </div>
       </div>
-    </div>
 
-    <button class="ui button" type="submit">Submit</button>
-  </form>
+      <div class="field">
+        <label>Folder Name</label>
+        <div class="ui equal width grid">
+          <div class="column">
+            <input type="text" name="folderName" placeholder="Choose folder from Box..." readonly="">
+            <input type="text" name="folderId" readonly="" hidden="">
+          </div>
+          <div class="column">
+            <div id="box-select" data-link-type="shared" data-multiselect="false" data-client-id="8tbfrpmfguuywx6u61jqyoaopt5itvdf"></div>
+          </div>
+        </div>
+      </div>
 
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+
+  </div>
 </div>
-
 </template>
