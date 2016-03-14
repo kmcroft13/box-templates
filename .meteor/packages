@@ -43,3 +43,5 @@ useraccounts:iron-routing
 accounts-box
 momentjs:moment
 force-ssl
+yogiben:admin
+aldeed:simple-schema
