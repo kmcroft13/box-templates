@@ -16,6 +16,9 @@
         <i class="dropdown icon"></i>
         <div class="menu" style="font-size: 1em !important;"> <!--fix for Semantic UI issue -->
           <a href="/profile" class="item">Profile</a>
+          {{#if isInRole 'admin'}}
+            <a href="/admin" class="item">Admin</a>
+          {{/if}}
           <div class="divider"></div>
           <a href="/sign-out" class="item">Logout</a>
         </div>
