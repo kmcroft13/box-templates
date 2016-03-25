@@ -11,9 +11,12 @@ Template['templates'].helpers(
 Template['templates'].events(
 
   'click .dropdown-item': (evt, tpl) ->
-    console.log(this.name + " (" + this._id + ") selected");
     description = this.description
+    folderName = this.folderName
+    folderId = this.folderId
+    Session.set("folderToCopy",folderId)
     $("#description").text(description)
+    console.log(this.name + " (" + this._id + ") selected. Session variable set for " + this.folderName + " (" + this.folderId + ")")
 
   'click .delete': ->
     Session.set('templateToDelete', this._id)

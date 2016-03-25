@@ -9,7 +9,6 @@ aldeed:collection2
 iron:router
 raix:handlebar-helpers
 matteodem:easy-security
-audit-argument-checks
 fastclick
 zimme:iron-router-active
 manuelschoebel:ms-seo
@@ -45,3 +44,5 @@ momentjs:moment
 force-ssl
 yogiben:admin
 aldeed:simple-schema
+http
+audit-argument-checks

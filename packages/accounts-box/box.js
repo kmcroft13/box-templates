@@ -7,9 +7,11 @@ if (Meteor.isClient) {
             callback = options;
             options = {};
         }
-        if (!options)
+        if (!options) {
             options = {};
-
+        }
+        console.log("3");
+        console.log(options);
 
         var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
         Box.requestCredential(options, credentialRequestCompleteCallback);

@@ -1,35 +1,34 @@
-root = exports ? this
+Schemas = {}
+@Template = new Meteor.Collection('Template')
 
-root.Template = new Mongo.Collection 'Template'
+Schemas.Template = new SimpleSchema
+  name:
+    type: String
 
-root.Template.attachSchema(
-  new SimpleSchema(
-    name:
-      type: String
+  description:
+    type: String
 
-    description:
-      type: String
+  active:
+    type: Boolean
 
-    active:
-      type: Boolean
+  createdAt:
+    type: Date
 
-    createdAt:
-      type: Date
+  owner:
+    type: String
 
-    owner:
-      type: String
+  folderName:
+    type: String
 
-    folderName:
-      type: String
+  folderId:
+    type: String
 
-    folderId:
-      type: String
-  )
-)
+
+Template.attachSchema Schemas.Template
 
 # Collection2 already does schema checking
 # Add custom permission rules if needed
-root.Template.allow(
+Template.allow(
   insert: (userId, doc) ->
     userId == doc.owner
 
@@ -38,5 +37,11 @@ root.Template.allow(
 
   remove: (userId, doc) ->
     userId == doc.owner
+)
+
+Template.helpers(
+	creator: ->
+		user = Meteor.users.findOne(@owner)
+		user.profile.fullName
 
 )
