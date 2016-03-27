@@ -1,5 +1,6 @@
 <template name="templates">
 <div id="content">
+{{#if privateTemplates.count}}
   <div class="ui text container">
     <div class="ui text">
 
@@ -16,7 +17,7 @@
         <div class="header">
           Something went wrong!
         </div>
-        <p>Box says: <b><span id="errorDesc"></span></b>. We're looking into it, but feel free to cross your fingers and try again.</p>
+        <p>Here's a little more context: <b><span id="errorDesc"></span></b></p>
       </div>
 
         <div class="ui dividing header">
@@ -46,11 +47,25 @@
 
     <div class="ui text container">
       <div class="content">
-        <button id="copyTemplate" class="positive ui right floated button">Copy Template</button>
+        <button id="copyTemplate" class="positive ui right floated disabled button">Copy Template</button>
       </div>
     </div>
-    {{> confirmModal}}
+{{else}}
+  <div class="ui text container">
+    <div class="ui text">
+        <h1 class="ui dividing header">Build from Template</h1>
+    </div>
+  </div>
+  <br>
+  <div class="ui text container">
+    <p>Looks like you haven't created a Template yet! Want to <a href="/template/create"><b>create one</b></a>?
+    </p>
+  </div>
+{{/if}}
+
+{{> confirmModal}}
 </div>
+
 </template>
 
 

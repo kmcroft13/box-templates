@@ -1,13 +1,13 @@
 <template name="navbar">
   <div class="ui borderless main menu">
     <div class="ui container">
-      <div href="#" class="header item">
+      <div href="#" class="{{#if isActiveRoute name="templates"}}active{{/if}} item">
         <img class="logo" src="/images/boxLogo.png">
-        <a href="/templates">Templates</a>
+        <a href="/templates"><b>Templates</b></a>
       </div>
       {{#if isLoggedIn}}
-      <a href="/manage/private" class="item">Manage</a>
-      <a href="/template/create" class="item">Create</a>
+      <a href="/manage/private" class="{{#if isActiveRoute name="managePrivate"}}active{{/if}} item">Manage</a>
+      <a href="/template/create" class="{{#if isActiveRoute name="createTemplate"}}active{{/if}} item">Create</a>
       {{/if}}
       {{#if isLoggedIn}}
       <div class="ui right floated dropdown item">
@@ -30,4 +30,5 @@
       {{/if}}
     </div>
   </div>
+
 </template>

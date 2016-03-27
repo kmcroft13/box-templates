@@ -3,22 +3,23 @@
   <div class="ui text container">
     <div class="ui text">
         <h1 class="ui dividing header">Your Templates</h1>
-        <div class="overlay">
-          <div class="ui labeled icon vertical menu">
-            <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
-          </div>
-        </div>
-        <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
-          made available to you. Only Administrators can manage Enterprise Templates. You can also see
-          and manage <b>Private Templates</b> which you have created.
-        </p>
     </div>
   </div>
 
-  <br><br>
 
-  {{#if privateTemplates}}
+  {{#if privateTemplates.count}}
+    <br><br>
     <div class="ui text container">
+      <div class="overlay">
+        <div class="ui labeled icon vertical menu">
+          <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
+        </div>
+      </div>
+      <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
+        made available to you. Only Administrators can manage Enterprise Templates. You can also see
+        and manage <b>Private Templates</b> which you have created.
+      </p>
+
       <table class="ui selectable unstackable table single line table">
         <thead>
           <tr><th>Name</th>
@@ -35,8 +36,10 @@
     </div>
     {{> deleteModal}}
   {{else}}
-    <div class="ui large labeled icon vertical menu">
-      <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
+    <br>
+    <div class="ui text container">
+      <p>Looks like you haven't created a Template yet! Want to <a href="/template/create"><b>create one</b></a>?
+      </p>
     </div>
   {{/if}}
 </div>

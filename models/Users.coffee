@@ -1,3 +1,14 @@
+BoxGroups = new SimpleSchema
+
+  id:
+    type: String
+    optional: true
+
+  name:
+    type: String
+    optional: true
+
+
 UserProfile = new SimpleSchema
 
   fullName:
@@ -23,6 +34,17 @@ UserProfile = new SimpleSchema
   avatar:
     type: String
     optional: true
+
+  boxGroups:
+    type: [Object]
+    optional: true
+    blackbox: true
+
+  "boxGroups.$.id":
+    type: String
+
+  "boxGroups.$.name":
+    type: String
 
 
 User = new SimpleSchema

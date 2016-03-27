@@ -1,13 +1,10 @@
 Router.map ->
 
-
   @route 'templates',
     path: '/templates'
     layout: 'basicLayout'
     waitOn: ->
-      [
         Meteor.subscribe 'Template'
-      ]
     data: ->
         privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
 
@@ -16,9 +13,7 @@ Router.map ->
     path: '/manage/private'
     layout: 'basicLayout'
     waitOn: ->
-      [
         Meteor.subscribe 'Template'
-      ]
     data: ->
         privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {createdAt: 1}})
 
@@ -37,11 +32,3 @@ Router.map ->
       ]
     data: ->
         template: Template.findOne({$and: [{_id: this.params._id},{owner: Meteor.userId()}]})
-
-
-  @route 'signOut',
-    path: '/sign-out'
-    onBeforeAction: ->
-      AccountsTemplates.logout()
-      @redirect '/'
-      @next()

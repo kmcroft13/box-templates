@@ -16,7 +16,7 @@ Template.templates.events(
     folder = Session.get("folderToCopy")
 
     console.log("Preparing to copy Box folder (" + folder + ")...")
-
+    
     Meteor.call('copyTemplate', folder, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error

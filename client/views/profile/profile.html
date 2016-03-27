@@ -4,7 +4,7 @@
 
     <div class="ui icon info message">
       <i class="warning icon"></i>
-      The infomation on this page is captured from Box. Any updates you make in Box will be synced next time you login.
+      The infomation on this page is captured from Box.  Any updates you make in Box will be synced next time you login.
     </div>
     <br>
 
@@ -51,6 +51,17 @@
           <a class="header">Box EID</a>
           <div class="description">
             <p>{{currentUser.profile.eid}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="content">
+          <a class="header">Box Group Membership</a>
+          <div class="description">
+            {{#each currentUser.profile.boxGroups}}
+              <p>{{name}}</p>
+            {{/each}}
           </div>
         </div>
       </div>

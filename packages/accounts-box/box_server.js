@@ -8,8 +8,6 @@ OAuth.registerService('box', 2, null, function(query) {
   var response = getTokens(query);
   var accessToken = response.accessToken;
   var identity = getIdentity(accessToken);
-  var role = getRole(accessToken);
-  var enterprise = getEnterprise(accessToken).enterprise;
 
   var serviceData = {
     accessToken: accessToken,
@@ -31,7 +29,7 @@ OAuth.registerService('box', 2, null, function(query) {
   return {
     serviceData: serviceData,
     options: {
-      profile: {fullName: identity.name, avatar: identity.avatar_url, boxRole: role.role, boxTariff: enterprise.type, eid: enterprise.id, boxEntName: enterprise.name},
+      profile: {fullName: identity.name, avatar: identity.avatar_url},
       email: identity.login
     }
   };
@@ -84,29 +82,6 @@ var getIdentity = function (accessToken) {
   }
 };
 
-var getRole = function (accessToken) {
-  try {
-    var response = HTTP.get(
-      "https://www.box.com/api/2.0/users/me?fields=role",
-      {params: {access_token: accessToken}}).data;
-    return response
-  } catch (err) {
-    throw _.extend(new Error("Failed to fetch user role from Box. " + err.message),
-                   {response: err.response});
-  }
-};
-
-var getEnterprise = function (accessToken) {
-  try {
-    var response = HTTP.get(
-      "https://www.box.com/api/2.0/users/me?fields=enterprise",
-      {params: {access_token: accessToken}}).data;
-    return response
-  } catch (err) {
-    throw _.extend(new Error("Failed to fetch user enterprise from Box. " + err.message),
-                   {response: err.response});
-  }
-};
 
 Box.retrieveCredential = function(credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);

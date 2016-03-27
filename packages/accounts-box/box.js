@@ -10,11 +10,11 @@ if (Meteor.isClient) {
         if (!options) {
             options = {};
         }
-        console.log("3");
-        console.log(options);
+
 
         var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
         Box.requestCredential(options, credentialRequestCompleteCallback);
+        
     };
 } else {
     Accounts.addAutopublishFields({

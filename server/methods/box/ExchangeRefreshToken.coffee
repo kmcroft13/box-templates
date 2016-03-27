@@ -1,8 +1,6 @@
 Meteor.methods(
   refreshToken: ->
-
-    console.log("Does it get here?")
-
+    console.log("Token Expired")
     config = ServiceConfiguration.configurations.findOne({service: 'box'})
     if !config
       throw new ServiceConfiguration.ConfigError()
@@ -25,10 +23,11 @@ Meteor.methods(
     if result.data.access_token
       Meteor.users.update({_id: Meteor.userId()}, {$set: {
         'services.box.accessToken': result.data.access_token,
-        'services.box.expiresAt': result.data.expires_in,
+        'services.box.expiresAt': (+new Date) + (1000 * result.data.expires_in),
         'services.box.refreshToken': result.data.refresh_token
       }})
 
       console.log("Success! New access token...")
       console.log(result.data.access_token)
+      console.log("Proceeding with call to Box API")
 )

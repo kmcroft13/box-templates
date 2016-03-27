@@ -13,20 +13,12 @@
 
   <div class="ui text container">
 
-    <div class="hidden ui positive floating message">
+    <div class="hidden ui floating message">
       <i class="close icon"></i>
       <div class="header">
-        Success!
+        <span id="messageTitle"></span>
       </div>
-      <p><b><span id="templateName"></span></b> was successfully created</p>
-    </div>
-
-    <div class="hidden ui negative floating message">
-      <i class="close icon"></i>
-      <div class="header">
-        Something went wrong
-      </div>
-      <p><b><span id="errorDesc"></span>.</b> Please try again.</p>
+      <p id="messageBody"></p>
     </div>
 
   <br>
@@ -38,7 +30,7 @@
       </div>
       <div class="field">
         <label>Description</label>
-        <textarea rows="2" name="templateDescription" placeholder="Description"></textarea>
+        <textarea name="templateDescription" placeholder="Description"></textarea>
       </div>
       <div class="field">
         <div class="ui toggle checkbox">

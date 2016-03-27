@@ -16,6 +16,7 @@ Template['templates'].events(
     folderId = this.folderId
     Session.set("folderToCopy",folderId)
     $("#description").text(description)
+    $("#copyTemplate").removeClass("disabled")
     console.log(this.name + " (" + this._id + ") selected. Session variable set for " + this.folderName + " (" + this.folderId + ")")
 
   'click .delete': ->
