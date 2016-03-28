@@ -7,6 +7,8 @@ Router.map ->
         Meteor.subscribe 'Template'
     data: ->
         privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
+    onBeforeAction: ->
+        console.log(this.params.query.post_params)
 
 
   @route 'managePrivate',
