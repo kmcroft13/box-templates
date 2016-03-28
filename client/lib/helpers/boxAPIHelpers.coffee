@@ -13,11 +13,12 @@ Template.boxAPIresponse.helpers({
 
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
-    folder = Session.get("folderToCopy")
+    sourceFolder = Session.get("folderToCopy")
+    targetFolderName = $('input[name="newFolderName"]').val()
 
-    console.log("Preparing to copy Box folder (" + folder + ")...")
-    
-    Meteor.call('copyTemplate', folder, (error, result) ->
+    console.log("Preparing to copy Box folder (" + sourceFolder + ") as " + targetFolderName + "...")
+
+    Meteor.call('copyTemplate', sourceFolder, targetFolderName, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
          console.log(error)
@@ -28,7 +29,7 @@ Template.templates.events(
          $('html, body').animate(
            scrollTop: 0, 300)
       else
-         console.log(JSON.parse(result))
+         console.log(result)
          Session.set("folderToCopy",undefined)
          $('.negative').addClass('hidden')
          $('form').form('clear')

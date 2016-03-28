@@ -1,6 +1,7 @@
 Meteor.methods(
-  copyTemplate: (folder) ->
+  copyTemplate: (folder, targetFolderName) ->
     check(folder, Match.Any)
+    check(targetFolderName, Match.Any)
     # avoid blocking other method calls from the same client
     this.unblock()
     sourceFolder = folder
@@ -32,7 +33,7 @@ Meteor.methods(
           "parent": {
             "id" : targetFolder
           },
-          "name": "TEST"
+          "name": targetFolderName
         }
       })
 
