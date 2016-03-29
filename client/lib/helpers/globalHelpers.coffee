@@ -1,8 +1,3 @@
-Tracker.autorun( ->
-  if Meteor.user()
-    Meteor.call("syncProfile")
-)
-
 
 UI.registerHelper('isLoggedIn', ->
   !!Meteor.user()

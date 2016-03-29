@@ -19,7 +19,6 @@ dburles:collection-helpers
 meteorhacks:fast-render
 
 semantic:ui-css
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -46,3 +45,5 @@ yogiben:admin
 aldeed:simple-schema
 http
 audit-argument-checks
+standard-minifier-css
+standard-minifier-js
