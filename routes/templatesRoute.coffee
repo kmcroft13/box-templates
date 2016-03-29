@@ -10,6 +10,7 @@ Router.map ->
     onBeforeAction: ->
         console.log(this.params)
         console.log(this.request)
+        console.log(this.request.body)
         @next()
 
 
