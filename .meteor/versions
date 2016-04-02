@@ -8,7 +8,7 @@ aldeed:collection2-core@1.1.1
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
-aldeed:tabular@1.4.2
+aldeed:tabular@1.6.0
 aldeed:template-extension@4.0.0
 allow-deny@1.0.2
 audit-argument-checks@1.0.5
@@ -57,7 +57,7 @@ iron:core@1.0.11
 iron:dynamic-template@1.0.12
 iron:layout@1.0.12
 iron:location@1.0.11
-iron:middleware-stack@1.0.11
+iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.6
