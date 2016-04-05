@@ -6,6 +6,8 @@
 jquery
 underscore
 aldeed:collection2
+dburles:collection-helpers
+aldeed:simple-schema
 iron:router
 raix:handlebar-helpers
 matteodem:easy-security
@@ -15,7 +17,6 @@ manuelschoebel:ms-seo
 browser-policy
 useraccounts:semantic-ui
 natestrauser:animate-css
-dburles:collection-helpers
 meteorhacks:fast-render
 
 semantic:ui-css
@@ -42,7 +43,6 @@ accounts-box
 momentjs:moment
 force-ssl
 yogiben:admin
-aldeed:simple-schema
 http
 audit-argument-checks
 standard-minifier-css
