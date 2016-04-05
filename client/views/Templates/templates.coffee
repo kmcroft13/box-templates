@@ -4,10 +4,6 @@ Template['templates'].onRendered -> (
 )
 
 
-Template['templates'].helpers(
-)
-
-
 Template['templates'].events(
 
   'click .dropdown-item': (evt, tpl) ->

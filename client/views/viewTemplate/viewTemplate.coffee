@@ -3,11 +3,3 @@ Template['viewTemplate'].onRendered -> (
   this.$('.ui.checkbox').checkbox()
 
 )
-
-
-Template['viewTemplate'].helpers(
-)
-
-
-Template['viewTemplate'].events(
-)

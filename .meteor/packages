@@ -5,9 +5,6 @@
 
 jquery
 underscore
-aldeed:collection2
-dburles:collection-helpers
-aldeed:simple-schema
 iron:router
 raix:handlebar-helpers
 matteodem:easy-security
@@ -47,3 +44,6 @@ http
 audit-argument-checks
 standard-minifier-css
 standard-minifier-js
+aldeed:collection2
+dburles:collection-helpers
+aldeed:simple-schema

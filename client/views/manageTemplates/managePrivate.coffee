@@ -1,13 +1,3 @@
-###
-Template['allTemplates'].onRendered -> (
-
-)
-###
-
-Template['managePrivate'].helpers(
-)
-
-
 Template['managePrivate'].events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)

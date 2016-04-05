@@ -4,9 +4,6 @@ Template['createTemplate'].onRendered -> (
 
 )
 
-Template['createTemplate'].helpers(
-)
-
 
 Template['createTemplate'].events(
 
