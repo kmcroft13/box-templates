@@ -8,9 +8,11 @@ Router.map ->
     data: ->
         privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
     onBeforeAction: ->
-        console.log(this.params)
-        console.log(this.request)
-        console.log(this.request.body)
+        console.log("this.params: " + JSON.stringify(this.params))
+        console.log("this.request: " + JSON.stringify(this.request))
+        console.log("this.request.body: " + JSON.stringify(this.request.body))
+        console.log("this.request.query: " + JSON.stringify(this.request.query))
+        console.log("this.req: " + JSON.stringify(this.req))
         @next()
 
 
