@@ -12,7 +12,7 @@ Meteor.methods(
     else if targetFolder
       targetFolder = targetFolder
     else
-      throw new Meteor.Error(400, "Target folder is unknown");
+      throw new Meteor.Error(400, "Target folder is unknown. Try launching this window directly by right-clicking on a Box folder.");
 
 
     console.log("Copying template for " + Meteor.userId() + " (userId) from " + sourceFolder + " (Box folder ID) to " + targetFolder + " (Box folder ID)...")
