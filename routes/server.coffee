@@ -20,7 +20,8 @@ Router.map ->
         {
           folderName: folderName,
           folderId: folderId,
-          boxUserId: userId
+          boxUserId: userId,
+          addedAt: new Date()
         }
       )
 

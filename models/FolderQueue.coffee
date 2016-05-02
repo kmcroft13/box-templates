@@ -11,6 +11,9 @@ Schemas.FolderQueue = new SimpleSchema
   boxUserId:
     type: String
 
+  addedAt:
+    type: Date
+
 
 FolderQueue.attachSchema Schemas.FolderQueue
 
