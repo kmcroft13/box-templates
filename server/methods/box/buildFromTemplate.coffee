@@ -11,7 +11,7 @@ Meteor.methods(
     #PICK FOLDER TO COPY
     if Meteor.settings.public.environment == "dev"
       targetFolder = "0" #Root level for Dev
-    else if targetFolder
+    else if target
       console.log("Found target folder:")
       console.log(" - " + targetFolder.folderId)
       console.log(" - " + targetFolder.folderName)
