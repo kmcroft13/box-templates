@@ -6,7 +6,7 @@ Meteor.methods(
     this.unblock()
     sourceFolder = folder
     userBoxId = Meteor.user().services.box.id
-    targetFolder = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {DateTime: -1}})
+    targetFolder = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}})
 
     #PICK FOLDER TO COPY
     if Meteor.settings.public.environment == "dev"
