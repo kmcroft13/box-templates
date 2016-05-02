@@ -4,10 +4,6 @@ Router.map ->
     path: '/server'
     where: 'server'
     action: ->
-      console.log("this.params: ", this.params)
-      console.log("this.request.body: ", this.request.body)
-      console.log("this.request.query: ", this.request.query)
-
       folderId = this.request.body.file_id
       folderName = this.request.body.file_name
       userId = this.request.body.box_id
@@ -26,4 +22,5 @@ Router.map ->
       )
 
       this.response.statusCode = 200;
-      this.response.end("Folder successfully submitted to queue.");
+      console.log("Folder successfully submitted to queue.")
+      this.response.end("Folder successfully submitted to queue.")

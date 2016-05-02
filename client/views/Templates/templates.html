@@ -4,6 +4,12 @@
   <div class="ui text container">
     <div class="ui text">
 
+      {{#if queue}}
+      <div class="ui floating message">
+        <p>Preparing to copy {{#each queue}}<b>{{folderName}}</b>{{/ each}}</p>
+      </div>
+      {{/ if}}
+
       <div class="hidden ui positive floating message">
         <i class="close icon"></i>
         <div class="header">

@@ -6,22 +6,22 @@ Meteor.methods(
     this.unblock()
     sourceFolder = folder
     userBoxId = Meteor.user().services.box.id
-    targetFolder = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}})
+    target = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}})
 
     #PICK FOLDER TO COPY
     if Meteor.settings.public.environment == "dev"
       targetFolder = "0" #Root level for Dev
     else if targetFolder
-      console.log(targetFolder)
-      console.log(targetFolder.folderId)
-      console.log(targetFolder.folderName)
-      console.log(targetFolder.boxUserId)
-      targetFolder = targetFolder.folderId
+      console.log("Found target folder:")
+      console.log(" - " + targetFolder.folderId)
+      console.log(" - " + targetFolder.folderName)
+      console.log(" - " + targetFolder.boxUserId)
+      targetFolder = target.folderId
     else
       throw new Meteor.Error(400, "Target folder is unknown. Try launching this window directly by right-clicking on a Box folder.");
 
 
-    console.log("Copying template for " + Meteor.userId() + " (userId) from " + sourceFolder + " (Box folder ID) to " + targetFolder + " (Box folder ID)...")
+    console.log("Copying template for " + Meteor.userId() + " (userId) from " + sourceFolder + " (Box folder ID) to " + targetFolder + " (" + target.folderName + ")...")
 
     tokenExpiration = Meteor.user().services.box.expiresAt
     if Date.now() - tokenExpiration > 0

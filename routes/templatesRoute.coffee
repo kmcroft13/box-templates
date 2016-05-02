@@ -5,9 +5,11 @@ Router.map ->
     layout: 'basicLayout'
     waitOn: ->
         Meteor.subscribe 'Template'
+        Meteor.subscribe 'FolderQueue'
     data: ->
         privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
-
+        queue: FolderQueue.findOne({}, {sort: {addedAt: -1}})
+        
 
   @route 'managePrivate',
     path: '/manage/private'
