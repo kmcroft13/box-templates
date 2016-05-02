@@ -6,12 +6,12 @@ Meteor.methods(
     this.unblock()
     sourceFolder = folder
     userBoxId = Meteor.user().services.box.id
+    targetFolder = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {DateTime: -1}})
 
     #PICK FOLDER TO COPY
     if Meteor.settings.public.environment == "dev"
       targetFolder = "0" #Root level for Dev
     else if targetFolder
-      targetFolder = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {DateTime: -1}})
       console.log(targetFolder)
     else
       throw new Meteor.Error(400, "Target folder is unknown. Try launching this window directly by right-clicking on a Box folder.");
