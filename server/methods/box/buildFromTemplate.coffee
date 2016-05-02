@@ -13,9 +13,9 @@ Meteor.methods(
       targetFolder = "0" #Root level for Dev
     else if target
       console.log("Found target folder:")
-      console.log(" - " + targetFolder.folderId)
-      console.log(" - " + targetFolder.folderName)
-      console.log(" - " + targetFolder.boxUserId)
+      console.log(" - " + target.folderId)
+      console.log(" - " + target.folderName)
+      console.log(" - " + target.boxUserId)
       targetFolder = target.folderId
     else
       throw new Meteor.Error(400, "Target folder is unknown. Try launching this window directly by right-clicking on a Box folder.");
