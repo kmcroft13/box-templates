@@ -5,18 +5,15 @@
     <div class="ui text">
 
       {{#if queue}}
-      <div class="ui icon blue message">
+      <div id="prep" class="ui icon message">
         <i class="folder icon"></i>
         <div class="content">
-          <div class="header">
-            Preparing to copy
-          </div>
           <p>Choose a template below to copy items into <b>{{queue.folderName}}</b></p>
         </div>
       </div>
       {{/ if}}
 
-      <div class="ui hidden icon blue message">
+      <div id="copy" class="ui hidden icon blue message">
         <i class="notched circle loading icon"></i>
         <div class="content">
           <div class="header">
@@ -26,7 +23,7 @@
         </div>
       </div>
 
-      <div class="hidden ui positive floating message">
+      <div id="success" class="hidden ui positive floating message">
         <i class="close icon"></i>
         <div class="header">
           Success!
@@ -34,7 +31,7 @@
         <p><b><span id="folderName"></span></b> was successfully created</p>
       </div>
 
-      <div class="hidden ui negative floating message">
+      <div id="fail" class="hidden ui negative floating message">
         <i class="close icon"></i>
         <div class="header">
           Something went wrong!
@@ -80,6 +77,7 @@
         <button id="copyTemplate" class="positive ui right floated disabled button">Copy Template</button>
       </div>
     </div>
+
 {{else}}
   <div class="ui text container">
     <div class="ui text">

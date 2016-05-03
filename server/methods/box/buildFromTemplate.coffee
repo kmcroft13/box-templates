@@ -23,11 +23,7 @@ Meteor.methods(
 
     console.log("Copying template for " + Meteor.userId() + " (userId) from " + sourceFolder + " (Box folder ID) to " + targetFolder + " (" + target.folderName + ")...")
 
-    tokenExpiration = Meteor.user().services.box.expiresAt
-    if Date.now() - tokenExpiration > 0
-      Meteor.call("refreshToken")
-    else
-      console.log("Token valid. Proceed with call to Box API")
+
 
     apiURL = "https://api.box.com/2.0/folders/" + sourceFolder + "/copy"
 

@@ -9,11 +9,3 @@ Template['navbar'].onRendered -> (
     on: 'hover'
   })
 )
-
-Template['navbar'].events (
-  'click .github': ->
-    Meteor.loginWithBox({}, (err) ->
-      if err
-        throw new Meteor.Error("Box login failed")
-    )
-)
