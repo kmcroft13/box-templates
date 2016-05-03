@@ -3,7 +3,6 @@ BrowserPolicy.content.allowOriginForAll('*.gstatic.com');
 BrowserPolicy.content.allowOriginForAll('*.bootstrapcdn.com');
 BrowserPolicy.content.allowOriginForAll('*.box.com');
 BrowserPolicy.content.allowOriginForAll('*.boxcdn.net');
-BrowserPolicy.content.allowOriginForAll('about:blank');
 
 BrowserPolicy.content.allowFontDataUrl();
 
