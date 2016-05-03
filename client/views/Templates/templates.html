@@ -5,10 +5,26 @@
     <div class="ui text">
 
       {{#if queue}}
-      <div class="ui floating message">
-        <p>Preparing to copy into <b>{{queue.folderName}}</b> folder</p>
+      <div class="ui icon blue message">
+        <i class="folder icon"></i>
+        <div class="content">
+          <div class="header">
+            Preparing to copy
+          </div>
+          <p>Choose a template below to copy items into <b>{{queue.folderName}}</b></p>
+        </div>
       </div>
       {{/ if}}
+
+      <div class="ui hidden icon blue message">
+        <i class="notched circle loading icon"></i>
+        <div class="content">
+          <div class="header">
+            Just a second
+          </div>
+          <p>We're copying items into <b>{{queue.folderName}}</b></p>
+        </div>
+      </div>
 
       <div class="hidden ui positive floating message">
         <i class="close icon"></i>
