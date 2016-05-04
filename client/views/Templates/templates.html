@@ -23,20 +23,26 @@
         </div>
       </div>
 
-      <div id="success" class="hidden ui positive floating message">
+      <div id="success" class="ui hidden icon positive floating message">
+        <i class="checkmark icon"></i>
         <i class="close icon"></i>
-        <div class="header">
-          Success!
+        <div class="content">
+          <div class="header">
+            Success!
+          </div>
+          <p><b><span id="folderName"></span></b> was successfully created</p>
         </div>
-        <p><b><span id="folderName"></span></b> was successfully created</p>
       </div>
 
-      <div id="fail" class="hidden ui negative floating message">
+      <div id="fail" class="ui hidden icon negative floating message">
+        <i class="warning sign icon"></i>
         <i class="close icon"></i>
-        <div class="header">
-          Something went wrong!
+        <div class="content">
+          <div class="header">
+            Something went wrong!
+          </div>
+          <p>Here's a little more context: <b><span id="errorDesc"></span></b></p>
         </div>
-        <p>Here's a little more context: <b><span id="errorDesc"></span></b></p>
       </div>
 
         <div class="ui dividing header">
