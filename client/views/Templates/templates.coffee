@@ -1,6 +1,14 @@
 Template.templates.onRendered -> (
   $('.ui.dropdown')
     .dropdown()
+
+  $('.message .close')
+    .on('click', ->
+      $(this)
+        .closest('.message')
+        .transition('fade')
+    )
+
 )
 
 
