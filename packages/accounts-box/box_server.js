@@ -1,7 +1,7 @@
 Box = {};
 
 // For now, might add more fields later
-Box.whitelistedFields = ['id', 'login', 'name', 'role', 'avatar_url'];
+Box.whitelistedFields = ['id', 'login', 'name', 'role', 'avatar_url', 'expiresAt'];
 
 OAuth.registerService('box', 2, null, function(query) {
 

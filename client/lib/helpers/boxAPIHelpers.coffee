@@ -17,6 +17,7 @@ Template.templates.events(
     targetFolderName = $('input[name="newFolderName"]').val()
 
     tokenExpiration = Meteor.user().services.box.expiresAt
+    console.log(tokenExpiration)
     if Date.now() - tokenExpiration > 0
       Meteor.call("refreshToken")
 

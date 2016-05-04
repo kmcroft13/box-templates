@@ -14,7 +14,7 @@ if (Meteor.isClient) {
 
         var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
         Box.requestCredential(options, credentialRequestCompleteCallback);
-        
+
     };
 } else {
     Accounts.addAutopublishFields({
@@ -28,4 +28,7 @@ if (Meteor.isClient) {
             _.without(Box.whitelistedFields, 'email', 'verified_email'),
             function (subfield) { return 'services.box.' + subfield; })
     });
+
+    
+
 }
