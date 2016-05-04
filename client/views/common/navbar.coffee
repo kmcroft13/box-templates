@@ -1,4 +1,4 @@
-Template['navbar'].onRendered -> (
+Template.navbar.onRendered -> (
 
   # fix main menu to page on passing
   this.$('.main.menu').visibility({
@@ -6,7 +6,7 @@ Template['navbar'].onRendered -> (
   })
 
   # show dropdown on hover
-  this.$('.dropdown').dropdown({
+  this.$('.main.menu.dropdown').dropdown({
     on: 'click'
   })
 

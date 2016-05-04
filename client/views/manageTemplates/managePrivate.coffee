@@ -1,4 +1,4 @@
-Template['managePrivate'].events(
+Template.managePrivate.events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)
     $('.ui.basic.modal')
@@ -15,7 +15,7 @@ Template['managePrivate'].events(
 )
 
 
-Template['deleteModal'].events(
+Template.deleteModal.events(
   'click .cancel': ->
     $('.ui.basic.modal')
       .modal('hide')

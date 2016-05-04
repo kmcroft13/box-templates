@@ -1,10 +1,10 @@
-Template['templates'].onRendered -> (
+Template.templates.onRendered -> (
   $('.ui.dropdown')
     .dropdown()
 )
 
 
-Template['templates'].events(
+Template.templates.events(
 
   'click .dropdown-item': (evt, tpl) ->
     description = this.description
@@ -32,7 +32,7 @@ Template['templates'].events(
 )
 
 
-Template['confirmModal'].events(
+Template.confirmModal.events(
   'click .cancel': ->
     $('.ui.basic.modal')
       .modal('hide')

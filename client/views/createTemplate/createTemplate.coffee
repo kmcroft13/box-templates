@@ -1,11 +1,11 @@
-Template['createTemplate'].onRendered -> (
+Template.createTemplate.onRendered -> (
   # initialize checkboxes
   this.$('.ui.checkbox').checkbox()
 
 )
 
 
-Template['createTemplate'].events(
+Template.createTemplate.events(
 
   'click .message .close': ->
     $('.message')
