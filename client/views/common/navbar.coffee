@@ -6,7 +6,7 @@ Template.navbar.onRendered -> (
   })
 
   # show dropdown on hover
-  this.$('.main.menu.dropdown').dropdown({
+  this.$('.ui.dropdown').dropdown({
     on: 'click'
   })
 
