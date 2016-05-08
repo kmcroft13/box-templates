@@ -11,6 +11,6 @@ Template.navbar.onRendered -> (
       on: 'click',
       action: 'hide'
       })
-    ,300)
-    
+    ,500)
+
 )
