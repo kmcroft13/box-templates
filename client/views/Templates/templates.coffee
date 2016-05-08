@@ -7,6 +7,7 @@ Template.templates.onRendered -> (
       $(this)
         .closest('.message')
         .transition('fade')
+      Session.set('templateStatus','prep')
     )
 
 )
