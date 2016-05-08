@@ -15,12 +15,12 @@ Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     sourceFolder = Session.get("folderToCopy")
     targetFolderName = $('input[name="newFolderName"]').val()
-
+    ###
     tokenExpiration = Meteor.user().services.box.expiresAt
-    console.log(tokenExpiration)
     if Date.now() - tokenExpiration > 0
+      console.log("Token Expired")
       Meteor.call("refreshToken")
-
+    ###
     console.log("Preparing to copy Box folder (" + sourceFolder + ") as " + targetFolderName + "...")
     Session.set("templateStatus","copy")
     Meteor.call('copyTemplate', sourceFolder, targetFolderName, (error, result) ->

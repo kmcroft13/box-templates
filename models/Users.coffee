@@ -46,6 +46,10 @@ UserProfile = new SimpleSchema
   "boxGroups.$.name":
     type: String
 
+  lastSync:
+    type: Date
+    optional: true
+
 
 User = new SimpleSchema
 

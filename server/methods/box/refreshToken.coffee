@@ -1,12 +1,11 @@
-Meteor.methods(
+Meteor.myFunctions = (
   refreshToken: ->
-    console.log("Token Expired")
     config = ServiceConfiguration.configurations.findOne({service: 'box'})
     if !config
       throw new ServiceConfiguration.ConfigError()
 
     console.log("Trying to exchange Refresh Token...")
-    this.unblock()
+
     refreshToken = Meteor.user().services.box.refreshToken
     console.log(refreshToken)
 

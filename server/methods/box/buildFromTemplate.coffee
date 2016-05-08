@@ -2,13 +2,17 @@ Meteor.methods(
   copyTemplate: (folder, targetFolderName) ->
     check(folder, Match.Any)
     check(targetFolderName, Match.Any)
-    # avoid blocking other method calls from the same client
-    this.unblock()
+
     sourceFolder = folder
     userBoxId = Meteor.user().services.box.id
     target = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}})
+    tokenExpiration = Meteor.user().services.box.expiresAt
 
-    #PICK FOLDER TO COPY
+    if Date.now() - tokenExpiration > 0
+      console.log("Token Expired")
+      refreshAccessToken = Meteor.myFunctions.refreshToken()
+
+    # PICK FOLDER TO COPY
     if Meteor.settings.public.environment == "dev"
       targetFolder = "0" #Root level for Dev
     else if target

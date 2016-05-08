@@ -29,6 +29,6 @@ if (Meteor.isClient) {
             function (subfield) { return 'services.box.' + subfield; })
     });
 
-    
+
 
 }
