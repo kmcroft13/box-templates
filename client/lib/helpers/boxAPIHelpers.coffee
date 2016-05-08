@@ -1,26 +1,8 @@
-###
-Template.boxAPIresponse.helpers({
-  boxResponse: function () {
-
-    Meteor.setTimeout(function() {
-      Session.set('boxResponse', undefined);
-    }, 7000);
-
-    return Session.get('boxResponse');
-  }
-});
-###
-
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     sourceFolder = Session.get("folderToCopy")
     targetFolderName = $('input[name="newFolderName"]').val()
-    ###
-    tokenExpiration = Meteor.user().services.box.expiresAt
-    if Date.now() - tokenExpiration > 0
-      console.log("Token Expired")
-      Meteor.call("refreshToken")
-    ###
+
     console.log("Preparing to copy Box folder (" + sourceFolder + ") as " + targetFolderName + "...")
     Session.set("templateStatus","copy")
     Meteor.call('copyTemplate', sourceFolder, targetFolderName, (error, result) ->
