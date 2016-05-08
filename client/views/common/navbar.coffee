@@ -5,9 +5,12 @@ Template.navbar.onRendered -> (
     type: 'fixed'
   })
 
-  # show dropdown on hover
-  this.$('.ui.dropdown').dropdown({
-    on: 'click'
-  })
-
+  # show dropdown on click
+  Meteor.setTimeout(->
+      this.$('#profile').dropdown({
+      on: 'click',
+      action: 'hide'
+      })
+    ,300)
+    
 )
