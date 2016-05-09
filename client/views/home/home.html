@@ -1,22 +1,129 @@
 <template name="home">
-<div id="content">
-  <div class="ui text container">
-    <div class="ui center aligned header">
-      <h1>welcome</h1>
+
+  <!-- BEGIN NEW CODE -->
+
+  <!-- Page Contents -->
+  <div class="pusher">
+
+    <div class="ui inverted vertical masthead center aligned segment">
+
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          {{#if isLoggedIn}}
+            <a class="active item">Home</a>
+            <a class="item" href="/templates">Copy from Template</a>
+            <a class="item" href="/manage/private">Manage</a>
+            <a class="item" href="/template/create">Create</a>
+          {{else}}
+            <a class="active item">Home</a>
+          {{/if}}
+          <div class="right item">
+            {{#if isLoggedIn}}
+              <div id="profile" class="ui dropdown">
+                <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
+                <div class="text"> {{currentUser.profile.fullName}}</div>
+                <i class="dropdown icon"></i>
+                <div class="menu" style="font-size: 1em !important;"> <!--fix for Semantic UI issue -->
+                  <a href="/profile" class="item">Profile</a>
+                  {{#if isInRole 'admin'}}
+                    <a href="/admin" class="item">Admin</a>
+                  {{/if}}
+                  <div class="divider"></div>
+                  <a href="/sign-out" class="item">Logout</a>
+                </div>
+              </div>
+            {{else}}
+              <a class="ui inverted button" href="/sign-in">Log in</a>
+              <a class="ui inverted button" href="/sign-in">Sign Up</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          {{#if isLoggedIn}}
+            Hey, {{currentUser.profile.fullName}}!
+          {{else}}
+            CloudTemplates for Box
+          {{/if}}
+        </h1>
+        <h2>
+          {{#if isLoggedIn}}
+            CloudTemplates for Box allows you to create templates that can be quickly copied into Box folders
+          {{else}}
+            Create templates that can be quickly copied into Box folders
+          {{/if}}
+        </h2>
+
+        <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+      </div>
+
     </div>
 
-    <div class="ui text">
-      {{#if isLoggedIn}}
-        <h3 class="ui centered header">
-          <a href="/templates">copy a template</a> to get started
-        </h3>
-        <div class="ui center-text content">
-          you can also <b><a href="/manage/private">manage your templates</a></b> or <b><a href="/template/create">create a new one</a></b>
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Create a Template</h3>
+            <p>A Template is just a Box folder that you can copy into other folders.</p>
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/create.png" class="ui small rounded image">
+          </div>
         </div>
-      {{else}}
-        <h3 class="ui centered header"><b><a href="/sign-in">login</a></b> to get started</h3>
-      {{/if}}
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui large button" href="/template/create">Create</a>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Copy from a Template</h3>
+            <p>A Template is just a Box folder that you can copy into other folders.</p>
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/copy.png" class="ui small rounded image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui large button" href="/templates">Copy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Manage Your Templates</h3>
+            <p>A Template is just a Box folder that you can copy into other folders.</p>
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/manage.png" class="ui small rounded image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui large button" href="/manage/private">Manage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-</div>
+
+  <!-- END NEW CODE -->
+
+
 </template>

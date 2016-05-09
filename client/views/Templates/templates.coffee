@@ -1,5 +1,5 @@
 Template.templates.onRendered -> (
-  $('.ui.dropdown')
+  $('#selectTemplate')
     .dropdown()
 
   $('.message .close')

@@ -2,7 +2,7 @@ Router.map ->
 
   @route 'templates',
     path: '/templates'
-    layout: 'basicLayout'
+    layoutTemplate: 'basicLayout'
     waitOn: ->
       Meteor.subscribe 'Template'
       Meteor.subscribe 'FolderQueue'
@@ -18,7 +18,7 @@ Router.map ->
 
   @route 'managePrivate',
     path: '/manage/private'
-    layout: 'basicLayout'
+    layoutTemplate: 'basicLayout'
     waitOn: ->
       Meteor.subscribe 'Template'
     data: ->
@@ -31,7 +31,7 @@ Router.map ->
 
   @route 'createTemplate',
     path: '/template/create'
-    layout: 'basicLayout'
+    layoutTemplate: 'basicLayout'
     onBeforeAction: ->
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)
@@ -40,7 +40,7 @@ Router.map ->
 
   @route 'viewTemplate',
     path: '/template/:_id/view'
-    layout: 'basicLayout'
+    layoutTemplate: 'basicLayout'
     waitOn: ->
       Meteor.subscribe 'Template'
     data: ->

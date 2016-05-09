@@ -2,15 +2,16 @@ Router.map ->
 
   @route 'home',
     path: '/'
+    layoutTemplate: 'homeLayout'
     onBeforeAction: ->
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)
       @next()
-      
+
 
   @route 'profile',
     path: '/profile'
-    layout: 'basicLayout'
+    layoutTemplate: 'basicLayout'
     onBeforeAction: ->
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)

@@ -5,3 +5,11 @@ Router.plugin 'ensureSignedIn', except: [
   'home'
   '/'
 ]
+
+Router.configure(
+  layoutTemplate:"homeLayout"
+)
+
+Router.configure(
+  layoutTemplate:"basicLayout"
+)

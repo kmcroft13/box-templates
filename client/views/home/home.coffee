@@ -1,9 +1,4 @@
-Template.navbar.onRendered -> (
-
-  # fix main menu to page on passing
-  this.$('#navbar').visibility({
-    type: 'fixed'
-  })
+Template.home.onRendered -> (
 
   # show dropdown on click
   Meteor.setTimeout(->
