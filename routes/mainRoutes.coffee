@@ -3,6 +3,10 @@ Router.map ->
   @route 'home',
     path: '/'
     layoutTemplate: 'homeLayout'
+    waitOn: ->
+      Meteor.subscribe 'Template'
+    data: ->
+      privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
     onBeforeAction: ->
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)

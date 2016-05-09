@@ -1,8 +1,5 @@
 <template name="home">
 
-  <!-- BEGIN NEW CODE -->
-
-  <!-- Page Contents -->
   <div class="pusher">
 
     <div class="ui inverted vertical masthead center aligned segment">
@@ -51,26 +48,36 @@
         </h1>
         <h2>
           {{#if isLoggedIn}}
-            CloudTemplates for Box allows you to create templates that can be quickly copied into Box folders
+            CloudTemplates for Box allows you to create Templates that can be quickly copied into Box folders
           {{else}}
-            Create templates that can be quickly copied into Box folders
+            Create Templates of items that can be quickly copied into Box folders. Scroll down to learn more.
           {{/if}}
         </h2>
 
-        <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+
+        {{#if privateTemplates.count}}
+          <a class="ui huge primary button" href="/templates">Copy from Template <i class="right arrow icon"></i></a>
+        {{else}}
+          <a class="ui huge primary button" href="/template/create">Create a Template <i class="right arrow icon"></i></a>
+        {{/if}}
       </div>
 
     </div>
 
-    <div class="ui vertical stripe segment">
+    <div id="top" class="ui vertical stripe segment">
       <div class="ui middle aligned stackable grid container">
         <div class="row">
           <div class="eight wide column">
             <h3 class="ui header">Create a Template</h3>
-            <p>A Template is just a Box folder that you can copy into other folders.</p>
+            {{#if privateTemplates.count}}
+              <p>Nice, you already have some templates! Create another for sales collateral, project materials, or info for new customers.</p>
+            {{else}}
+              <p>Your first step is to create a Template! A Template is just a Box folder that can be quickly copied into other folders.
+              Create one for sales collateral, project materials, or info for new customers.</p>
+            {{/if}}
           </div>
           <div class="six wide right floated column">
-            <img src="/images/create.png" class="ui small rounded image">
+            <img src="/images/create.png" class="ui rounded image">
           </div>
         </div>
         <div class="row">
@@ -87,10 +94,16 @@
         <div class="row">
           <div class="eight wide column">
             <h3 class="ui header">Copy from a Template</h3>
-            <p>A Template is just a Box folder that you can copy into other folders.</p>
+            {{#if privateTemplates.count}}
+              <p>Ready to build from your existing Templates? Go to your Box account
+              and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
+            {{else}}
+              <p>Once you've created a Template, use it to copy items into your Box folder. Just <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account
+              and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
+            {{/if}}
           </div>
           <div class="six wide right floated column">
-            <img src="/images/copy.png" class="ui small rounded image">
+            <img src="/images/integration.png" class="ui rounded image">
           </div>
         </div>
         <div class="row">
@@ -106,24 +119,17 @@
       <div class="ui middle aligned stackable grid container">
         <div class="row">
           <div class="eight wide column">
-            <h3 class="ui header">Manage Your Templates</h3>
-            <p>A Template is just a Box folder that you can copy into other folders.</p>
+            <h3 class="ui header">Stay Tuned for More</h3>
+            <p>Think of this as V1. We're hoping to add other great features soon!
+            Some things we're thinking about are adding multiple items into a Template, dynamically renaming items, and Admin-managed Enterprise level Templates.</p>
           </div>
           <div class="six wide right floated column">
             <img src="/images/manage.png" class="ui small rounded image">
-          </div>
-        </div>
-        <div class="row">
-          <div class="center aligned column">
-            <a class="ui large button" href="/manage/private">Manage</a>
           </div>
         </div>
       </div>
     </div>
 
   </div>
-
-  <!-- END NEW CODE -->
-
 
 </template>
