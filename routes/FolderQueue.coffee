@@ -4,8 +4,8 @@ Router.map ->
     path: '/folderqueue'
     where: 'server'
     action: ->
-      folderId = this.request.body.file_id
-      folderName = this.request.body.file_name
+      folderId = this.request.body.folder_id
+      folderName = this.request.body.folder_name
       userId = this.request.body.box_id
 
       check(folderId, Match.Any)

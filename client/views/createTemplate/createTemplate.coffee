@@ -14,7 +14,7 @@ Template.createTemplate.events(
 
 
   'submit form': (e) -> (
-    e.preventDefault();
+    e.preventDefault()
     console.log("Form: " + e.type);
     templateName = e.target.templateName.value
     active = e.target.active.checked
