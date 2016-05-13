@@ -37,7 +37,7 @@ Template.createTemplate.events(
            $('.message').removeClass('negative')
            $('.message').addClass('positive')
            $("#messageTitle").text("Success!")
-           $("#messageBody").html("<b>" + templateName + "</b> was successfully created")
+           $("#messageBody").html("<b>" + templateName + "</b> was successfully created. Now <b><a href=\"/templates\">let's put it to work</a></b>!")
            $('.message').removeClass('hidden')
            $('html, body').animate(
              scrollTop: 0, 300)

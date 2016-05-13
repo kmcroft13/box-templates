@@ -1,6 +1,6 @@
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
-    e.preventDefault()
+    evt.preventDefault()
     sourceFolder = Session.get("folderToCopy")
     targetFolderName = $('input[name="newFolderName"]').val()
 
