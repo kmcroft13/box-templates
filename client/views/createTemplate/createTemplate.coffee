@@ -17,7 +17,7 @@ Template.createTemplate.events(
     e.preventDefault()
     console.log("Form: " + e.type);
     templateName = e.target.templateName.value
-    active = e.target.active.checked
+    active = true
     folderName = e.target.folderName.value
     folderId = e.target.folderId.value
     templateDescription = e.target.templateDescription.value

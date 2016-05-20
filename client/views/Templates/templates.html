@@ -5,10 +5,10 @@
     <div class="ui text">
 
       {{#if queue}}
-        <div id="prep" class="ui icon message">
+        <div id="prep" class="ui icon message" style="overflow:hidden;">
           <i class="folder icon"></i>
           <div class="content">
-            <p>Choose a template below to copy items into <b>{{queue.folderName}}</b></p>
+            <p>Choose a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui right corner green label"><i class="question icon"></i></a></p>
           </div>
         </div>
       {{else}}
@@ -57,6 +57,7 @@
 
     <!-- TEMPLATE CREATION SECTION -->
     {{#if queue}}
+
       <div class="ui dividing header">
         <div id="selectTemplate" class="ui dropdown">
           <div class="text"><h2>Choose Template...</h2></div>
@@ -78,18 +79,20 @@
       </div>
       <p id="description">Select a template above to get started</p>
 
-      <form class="ui form">
-        <div class="field">
-          <label>New Folder Name</label>
-          <input type="text" name="newFolderName" placeholder="New Folder Name">
-        </div>
-      </form>
+      <div id="formElements" class="hidden">
+        <form class="ui form">
+          <div class="field">
+            <label>New Folder Name</label>
+            <input type="text" name="newFolderName" placeholder="New Folder Name">
+          </div>
+        </form>
 
-      <br><br>
+        <br><br>
 
-      <button id="copyTemplate" class="positive ui right floated disabled button">Copy Template</button>
+        <button id="copyTemplate" class="positive ui right floated disabled button">Copy Template</button>
+      </div>
 
-      {{/if}}
+    {{/if}} <!-- if queue -->
       <!-- END TEMPLATE CREATION SECTION -->
 
     </div>
@@ -139,31 +142,29 @@
 
 {{/if}}
 
-{{> confirmModal}}
+{{> folderQuestion}}
 </div>
 
 </template>
 
 
-<template name="confirmModal">
+<template name="folderQuestion">
   <div class="ui basic modal">
     <div class="centered header">
-      Delete Template
+      Copying Items into a Folder
     </div>
     <div class="content">
       <div class="description">
-        <p>You will be unable to use this Template from now on.  Are you sure you want to delete?</p>
+        <p>This page allows you to copy items from your existing Templates into a Box folder.
+          It looks like <b>{{queue.folderName}}</b> is the last folder you tried to copy into, so we remembered it from last time.
+          If you want to copy into a different folder instead, <b>right-click on that folder in Box and choose "Copy from CloudTemplates" in the More Actions menu.</b>
+        </p>
       </div>
     </div>
     <div class="actions">
-      <div class="ui inverted buttons">
-        <div class="ui basic inverted button cancel">
-          Cancel
-        </div>
-        <div class="ui red basic inverted button approve">
-          <i class="remove icon"></i>
-          Delete
-        </div>
+      <div class="ui basic green inverted button cancel">
+        <i class="check icon"></i>
+        Ok, Got It
       </div>
     </div>
   </div>

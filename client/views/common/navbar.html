@@ -1,9 +1,11 @@
 <template name="navbar">
-  <div class="ui fixed borderless main menu">
+  <div class="ui inverted fixed borderless main menu">
     <div class="ui container">
       <div href="#" class="item">
-        <img class="logo" src="/images/boxLogo.png">
-        <a href="/"><b>Home</b></a>
+        <a href="/">
+          <img class="logo" src="/images/logo/CloudTemplates-white-55px.png">
+          <b>Home</b>
+        </a>
       </div>
       {{#if isLoggedIn}}
       <a href="/templates" class="{{#if isActiveRoute name="templates"}}active{{/if}} item">Copy from Template</a>

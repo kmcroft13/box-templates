@@ -11,7 +11,6 @@ Template.templates.events(
       if error
          console.log(error)
          $("#errorDesc").text(error.reason)
-         Session.set("folderToCopy",undefined)
          Session.set("templateStatus","fail")
       else
          console.log(result)

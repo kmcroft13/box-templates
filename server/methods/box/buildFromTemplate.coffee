@@ -1,5 +1,8 @@
 Meteor.methods(
   copyTemplate: (folder, targetFolderName) ->
+    # avoid blocking other method calls from the same client
+    @unblock()
+
     check(folder, Match.Any)
     check(targetFolderName, Match.Any)
 
