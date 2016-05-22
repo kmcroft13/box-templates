@@ -1,7 +1,7 @@
 Template.managePrivate.events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)
-    $('.ui.basic.modal')
+    $('#deleteTemplateModal')
       .modal({
         blurring: true,
         onApprove: ->
@@ -17,6 +17,6 @@ Template.managePrivate.events(
 
 Template.deleteModal.events(
   'click .cancel': ->
-    $('.ui.basic.modal')
+    $('#deleteTemplateModal')
       .modal('hide')
 )

@@ -32,7 +32,7 @@ Template.templates.events(
     console.log(this.name + " (" + this._id + ") selected. Session variable set for " + this.folderName + " (" + this.folderId + ")")
 
   'click #folderQuestion': ->
-    $('.ui.basic.modal')
+    $('#folderQuestionModal')
       .modal({
         blurring: true,
       })
@@ -42,6 +42,6 @@ Template.templates.events(
 
 Template.folderQuestion.events(
   'click #confirm': ->
-    $('.ui.basic.modal')
+    $('#folderQuestionModal')
       .modal('hide')
 )
