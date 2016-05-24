@@ -13,15 +13,30 @@ Template.templates.events(
         Session.set("templateStatus","fail")
       else
         $('form').form('clear')
-        $("#folderName").text(result.name)
-        Session.set("folderToCopy",undefined)
+        $( "#itemsCopySuccess" ).empty()
+        $( "#itemsCopyWarning" ).empty()
+        i = 0
+        e = 0
+        s = 0
         result.forEach (item) ->
           type = item.type
           name = item.name
           message = item.message
-          console.log(type + ", " + name + ", " + message)
-          $( "#itemsCopyStatus" ).append( "<b>" + type + "</b>&nbsp;&nbsp;" + name + "&nbsp;&nbsp;" + message + "<br>");
-        Session.set("templateStatus","success")
+          i = i+1
+          if type == "error"
+            e = e+1
+            $( "#itemsCopySuccess" ).append( "<div class=\"ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br>")
+          else
+            s = s+1
+            $( "#itemsCopySuccess" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
+        if s == i
+          $( "#successStatus" ).append( s + " items were successfully created &nbsp;&nbsp;&nbsp;<a id=\"successDetails\" href=\"#\">More Details...</a>")
+          Session.set("templateStatus","success")
+        else
+          $( "#warningStatus" ).append( s + " items created and " + e + " items failed &nbsp;&nbsp;&nbsp;<a id=\"warningDetails\" href=\"#\">More Details...</a>")
+          Session.set("templateStatus","warning")
     )
 
 )

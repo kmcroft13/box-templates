@@ -40,8 +40,21 @@
           <div class="header">
             Success!
           </div>
-          <p><b><span id="folderName"></span></b>All Template items were successfully created</p>
-          <div id="itemsCopyStatus">
+          <p id="successStatus"></p>
+          <div id="itemsCopySuccess" class="hidden">
+          </div>
+        </div>
+      </div>
+
+      <div id="warning" class="ui hidden icon warning floating message">
+        <i class="warning sign icon"></i>
+        <i class="close icon"></i>
+        <div class="content">
+          <div class="header">
+            Some items were not created
+          </div>
+          <p id="warningStatus"></p>
+          <div id="itemsCopyWarning" class="hidden">
           </div>
         </div>
       </div>
@@ -82,12 +95,12 @@
       <p id="description">Select a template above to get started</p>
 
       <div id="formElements" class="hidden">
-        <form class="ui form">
+        <!-- <form class="ui form">
           <div class="field">
             <label>New Folder Name</label>
             <input type="text" name="newFolderName" placeholder="New Folder Name">
           </div>
-        </form>
+        </form> -->
 
         <br><br>
 

@@ -52,7 +52,8 @@ Meteor.methods(
 
           itemStatus = {}
           itemStatus["type"] = "success"
-          itemStatus["message"] = response.data.name + " successfully created"
+          itemStatus["name"] = name
+          itemStatus["message"] = "successfully created"
           itemsStatus.push(itemStatus)
           console.log("Success! " + response.data.name + " created")
 
@@ -78,7 +79,8 @@ Meteor.methods(
 
           itemStatus = {}
           itemStatus["type"] = "success"
-          itemStatus["message"] = response.data.name + " successfully created"
+          itemStatus["name"] = name
+          itemStatus["message"] = "successfully created"
           itemsStatus.push(itemStatus)
           console.log("Success! " + response.data.name + " created")
 
