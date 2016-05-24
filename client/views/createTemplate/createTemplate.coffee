@@ -2,6 +2,25 @@ Template.createTemplate.onRendered -> (
   # initialize checkboxes
   this.$('.ui.checkbox').checkbox()
 
+  # initialize form validation
+  $('.ui.form')
+    .form(
+      fields:
+        templateName:
+          identifier: 'templateName',
+          rules: [
+              type   : 'empty',
+              prompt : 'Please enter a Template name'
+          ]
+        ,
+        templateDescription:
+          identifier: 'templateDescription',
+          rules: [
+              type   : 'empty',
+              prompt : 'Please enter a Template description'
+          ]
+    )
+
 )
 
 
