@@ -1,26 +1,24 @@
 Meteor.methods({
-  addTemplate: (templateName, active, folderName, folderId, templateDescription) -> (
+  addTemplate: (templateName, active, templateDescription, items) -> (
     check(templateName, Match.Any)
     check(active, Match.Any)
-    check(folderName, Match.Any)
-    check(folderId, Match.Any)
     check(templateDescription, Match.Any)
+    check(items, Match.Any)
 
     newTemplateId = Template.insert({
       name: templateName,
       active: active,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      folderName: folderName,
-      folderId: folderId,
-      description: templateDescription
+      description: templateDescription,
+      items: items
     })
     newTemplateId
 
     console.log("New Template (" + templateName + ") Created: " + newTemplateId)
 ),
 
-  deleteTask: (templateId) -> (
+  deleteTemplate: (templateId) -> (
     check(templateId, Match.Any)
 
     ###

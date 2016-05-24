@@ -27,15 +27,6 @@
 
         <div class="item">
           <div class="content">
-            <a class="header">Folder</a>
-            <div class="description">
-              <p>{{template.folderName}}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="content">
             <a class="header">Date Created</a>
             <div class="description">
               <p>{{longDate template.createdAt}}</p>
@@ -56,8 +47,21 @@
           </div>
         </div>
 
-      </div>
+        <div class="item">
+          <div class="content">
+            <a class="header">Items in Template</a>
+            <div class="ui divided list">
+              {{#each template.items}}
+                <div class="item">
+                <p><div class="ui green horizontal label">{{this.type}}</div>&nbsp;&nbsp; {{this.name}}</p>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
 
+      </div>
+    <br>
     </div>
 
   {{else}}

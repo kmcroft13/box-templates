@@ -1,23 +1,27 @@
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     evt.preventDefault()
-    sourceFolder = Session.get("folderToCopy")
-    targetFolderName = $('input[name="newFolderName"]').val()
+    templateItems = Session.get("itemsToCopy")
 
-    console.log("Preparing to copy Box folder (" + sourceFolder + ") as " + targetFolderName + "...")
+    console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
-    Meteor.call('copyTemplate', sourceFolder, targetFolderName, (error, result) ->
+    Meteor.call('copyTemplate', templateItems, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
-         console.log(error)
-         $("#errorDesc").text(error.reason)
-         Session.set("templateStatus","fail")
+        console.log(error)
+        $("#errorDesc").text(error.reason)
+        Session.set("templateStatus","fail")
       else
-         console.log(result)
-         $('form').form('clear')
-         $("#folderName").text(result.name)
-         Session.set("folderToCopy",undefined)
-         Session.set("templateStatus","success")
+        $('form').form('clear')
+        $("#folderName").text(result.name)
+        Session.set("folderToCopy",undefined)
+        result.forEach (item) ->
+          type = item.type
+          name = item.name
+          message = item.message
+          console.log(type + ", " + name + ", " + message)
+          $( "#itemsCopyStatus" ).append( "<b>" + type + "</b>&nbsp;&nbsp;" + name + "&nbsp;&nbsp;" + message + "<br>");
+        Session.set("templateStatus","success")
     )
 
 )

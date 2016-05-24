@@ -5,6 +5,12 @@ Template.createTemplate.onRendered -> (
 )
 
 
+Template.createTemplate.helpers(
+  templateItems: ->
+    Session.get('items')
+)
+
+
 Template.createTemplate.events(
 
   'click .message .close': ->
@@ -18,10 +24,9 @@ Template.createTemplate.events(
     console.log("Form: " + e.type);
     templateName = e.target.templateName.value
     active = true
-    folderName = e.target.folderName.value
-    folderId = e.target.folderId.value
     templateDescription = e.target.templateDescription.value
-    Meteor.call('addTemplate', templateName, active, folderName, folderId, templateDescription, (error, result) -> (
+    items = Session.get("items")
+    Meteor.call('addTemplate', templateName, active, templateDescription, items, (error, result) -> (
         if error
            console.log(JSON.stringify(error,null,2))
            $('.message').removeClass('positive')
@@ -39,6 +44,7 @@ Template.createTemplate.events(
            $("#messageTitle").text("Success!")
            $("#messageBody").html("<b>" + templateName + "</b> was successfully created. Now <b><a href=\"/templates\">let's put it to work</a></b>!")
            $('.message').removeClass('hidden')
+           Session.set("items", undefined)
            $('html, body').animate(
              scrollTop: 0, 300)
     ))

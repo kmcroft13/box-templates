@@ -17,10 +17,27 @@ Schemas.Template = new SimpleSchema
   owner:
     type: String
 
-  folderName:
+  items:
+    type: [Object]
+    blackbox: true
+
+  "items.$.id":
     type: String
 
-  folderId:
+  "items.$.name":
+    type: String
+
+  "items.$.access":
+    type: String
+
+  "items.$.permissions":
+    type: [Object]
+    blackbox: true
+
+  "items.$.type":
+    type: String
+
+  "items.$.url":
     type: String
 
 

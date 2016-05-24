@@ -5,13 +5,8 @@ Template.createTemplate.onRendered(function() {
     var boxSelect = new BoxSelect();
     // Register a success callback handler
     boxSelect.success(function(response) {
-      var folderId = response[0].id;
-      var folderName = response[0].name;
-
-      console.log(folderName + " - " + folderId);
-
-      $('input[name="folderName"]').val(folderName);
-      $('input[name="folderId"]').val(folderId);
+      console.log(response);
+      Session.set("items", response);
 
     });
     // Register a cancel callback handler

@@ -34,14 +34,19 @@
       </div>
 
       <div class="field">
-        <label>Folder Name</label>
+        <label>Choose Items for Template</label>
         <div class="ui equal width grid">
           <div class="column">
-            <input type="text" name="folderName" placeholder="Choose folder from Box..." readonly="">
-            <input type="text" name="folderId" readonly="" hidden="">
+            <div id="box-select" data-link-type="shared" data-multiselect="true" data-client-id="s453dffkrhqzhm8nol7ca4i523a4wn7c"></div>
           </div>
           <div class="column">
-            <div id="box-select" data-link-type="shared" data-multiselect="false" data-client-id="s453dffkrhqzhm8nol7ca4i523a4wn7c"></div>
+            <div class="ui divided list">
+              {{#each templateItems}}
+                <div class="item">
+                <p><div class="ui green horizontal label">{{this.type}}</div>&nbsp;&nbsp; {{this.name}}</p>
+                </div>
+              {{/each}}
+            </div>
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@
       <table class="ui selectable unstackable table fixed single line table">
         <thead>
           <tr><th class="five wide">Name</th>
-          <th class="five wide">Folder</th>
+          <th class="five wide">Description</th>
           <th class="three wide">Created</th>
           <th class="three wide"></th>
         </tr></thead>
@@ -49,9 +49,9 @@
 <template name="privateTemplate">
   <tr>
     <td><a href="/template/{{_id}}/view">{{name}}</a></td>
-    <td>{{folderName}}</td>
+    <td>{{description}}</td>
     <td>{{shortDate createdAt}}</td>
-    {{#if isLoggedIn}}<td class="right aligned"><button class="ui compact negative button delete">Remove</button></td>{{/if}}
+    <td class="right aligned"><button class="ui compact negative button delete">Remove</button></td>
   </tr>
 </template>
 
