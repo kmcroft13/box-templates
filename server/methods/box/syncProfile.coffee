@@ -4,7 +4,7 @@ Meteor.methods(
     @unblock()
 
     lastSync = Meteor.user().profile.lastSync
-    if Date.now() - lastSync - 43200000 > 0
+    if lastSync == undefined || Date.now() - lastSync - 43200000 > 0
 
       console.log("Checking token expiration...")
       tokenExpiration = Meteor.user().services.box.expiresAt
