@@ -48,7 +48,11 @@
         </h1>
         <h2>
           {{#if isLoggedIn}}
-            CloudTemplates for Box allows you to create Templates that can be quickly copied into Box folders
+            {{#if queue}}
+              We're ready to copy items into <b>"{{queue.folderName}}"</b>...
+            {{else}}
+              Create a Template of items that can be quickly copied into Box folders. Get started below!
+            {{/if}}
           {{else}}
             Create Templates of items that can be quickly copied into Box folders. Scroll down to learn more.
           {{/if}}
@@ -72,7 +76,7 @@
             {{#if privateTemplates.count}}
               <p>Nice, you already have some templates! Create another for sales collateral, project materials, or info for new customers.</p>
             {{else}}
-              <p>Your first step is to create a Template! A Template is just a Box folder that can be quickly copied into other folders.
+              <p>Your first step is to create a Template! A Template is just a collection of Box items that can be quickly copied into other folders.
               Create one for sales collateral, project materials, or info for new customers.</p>
             {{/if}}
           </div>
@@ -95,8 +99,12 @@
           <div class="eight wide column">
             <h3 class="ui header">Copy from a Template</h3>
             {{#if privateTemplates.count}}
-              <p>Ready to build from your existing Templates? Go to your Box account
-              and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
+              {{#if queue}}
+                <p>We're ready to copy from your existing Templates into <b>"{{queue.folderName}}."</b> Click the Copy button below to get started.</p>
+              {{else}}
+                <p>Ready to build from your existing Templates? Go to your Box account
+                and click More Actions and "Create from CloudTemplates" on the folder you want to copy items into! You may need to <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account first.</p>
+              {{/if}}
             {{else}}
               <p>Once you've created a Template, use it to copy items into your Box folder. Just <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account
               and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
@@ -108,7 +116,9 @@
         </div>
         <div class="row">
           <div class="center aligned column">
-            <a class="ui large button" href="/templates">Copy</a>
+            {{#if queue}}
+              <a class="ui large button" href="/templates">Copy</a>
+            {{/if}}
           </div>
         </div>
       </div>
@@ -121,7 +131,7 @@
           <div class="eight wide column">
             <h3 class="ui header">Stay Tuned for More</h3>
             <p>Think of this as V1. We're hoping to add other great features soon!
-            Some things we're thinking about are adding multiple items into a Template, dynamically renaming items, and Admin-managed Enterprise level Templates.</p>
+            Some things we're thinking about are dynamically renaming items and Admin-managed Enterprise level Templates.</p>
           </div>
           <div class="six wide right floated column">
             <img src="/images/manage.png" class="ui small rounded image">
