@@ -8,11 +8,6 @@
         </a>
       </div>
       {{#if isLoggedIn}}
-      <a href="/templates" class="{{#if isActiveRoute name="templates"}}active{{/if}} item">Copy from Template</a>
-      <a href="/manage/private" class="{{#if isActiveRoute name="managePrivate"}}active{{/if}} item">Manage</a>
-      <a href="/template/create" class="{{#if isActiveRoute name="createTemplate"}}active{{/if}} item">Create</a>
-      {{/if}}
-      {{#if isLoggedIn}}
       <div id="profile" class="ui right floated dropdown item">
         <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
         <div class="text"> {{currentUser.profile.fullName}}</div>

@@ -29,6 +29,8 @@ Meteor.methods(
       cardName = "[BUG] " + "Reported by " + userName + ""
     else if feedbackType == "Suggestion"
       cardName = "[SUGGESTION] " + "Reported by " + userName + ""
+    else if feedbackType == "Question"
+      cardName = "[QUESTION] " + "Asked by " + userName + ""
     else
       cardName = "[OTHER] " + "Reported by " + userName + ""
 

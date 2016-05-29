@@ -6,14 +6,7 @@
 
       <div class="ui container">
         <div class="ui large secondary inverted pointing menu">
-          {{#if isLoggedIn}}
             <a class="active item">Home</a>
-            <a class="item" href="/templates">Copy from Template</a>
-            <a class="item" href="/manage/private">Manage</a>
-            <a class="item" href="/template/create">Create</a>
-          {{else}}
-            <a class="active item">Home</a>
-          {{/if}}
           <div class="right item">
             {{#if isLoggedIn}}
               <div id="profile" class="ui dropdown">
@@ -30,8 +23,8 @@
                 </div>
               </div>
             {{else}}
-              <a class="ui inverted button" href="/sign-in">Log in</a>
-              <a class="ui inverted button" href="/sign-in">Sign Up</a>
+              <a class="ui inverted blue button" href="/sign-in">Log in</a>
+              <a class="ui inverted blue button" href="/sign-in">Sign Up</a>
             {{/if}}
           </div>
         </div>
@@ -64,9 +57,9 @@
 
 
         {{#if privateTemplates.count}}
-          <a class="ui huge primary button" href="/templates">Copy from Template <i class="right arrow icon"></i></a>
+          <a class="ui huge inverted blue button" href="/templates">Copy from Template <i class="right arrow icon"></i></a>
         {{else}}
-          <a class="ui huge primary button" href="/template/create">Create a Template <i class="right arrow icon"></i></a>
+          <a class="ui huge inverted blue button" href="/template/create">Create a Template <i class="right arrow icon"></i></a>
         {{/if}}
       </div>
 

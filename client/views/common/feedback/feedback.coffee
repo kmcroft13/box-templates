@@ -26,6 +26,7 @@ Template.feedbackForm.events(
 
   'click #helpButton': ->
     $('#feedbackForm').transition('fly up')
+    $('#helpButton').toggleClass('active')
 
   'submit form': (e) -> (
     e.preventDefault()

@@ -12,7 +12,7 @@
         <p id="feedbackMessageBody"></p>
       </div>
 
-      <form class="ui form">
+      <form class="ui small form">
         <div class="ui error message">
         </div>
         <div class="field">
@@ -21,6 +21,7 @@
             <option value="">Select Feedback Type</option>
             <option value="Bug">Something's not working</option>
             <option value="Suggestion">Submit a suggestion</option>
+            <option value="Question">Ask a question</option>
             <option value="Other">Report something else</option>
           </select>
         </div>
@@ -28,11 +29,13 @@
           <label>Tell us more...</label>
           <textarea name="feedbackText" placeholder="Put your feedback here"></textarea>
         </div>
-        <button class="ui small blue right floated button">Submit Feedback</button>
+        <button class="ui small inverted blue right floated button">Submit Feedback</button>
       </form>
     </div>
   </div>
 
-  <button id="helpButton" class="ui blue basic icon button"><i class="question icon"></i></button>
+  <div>
+    <button id="helpButton" class="circular ui inverted blue icon button"><i class="question icon"></i></button>
+  </div>
 
 </template>
