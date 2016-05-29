@@ -1,0 +1,38 @@
+<template name="feedbackForm">
+  <div class="ui card hidden" id="feedbackForm">
+    <div class="content">
+      <div class="header">Submit Feedback</div>
+      <div class="meta">Let us know your thoughts about how we can improve this app. We're working to make improvements all the time!</div>
+    </div>
+    <div class="content">
+      <div id="feedbackMessage" class="hidden ui floating message">
+        <div class="header">
+          <span id="feedbackMessageTitle"></span>
+        </div>
+        <p id="feedbackMessageBody"></p>
+      </div>
+
+      <form class="ui form">
+        <div class="ui error message">
+        </div>
+        <div class="field">
+          <label>Type of Feedback</label>
+          <select name="feedbackType" class="ui dropdown">
+            <option value="">Select Feedback Type</option>
+            <option value="Bug">Something's not working</option>
+            <option value="Suggestion">Submit a suggestion</option>
+            <option value="Other">Report something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tell us more...</label>
+          <textarea name="feedbackText" placeholder="Put your feedback here"></textarea>
+        </div>
+        <button class="ui small blue right floated button">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+
+  <button id="helpButton" class="ui blue basic icon button"><i class="question icon"></i></button>
+
+</template>

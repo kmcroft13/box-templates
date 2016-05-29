@@ -48,10 +48,14 @@
         </h1>
         <h2>
           {{#if isLoggedIn}}
-            {{#if queue}}
-              We're ready to copy items into <b>"{{queue.folderName}}"</b>...
+            {{#if privateTemplates.count}}
+              {{#if queue}}
+                We're ready to copy items into <b>"{{queue.folderName}}"</b>...
+              {{else}}
+                Create a Template of items that can be quickly copied into Box folders. Get started below!
+              {{/if}}
             {{else}}
-              Create a Template of items that can be quickly copied into Box folders. Get started below!
+
             {{/if}}
           {{else}}
             Create Templates of items that can be quickly copied into Box folders. Scroll down to learn more.

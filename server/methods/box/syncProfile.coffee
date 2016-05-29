@@ -74,5 +74,5 @@ Meteor.methods(
 
       console.log("Sync successful!")
     else
-      console.log("Synced within last 24 hours")
+      console.log("Synced within last 12 hours")
 )
