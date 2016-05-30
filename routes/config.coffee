@@ -1,15 +1,15 @@
 AccountsTemplates.configureRoute('signIn')
 
+
 #To allow non-logged in users to access more routes, add it in the config file
 Router.plugin 'ensureSignedIn', except: [
   'home'
   '/'
 ]
 
-Router.configure(
-  layoutTemplate:"homeLayout"
-)
 
 Router.configure(
-  layoutTemplate:"basicLayout"
+  layoutTemplate: 'basicLayout',
+  notFoundTemplate: 'notFound',
+  loadingTemplate: 'loading'
 )

@@ -16,7 +16,6 @@ useraccounts:semantic-ui
 natestrauser:animate-css
 meteorhacks:fast-render
 
-semantic:ui-css
 meteor-base
 mobile-experience
 mongo

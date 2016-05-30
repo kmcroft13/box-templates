@@ -105,7 +105,6 @@ retry@1.0.7
 reywood:publish-composite@1.4.2
 routepolicy@1.0.10
 semantic:ui@2.1.8
-semantic:ui-css@1.12.3
 semantic:ui-data@2.1.8
 service-configuration@1.0.9
 session@1.1.5
