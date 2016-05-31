@@ -4,19 +4,19 @@
       <div id="copyTemplateLabel" class="ui black label hidden">
         Copy from an existing Template
       </div>
-      <a href="/templates" id="copyTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="templates"}}active{{/if}}"><i class="refresh icon"></i></a>
+      <a href="{{pathFor 'templates'}}" id="copyTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="templates"}}active{{/if}}"><i class="refresh icon"></i></a>
     </div>
     <div class="inline navButton">
       <div id="createTemplateLabel" class="ui black label hidden">
         Create a new Template
       </div>
-      <a href="/template/create" id="createTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="createTemplate"}}active{{/if}}"><i class="plus icon"></i></a>
+      <a href="{{pathFor 'createTemplate'}}" id="createTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="createTemplate"}}active{{/if}}"><i class="plus icon"></i></a>
     </div>
     <div class="inline navButton">
       <div id="manageTemplateLabel" class="ui black label hidden">
         Manage your Templates
       </div>
-      <a href="/manage/private" id="manageTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="managePrivate"}}active{{/if}}"><i class="write icon"></i></a>
+      <a href="{{pathFor 'managePrivate'}}" id="manageTemplateButton" class="massive circular ui inverted blue icon button {{#if isActiveRoute name="managePrivate"}}active{{/if}}"><i class="write icon"></i></a>
     </div>
   </div>
 </template>

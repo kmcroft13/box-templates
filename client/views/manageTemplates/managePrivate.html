@@ -1,5 +1,5 @@
 <template name="managePrivate">
-<div id="content">
+<div id="content" class="transitions-content">
   <div class="ui text container">
     <div class="ui text">
         <h1 class="ui dividing header">Your Templates</h1>
@@ -12,7 +12,7 @@
     <div class="ui text container">
       <div class="overlay">
         <div class="ui labeled icon vertical menu">
-          <a href="/template/create" class="item"><i class="plus icon"></i> Add</a>
+          <a href="{{pathFor 'createTemplate'}}" class="item"><i class="plus icon"></i> Add</a>
         </div>
       </div>
       <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
@@ -38,7 +38,7 @@
   {{else}}
     <br>
     <div class="ui text container">
-      <p>Looks like you haven't created a Template yet! Want to <a href="/template/create"><b>create one</b></a>?
+      <p>Looks like you haven't created a Template yet! Want to <a href="{{pathFor 'createTemplate'}}"><b>create one</b></a>?
       </p>
     </div>
   {{/if}}
@@ -48,7 +48,7 @@
 
 <template name="privateTemplate">
   <tr>
-    <td><a href="/template/{{_id}}/view">{{name}}</a></td>
+    <td><a href="{{pathFor 'viewTemplate'}}">{{name}}</a></td>
     <td>{{description}}</td>
     <td>{{shortDate createdAt}}</td>
     <td class="right aligned"><button class="ui compact negative button delete">Remove</button></td>
