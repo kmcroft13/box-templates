@@ -20,13 +20,18 @@ Template.feedbackForm.onRendered -> (
           ]
     )
 
+  this.$('#feedbackButton').hover(
+    -> ($('#feedbackLabel').transition('fade left')),
+    -> ($('#feedbackLabel').transition('fade left'))
+  )
+
 )
 
 Template.feedbackForm.events(
 
-  'click #helpButton': ->
+  'click #feedbackButton': ->
     $('#feedbackForm').transition('fly up')
-    $('#helpButton').toggleClass('active')
+    $('#feedbackButton').toggleClass('active')
 
   'submit form': (e) -> (
     e.preventDefault()
