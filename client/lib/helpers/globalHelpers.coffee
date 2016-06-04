@@ -27,3 +27,11 @@ Handlebars.registerHelper 'niceName', (_id)->
 			user.emails[0].address
 		else
 			'A user'
+
+Template.registerHelper('isFile', (type) ->
+  type == "file"
+)
+
+Template.registerHelper('isFolder', (type) ->
+  type == "folder"
+)

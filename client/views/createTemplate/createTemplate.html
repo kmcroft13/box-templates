@@ -45,7 +45,7 @@
             <div class="ui divided list">
               {{#each templateItems}}
                 <div class="item">
-                <p><div class="ui green horizontal label">{{this.type}}</div>&nbsp;&nbsp; {{this.name}}</p>
+                <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
                 </div>
               {{/each}}
             </div>
