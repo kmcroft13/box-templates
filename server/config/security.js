@@ -7,3 +7,5 @@ BrowserPolicy.content.allowOriginForAll('*.boxcdn.net');
 BrowserPolicy.content.allowFontDataUrl();
 
 BrowserPolicy.framing.restrictToOrigin('*.box.com');
+
+BrowserPolicy.content.allowOriginForAll("www.google-analytics.com");

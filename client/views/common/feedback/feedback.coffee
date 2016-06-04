@@ -33,6 +33,10 @@ Template.feedbackForm.events(
     $('#feedbackForm').transition('fly up')
     $('#feedbackButton').toggleClass('active')
 
+  'click #closeForm': ->
+    $('#feedbackForm').transition('fly up')
+    $('#feedbackButton').toggleClass('active')
+
   'submit form': (e) -> (
     e.preventDefault()
     feedbackType = e.target.feedbackType.value

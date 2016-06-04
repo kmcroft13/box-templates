@@ -49,6 +49,8 @@ Meteor.methods(
     #If bug report, add BUG label
     if feedbackType == "Bug"
       labels = labels + "," + bugLabel
+    else if feedbackType == "Question"
+      labels = labels
     else
       labels = labels + "," + suggestionLabel
 
