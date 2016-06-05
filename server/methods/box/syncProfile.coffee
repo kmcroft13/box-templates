@@ -62,8 +62,10 @@ Meteor.methods(
           eachGroup = {}
           groupId = v.group.id
           groupName = v.group.name
+          groupRole = v.role
           eachGroup["id"] = groupId
           eachGroup["name"] = groupName
+          eachGroup["role"] = groupRole
           Groups.push(eachGroup)
 
 

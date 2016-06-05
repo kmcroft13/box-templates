@@ -1,31 +1,24 @@
 <template name="managePrivate">
 <div id="content" class="transitions-content">
-  <div class="ui text container">
-    <div class="ui text">
-        <h1 class="ui dividing header">Your Templates</h1>
+  <h2 class="ui header">
+    <i class="edit icon"></i>
+    <div class="content">
+      Manage your Templates
+      <div class="sub header">View and manage all of your Templates</div>
     </div>
-  </div>
-
+  </h2>
+  <div class="ui divider"></div>
+  <br>
 
   {{#if privateTemplates.count}}
-    <br><br>
-    <div class="ui text container">
-      <div class="overlay">
-        <div class="ui labeled icon vertical menu">
-          <a href="{{pathFor 'createTemplate'}}" class="item"><i class="plus icon"></i> Add</a>
-        </div>
-      </div>
-      <p>All of the templates available to you are listed below. You can see <b>Enterprise Templates</b>
-        made available to you. Only Administrators can manage Enterprise Templates. You can also see
-        and manage <b>Private Templates</b> which you have created.
-      </p>
+    <div class="ui fixed raised segment">
 
-      <table class="ui selectable unstackable table fixed single line table">
+      <table class="ui unstackable very basic fixed single line table">
         <thead>
           <tr><th class="five wide">Name</th>
-          <th class="five wide">Description</th>
+          <th class="six wide">Description</th>
           <th class="three wide">Created</th>
-          <th class="three wide"></th>
+          <th class="two wide"></th>
         </tr></thead>
         <tbody>
           {{#each privateTemplates}}
@@ -36,11 +29,11 @@
     </div>
     {{> deleteModal}}
   {{else}}
-    <br>
-    <div class="ui text container">
-      <p>Looks like you haven't created a Template yet! Want to <a href="{{pathFor 'createTemplate'}}"><b>create one</b></a>?
-      </p>
-    </div>
+    <h2 class="ui center aligned icon disabled header">
+      <i class="help circle icon"></i>
+      You don't have any Templates yet<br>
+      <a href="{{pathFor 'createTemplate'}}"><u>Create one</u></a>
+    </h2>
   {{/if}}
 </div>
 </template>
@@ -51,7 +44,7 @@
     <td><a href="{{pathFor 'viewTemplate'}}">{{name}}</a></td>
     <td>{{description}}</td>
     <td>{{shortDate createdAt}}</td>
-    <td class="right aligned"><button class="ui compact negative button delete">Remove</button></td>
+    <td class="right aligned"><a href="#" class="ui negative delete">Remove</a></td>
   </tr>
 </template>
 

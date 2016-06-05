@@ -1,32 +1,42 @@
 <template name="navbar">
-  <div class="ui inverted fixed borderless main menu">
-    <div class="ui container">
-      <div href="#" class="item">
-        <a href="/">
-          <img class="logo" src="/images/logo/CloudTemplates-white-55px.png">
-          <b>CloudTemplates for Box</b>
-        </a>
-      </div>
-      {{#if isLoggedIn}}
-      <div id="profile" class="ui right floated dropdown item">
-        <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
-        <div class="text"> {{currentUser.profile.fullName}}</div>
-        <i class="dropdown icon"></i>
-        <div class="menu" style="font-size: 1em !important;"> <!--fix for Semantic UI issue -->
-          <a href="/profile" class="item">Profile</a>
+
+
+
+  <div id="sidebar" class="ui thin visible left vertical inverted sidebar labeled icon menu">
+    <div href="#" class="item">
+      <a href="/">
+        <img class="logo" src="/images/logo/CloudTemplates-white-90px.png">
+        <b>CloudTemplates for Box</b>
+      </a>
+    </div>
+    <div href="#" class="item">
+      <div class="ui inverted fluid accordion">
+        <div class="title">
+          <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
+          <div class="text"> {{currentUser.profile.fullName}}</div>
+        </div>
+        <div class="content">
+          <a href="{{pathFor 'profile'}}" class="item transition hidden">Profile</a>
           {{#if isInRole 'admin'}}
-            <a href="/admin" class="item">Admin</a>
+            <a href="/admin" class="item transition hidden">Admin</a>
           {{/if}}
           <div class="divider"></div>
-          <a href="/sign-out" class="item">Logout</a>
+          <a href="/sign-out" class="item transition hidden">Logout</a>
         </div>
       </div>
-      {{else}}
-      <a href="/sign-in" class="ui right floated item">
-        <div class="text">Login</div>
-      </a>
-      {{/if}}
     </div>
+    <a class="item {{#if isActiveRoute name="templates"}}active{{/if}}" href="{{pathFor 'templates'}}">
+      <i class="refresh icon"></i>
+      Copy from Template
+    </a>
+    <a class="item {{#if isActiveRoute name="createTemplate"}}active{{/if}}" href="{{pathFor 'createTemplate'}}">
+      <i class="plus icon"></i>
+      Create a Template
+    </a>
+    <a class="item {{#if isActiveRoute name="managePrivate"}}active{{/if}}" href="{{pathFor 'managePrivate'}}">
+      <i class="edit icon"></i>
+      Manage your Templates
+    </a>
   </div>
 
 </template>

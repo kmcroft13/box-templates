@@ -1,14 +1,24 @@
 <template name="templates">
 <div id="content" class="transitions-content">
+
+  <h2 class="ui header">
+    <i class="refresh icon"></i>
+    <div class="content">
+      Copy from a Template
+      <div class="sub header">Copy folders and files from an exsiting Template into another Box folder</div>
+    </div>
+  </h2>
+  <div class="ui divider"></div>
+  <br>
+
 {{#if privateTemplates.count}}
-  <div class="ui text container">
     <div class="ui text">
 
       {{#if queue}}
-        <div id="prep" class="ui icon message" style="overflow:hidden; !important">
+        <div id="prep" class="ui floating icon message" style="overflow:hidden; !important">
           <i class="folder icon"></i>
           <div class="content">
-            <p>Choose a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui right corner green label"><i class="question icon"></i></a></p>
+            <p>Choose a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
           </div>
         </div>
       {{else}}
@@ -73,9 +83,9 @@
         </div>
       </div>
 
-    <!-- TEMPLATE CREATION SECTION -->
-    {{#if queue}}
-
+  <!-- TEMPLATE CREATION SECTION -->
+  {{#if queue}}
+    <div class="ui fixed raised segment">
       <div class="ui dividing header">
         <div id="selectTemplate" class="ui dropdown">
           <div class="text"><h2>Choose Template...</h2></div>
@@ -96,24 +106,37 @@
         </div>
       </div>
       <p id="description">Select a template above to get started</p>
+  </div>
+  <div id="templateElements" class="hidden">
+    <div class="ui fixed raised segment">
+      <!-- <form class="ui form">
+        <div class="field">
+          <label>New Folder Name</label>
+          <input type="text" name="newFolderName" placeholder="New Folder Name">
+        </div>
+      </form> -->
 
-      <div id="formElements" class="hidden">
-        <!-- <form class="ui form">
-          <div class="field">
-            <label>New Folder Name</label>
-            <input type="text" name="newFolderName" placeholder="New Folder Name">
-          </div>
-        </form> -->
+      <h4>Ready to copy the items below into "{{queue.folderName}}":</h4>
 
-        <br><br>
-
-        <button id="copyTemplate" class="positive ui right floated disabled button">Copy Template</button>
+      <div class="ten wide column">
+        <div class="ui list">
+          {{#each itemsToCopy}}
+            <div class="item">
+            <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
+            </div>
+          {{/each}}
+        </div>
       </div>
+    </div>
+
+    <div class="ui fixed basic center aligned segment">
+      <button id="copyTemplate" class="large positive ui button">Copy Template</button>
+    </div>
+  </div>
 
     {{/if}} <!-- if queue -->
       <!-- END TEMPLATE CREATION SECTION -->
 
-    </div>
   </div>
 
 {{else}}

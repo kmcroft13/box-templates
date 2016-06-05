@@ -1,29 +1,28 @@
 <template name="createTemplate">
 <div id="content" class="transitions-content">
-  <div class="ui text container">
-    <div class="ui text">
-      <h1 class="ui dividing header">Create Template</h1>
-      <p>Create a new Template. <b>Private Templates</b> are available
-        only to you and cannot be used by other members of your organization.
-      </p>
+
+  <h2 class="ui header">
+    <i class="plus icon"></i>
+    <div class="content">
+      Create a Template
+      <div class="sub header">Create new Templates of Box files and folders. This Template will only be available
+        to you and cannot be used by other members of your organization.</div>
     </div>
+  </h2>
+  <div class="ui divider"></div>
+
+  <div class="hidden ui floating message">
+    <i class="close icon"></i>
+    <div class="header">
+      <span id="messageTitle"></span>
+    </div>
+    <p id="messageBody"></p>
   </div>
 
   <br>
 
-  <div class="ui text container">
-
-    <div class="hidden ui floating message">
-      <i class="close icon"></i>
-      <div class="header">
-        <span id="messageTitle"></span>
-      </div>
-      <p id="messageBody"></p>
-    </div>
-
-  <br>
-
-    <form class="ui form">
+  <form class="ui form">
+    <div class="ui fixed raised segment">
       <div class="ui error message">
       </div>
       <div class="field">
@@ -32,9 +31,10 @@
       </div>
       <div class="field">
         <label>Description</label>
-        <textarea name="templateDescription" placeholder="Description" rows="1"></textarea>
+        <textarea name="templateDescription" placeholder="Description" rows="3"></textarea>
       </div>
-
+    </div>
+    <div class="ui fixed raised segment">
       <div class="field">
         <label>Choose Items for Template</label>
         <div class="ui grid">
@@ -52,10 +52,14 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <button class="ui button" type="submit">Submit</button>
-    </form>
-    <br><br>
-  </div>
+    <div class="ui fixed basic center aligned segment">
+      <button class="large positive ui button" type="submit">Create Template</button>
+    </div>
+
+  </form>
+  <br><br>
+
 </div>
 </template>

@@ -1,79 +1,57 @@
 <template name="viewTemplate">
 <div id="content" class="transitions-content">
+  
   {{#if template}}
-    <div class="ui text container">
 
-      <div class="ui icon yellow message">
-        <i class="warning icon"></i>
-        Content is not yet editable
+    <h2 class="ui header">
+      <div class="content">
+        {{template.name}}
+        <div class="sub header">{{template.description}}</div>
       </div>
-      <br>
+    </h2>
+    <div class="ui divider"></div>
 
-      <div class="ui text">
-          <h1 class="ui dividing header">{{template.name}}</h1>
-      </div>
+    <div class="ui icon yellow floating message">
+      <i class="warning icon"></i>
+      Content is not yet editable
     </div>
 
-  <br>
+    <div class="ui raised segment">
+      <h4 class="ui header">
+        Date Created
+        <div class="sub header">{{longDate template.createdAt}}</div>
+      </h4>
 
-    <div class="ui text container">
-
-      <div class="ui items">
-        <div class="item">
-          <div class="description">
-            <p>{{template.description}}</p>
+      <h4 class="ui header">
+        Active
+        <div class="sub header">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" tabindex="0" checked="{{template.active}}" readonly="" class="hidden">
           </div>
         </div>
+      </h4>
+    </div>
 
-        <div class="item">
-          <div class="content">
-            <a class="header">Date Created</a>
-            <div class="description">
-              <p>{{longDate template.createdAt}}</p>
+    <div class="ui raised segment">
+      <h4 class="ui header">
+        Items in Template
+        <br>
+        <div class="ui divided list">
+          {{#each template.items}}
+            <div class="item">
+            <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
             </div>
-          </div>
+          {{/each}}
         </div>
-
-        <div class="item">
-          <div class="content">
-            <a class="header">Active?</a>
-            <div class="description">
-              <p>
-                <div class="ui toggle checkbox">
-                  <input type="checkbox" tabindex="0" checked="{{template.active}}" readonly="" class="hidden">
-                </div>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="content">
-            <a class="header">Items in Template</a>
-            <div class="ui divided list">
-              {{#each template.items}}
-                <div class="item">
-                <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
-                </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
-
-      </div>
-    <br>
+      </h4>
     </div>
 
   {{else}}
-
-  <div class="ui text container">
-
-    <div class="ui red message">
-      <i class="question icon"></i>
-      The template was not found or you do not have permission to access it
-    </div>
-  </div>
-
+    <h2 class="ui center aligned icon disabled red header">
+      <i class="warning sign icon"></i>
+      This Template doesn't exist or you do not have permission to view it<br>
+      <a href="{{pathFor 'managePrivate'}}"><u>Manage your Templates</u></a>
+    </h2>
   {{/if}}
 </div>
 </template>

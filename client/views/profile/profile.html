@@ -1,73 +1,50 @@
 <template name="profile">
 <div id="content" class="transitions-content">
-  <div class="ui text container">
 
-    <div class="ui icon info message">
-      <i class="warning icon"></i>
-      The infomation on this page is synced with Box every 12 hours.
+  <h2 class="ui header">
+    <img class="ui avatar image header" src="{{currentUser.profile.avatar}}">
+    <div class="content">
+      {{currentUser.profile.fullName}}
+      <div class="sub header">This infomation is synced with Box every 12 hours</div>
     </div>
-    <br>
+  </h2>
+  <div class="ui divider"></div>
+  <br>
 
-    <div class="ui text">
-        <h1 class="ui dividing header"><img class="ui avatar image header" src="{{currentUser.profile.avatar}}"> {{currentUser.profile.fullName}}</h1>
-    </div>
+  <div class="ui raised segment">
+    <h4 class="ui header">
+      Box Enterprise
+      <div class="sub header">{{currentUser.profile.boxEntName}}</div>
+    </h4>
+
+    <h4 class="ui header">
+      Box Role
+      <div class="sub header">{{currentUser.profile.boxRole}}</div>
+    </h4>
+
+    <h4 class="ui header">
+      Box Tariff
+      <div class="sub header">{{currentUser.profile.boxTariff}}</div>
+    </h4>
+
+    <h4 class="ui header">
+      Box EID
+      <div class="sub header">{{currentUser.profile.eid}}</div>
+    </h4>
   </div>
 
-<br>
-
-  <div class="ui text container">
-
-    <div class="ui items">
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Enterprise</a>
-          <div class="description">
-            <p>{{currentUser.profile.boxEntName}}</p>
+  <div class="ui raised segment">
+    <h4 class="ui header">
+      Box Groups
+      <br>
+      <div class="ui list">
+        {{#each currentUser.profile.boxGroups}}
+          <div class="sub header item">
+              <p>{{#if isAdmin role}}<div class="ui blue horizontal label">&nbsp;&nbsp;Admin&nbsp;&nbsp;</div>{{/if}}{{#if isMember role}}<div class="ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
           </div>
-        </div>
+        {{/each}}
       </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Box Role</a>
-          <div class="description">
-            <p>{{currentUser.profile.boxRole}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Box Tariff</a>
-          <div class="description">
-            <p>{{currentUser.profile.boxTariff}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Box EID</a>
-          <div class="description">
-            <p>{{currentUser.profile.eid}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Box Group Membership</a>
-          <div class="description">
-            {{#each currentUser.profile.boxGroups}}
-              <p>{{name}}</p>
-            {{/each}}
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <br>
+    </h4>
   </div>
 </div>
 </template>

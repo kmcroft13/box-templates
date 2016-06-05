@@ -13,8 +13,8 @@ Template.templates.onRendered -> (
 
 
 Template.templates.helpers(
-  'folderSelected': ->
-    Session.get("folderToCopy")
+  itemsToCopy: ->
+    Session.get('itemsToCopy')
 )
 
 
@@ -28,8 +28,7 @@ Template.templates.events(
     Session.set("itemsToCopy", items)
     $("#description").text(description)
     $('input[name="newFolderName"]').val(folderName)
-    $("#copyTemplate").removeClass("disabled")
-    $("#formElements").removeClass("hidden")
+    $("#templateElements").transition('drop')
     console.log(this.name + " (" + this._id + ") selected. Session variable set for " + items)
 
 
