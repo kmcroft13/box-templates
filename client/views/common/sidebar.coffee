@@ -1,4 +1,4 @@
-Template.navbar.onRendered -> (
+Template.sidebar.onRendered -> (
 
   # initialize accordian
   $('.ui.accordion')
