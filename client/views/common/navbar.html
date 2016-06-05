@@ -16,7 +16,7 @@
           <div class="text"> {{currentUser.profile.fullName}}</div>
         </div>
         <div class="content">
-          <a href="{{pathFor 'profile'}}" class="item transition hidden">Profile</a>
+          <a href="{{pathFor 'profile'}}" class="item transition hidden {{#if isActiveRoute name="profile"}}active{{/if}}">Profile</a>
           {{#if isInRole 'admin'}}
             <a href="/admin" class="item transition hidden">Admin</a>
           {{/if}}

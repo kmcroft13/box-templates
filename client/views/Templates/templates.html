@@ -9,9 +9,9 @@
     </div>
   </h2>
   <div class="ui divider"></div>
-  <br>
 
 {{#if privateTemplates.count}}
+<br>
     <div class="ui text">
 
       {{#if queue}}
@@ -22,21 +22,15 @@
           </div>
         </div>
       {{else}}
-        <div class="ui icon negative message">
-          <i class="warning sign icon"></i>
-          <div class="content">
-            <div class="header">
-              Hold on!
-            </div>
-            <p>
-              It looks like you haven't chosen a folder from Box yet. Go to More Actions on the folder you'd like to copy to and choose "CloudTemplates for Box".<br><br>
-              If you don't see see that option in More Actions, you may need to <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account first!
-            </p>
-          </div>
-        </div>
+        <h2 class="ui center aligned icon disabled header">
+          <i class="external share icon"></i>
+          It looks like you haven't chosen a folder from Box yet!<br>
+          Go to the Box folder you'd like to copy to and choose "CloudTemplates for Box" from the More Actions menu.<br>
+          If you don't see see that option in More Actions, you may need to <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account first!<br>
+        </h2>
       {{/ if}}
 
-      <div id="copy" class="ui hidden icon blue message">
+      <div id="copy" class="ui hidden icon blue floating message">
         <i class="notched circle loading icon"></i>
         <div class="content">
           <div class="header">
@@ -141,17 +135,19 @@
 
 {{else}}
 
-  <h1 class="ui centered header">
-    Hold on, you need to create a Template!
-  </h1>
-  <p class="ui centered header">Follow the steps below {{#if queue}}before copying into "{{queue.folderName}}"{{else}}to get started{{/if}}</p>
+  <h2 class="ui center aligned icon disabled blue header">
+    <i class="add circle icon"></i>
+    Hold on, you need to create a Template!<br>
+    Follow the steps below {{#if queue}}before copying into "{{queue.folderName}}"{{else}}to get started{{/if}}
+  </h2>
+  <br>
 
-  <div id="top" class="ui vertical stripe segment">
+  <div class="ui fixed raised segment">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
         <div class="eight wide column">
-          <h2 class="ui header">First, Create a Template</h2>
-            <p>Your first step is to create a Template! A Template is just a collection of folders and files from Box that can be quickly copied into other folders.
+          <h2 class="ui header">Start by Creating a Template</h2>
+            <p>A Template is just a collection of folders and files from Box that can be quickly copied into other folders.
             Create one for sales collateral, project materials, or info for new customers.</p>
         </div>
         <div class="six wide right floated column">
@@ -160,17 +156,19 @@
       </div>
       <div class="row">
         <div class="center aligned column">
-          <a class="ui large button" href="/template/create">Create</a>
+          <a class="ui large inverted blue button" href="{{pathFor 'createTemplate'}}">Let's Go</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="ui vertical stripe segment">
+  <br>
+
+  <div class="ui fixed raised segment">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
         <div class="eight wide column">
-          <h2 class="ui header">Then, Copy from a Template</h2>
+          <h2 class="ui header">Then Copy from a Template</h2>
             <p>Once you've created a Template, come back to this page so you can use it to copy items into your Box folder. Just <a href="https://box.com/services/browse/search/cloudtemplates_for_box" target="_blank">add the integration</a> to your Box account
             and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
         </div>
@@ -181,6 +179,7 @@
     </div>
   </div>
 
+  <br>
 {{/if}}
 
 {{> folderQuestion}}
