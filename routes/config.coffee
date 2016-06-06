@@ -5,6 +5,8 @@ AccountsTemplates.configureRoute('signIn')
 Router.plugin 'ensureSignedIn', except: [
   'home'
   '/'
+  'newHome'
+  '/new'
 ]
 
 

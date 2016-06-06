@@ -9,6 +9,7 @@
         <b>CloudTemplates for Box</b>
       </a>
     </div>
+    {{#if isLoggedIn}}
     <div href="#" class="item">
       <div class="ui inverted fluid accordion">
         <div class="title">
@@ -25,6 +26,7 @@
         </div>
       </div>
     </div>
+    {{/if}}
     <a class="item {{#if isActiveRoute name="templates"}}active{{/if}}" href="{{pathFor 'templates'}}">
       <i class="refresh icon"></i>
       Copy from Template

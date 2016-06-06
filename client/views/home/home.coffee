@@ -1,4 +1,7 @@
 Template.home.onRendered -> (
+  $('#fullpage').fullpage(
+    scrollOverflow: false
+  )
 
   # show dropdown on click
   Meteor.setTimeout(->
