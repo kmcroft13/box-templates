@@ -1,0 +1,138 @@
+<template name="homeOld">
+
+    <div class="ui inverted vertical masthead center aligned segment">
+
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+            <a class="active item">Home</a>
+          <div class="right item">
+            {{#if isLoggedIn}}
+              <div id="profile" class="ui dropdown">
+                <img class="ui avatar image" src="{{currentUser.profile.avatar}}">
+                <div class="text"> {{currentUser.profile.fullName}}</div>
+                <i class="dropdown icon"></i>
+                <div class="menu" style="font-size: 1em !important;"> <!--fix for Semantic UI issue -->
+                  <a href="/profile" class="item">Profile</a>
+                  {{#if isInRole 'admin'}}
+                    <a href="/admin" class="item">Admin</a>
+                  {{/if}}
+                  <div class="divider"></div>
+                  <a href="/sign-out" class="item">Logout</a>
+                </div>
+              </div>
+            {{else}}
+              <a class="ui inverted blue button" href="/sign-in">Log in</a>
+              <a class="ui inverted blue button" href="/sign-in">Sign Up</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          {{#if isLoggedIn}}
+            Hey, {{currentUser.profile.fullName}}!
+          {{else}}
+            CloudTemplates for Box
+          {{/if}}
+        </h1>
+        <h2>
+          {{#if isLoggedIn}}
+            {{#if privateTemplates.count}}
+              {{#if queue}}
+                We're ready to copy items into <b>"{{queue.folderName}}"</b>...
+              {{else}}
+                Pick a folder from Box to copy Template items into! Right-click on any Box folder and select "Create from CloudTemplates" from the More Actions menu.
+              {{/if}}
+            {{else}}
+                Create a Template of folders and files that can be quickly copied into other Box folders. Get started below!
+            {{/if}}
+          {{else}}
+            Create Templates of Box files and folder that can be quickly copied into other Box folders. Scroll down to learn more.
+          {{/if}}
+        </h2>
+
+
+        {{#if privateTemplates.count}}
+          <a class="ui huge inverted blue button" href="/templates">Copy from Template <i class="right arrow icon"></i></a>
+        {{else}}
+          <a class="ui huge inverted blue button" href="/template/create">Create a Template <i class="right arrow icon"></i></a>
+        {{/if}}
+      </div>
+
+    </div>
+
+    <div id="top" class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Create a Template</h3>
+            {{#if privateTemplates.count}}
+              <p>Nice, you already have some templates! Create another for sales collateral, project materials, or info for new customers.</p>
+            {{else}}
+              <p>Your first step is to create a Template! A Template is just a collection of Box items that can be quickly copied into other folders.
+              Create one for sales collateral, project materials, or info for new customers.</p>
+            {{/if}}
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/create.png" class="ui rounded image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui large button" href="/template/create">Create</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Copy from a Template</h3>
+            {{#if privateTemplates.count}}
+              {{#if queue}}
+                <p>We're ready to copy from your existing Templates into <b>"{{queue.folderName}}."</b> Click the Copy button below to get started.</p>
+              {{else}}
+                <p>Ready to build from your existing Templates? Go to your Box account
+                and click More Actions and "Create from CloudTemplates" on the folder you want to copy items into! You may need to <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account first.</p>
+              {{/if}}
+            {{else}}
+              <p>Once you've created a Template, use it to copy items into your Box folder. Just <a href="https://box.com/services/browse/search/cloudtemplates_for_box">add the integration</a> to your Box account
+              and click "Create from CloudTemplates" on the folder you want to copy items into!</p>
+            {{/if}}
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/integration.png" class="ui rounded image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            {{#if queue}}
+              <a class="ui large button" href="/templates">Copy</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">Stay Tuned for More</h3>
+            <p>Think of this as V1. We're hoping to add other great features soon!
+            Some things we're thinking about are dynamically renaming items and Admin-managed Enterprise level Templates.</p>
+          </div>
+          <div class="six wide right floated column">
+            <img src="/images/manage.png" class="ui small rounded image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+</template>
