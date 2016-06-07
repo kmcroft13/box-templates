@@ -1,6 +1,7 @@
 Template.home.onRendered -> (
   $('#fullpage').fullpage(
-    scrollOverflow: false
+    continuousVertical: true,
+    normalScrollElements: '.pusher'
   )
 
   # show dropdown on click

@@ -11,8 +11,6 @@
   <div class="ui divider"></div>
 
 {{#if privateTemplates.count}}
-<br>
-    <div class="ui text">
 
       {{#if queue}}
         <div id="prep" class="ui floating icon message" style="overflow:hidden; !important">
@@ -79,6 +77,7 @@
 
   <!-- TEMPLATE CREATION SECTION -->
   {{#if queue}}
+  <div class="scrollable">
     <div class="ui fixed raised segment">
       <div class="ui dividing header">
         <div id="selectTemplate" class="ui dropdown">
@@ -127,14 +126,13 @@
       <button id="copyTemplate" class="large positive ui button">Copy Template</button>
     </div>
   </div>
-
+</div>
     {{/if}} <!-- if queue -->
       <!-- END TEMPLATE CREATION SECTION -->
 
-  </div>
 
 {{else}}
-
+<div class="scrollable">
   <h2 class="ui center aligned icon disabled blue header">
     <i class="add circle icon"></i>
     Hold on, you need to create a Template!<br>
@@ -178,7 +176,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <br>
 {{/if}}
 

@@ -1,8 +1,7 @@
 <template name="viewTemplate">
 <div id="content" class="transitions-content">
-  
-  {{#if template}}
 
+  {{#if template}}
     <h2 class="ui header">
       <div class="content">
         {{template.name}}
@@ -15,7 +14,7 @@
       <i class="warning icon"></i>
       Content is not yet editable
     </div>
-
+<div class="scrollable">
     <div class="ui raised segment">
       <h4 class="ui header">
         Date Created
@@ -45,7 +44,7 @@
         </div>
       </h4>
     </div>
-
+</div>
   {{else}}
     <h2 class="ui center aligned icon disabled red header">
       <i class="warning sign icon"></i>

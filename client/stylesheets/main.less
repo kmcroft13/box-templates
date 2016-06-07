@@ -5,7 +5,9 @@
 @box-blue-lighter:      lighten(#004B85, 13.5%);
 
 // Main styles
-
+body{
+  overflow:hidden;
+}
 .main.container {
   margin-top: 1em;
 }
@@ -17,6 +19,11 @@
 
 #sidebar {
   background-color: @box-cyan;
+}
+
+.scrollable {
+    height: 300px;
+    overflow:auto !important;
 }
 
 .center-text {
