@@ -21,8 +21,17 @@ Template.feedbackForm.onRendered -> (
     )
 
   this.$('#feedbackButton').hover(
-    -> ($('#feedbackLabel').transition('fade left')),
-    -> ($('#feedbackLabel').transition('fade left'))
+    ->
+      feedbackIconClass = $('#feedbackIcon').attr('class')
+      if feedbackIconClass != 'icon close'
+        $('#feedbackIcon').addClass('hidden')
+        $('#feedbackLabel').removeClass('hidden')
+    ,
+    ->
+      feedbackIconClass = $('#feedbackIcon').attr('class')
+      if feedbackIconClass != 'icon close'
+        $('#feedbackLabel').addClass('hidden')
+        $('#feedbackIcon').removeClass('hidden')
   )
 
 )
@@ -30,12 +39,13 @@ Template.feedbackForm.onRendered -> (
 Template.feedbackForm.events(
 
   'click #feedbackButton': ->
-    $('#feedbackForm').transition('fly up')
+    $('#feedbackIcon').toggleClass('question')
+    $('#feedbackIcon').toggleClass('close')
+    $('#feedbackIcon').removeClass('hidden')
+    $('#feedbackLabel').addClass('hidden')
     $('#feedbackButton').toggleClass('active')
+    $('#feedbackForm').transition('fly up')
 
-  'click #closeForm': ->
-    $('#feedbackForm').transition('fly up')
-    $('#feedbackButton').toggleClass('active')
 
   'submit form': (e) -> (
     e.preventDefault()

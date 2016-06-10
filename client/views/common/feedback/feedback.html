@@ -1,7 +1,7 @@
 <template name="feedbackForm">
   <div class="ui card hidden" id="feedbackForm">
     <div class="content">
-      <div class="header">Submit Feedback <i id="closeForm" class="pull right close icon"></i></div>
+      <div class="header">Submit Feedback</div>
       <div class="meta">Let us know your thoughts about how we can improve this app. We're working to make improvements all the time!</div>
     </div>
     <div class="content">
@@ -35,10 +35,10 @@
   </div>
 
   <div id="feedbackButtons">
-    <div id="feedbackLabel" class="ui black right pointing label hidden">
+    <div class="ui black right pointing label hidden">
       Submit Feedback
     </div>
-    <button id="feedbackButton" class="ui inverted blue icon button"><i class="question icon"></i></button>
+    <button id="feedbackButton" class="ui inverted blue icon button"><i id="feedbackIcon" class="icon question"></i> <span id="feedbackLabel" class="hidden"> Submit Feedback </span> </button>
   </div>
 
 </template>

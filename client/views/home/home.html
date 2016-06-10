@@ -61,8 +61,9 @@
     </div>
 	</div>
 	<div class="section" id="section1">
-		<div class="slide createSlides">
+		<div class="createSlides">
 			<div class="intro">
+        <br><br>
       	<h1 class="home-h1">Create a Template</h1>
 
 				<p class="home-p">
@@ -73,22 +74,12 @@
           {{/if}}
         </p>
         <br>
-        <a class="ui large inverted button" href="{{pathFor 'createTemplate'}}">Let's Create</a>
-
-			</div>
-
-		</div>
-		<div class="slide createSlides">
-			<div class="intro">
-				<p class="home-p">Templates can contain multiple Box files and folders! They're designed to make the repetative task of copying
+        <p class="home-p">Templates can contain multiple Box files and folders! They're designed to make the repetative task of copying
           content you use frequently much easier. Create one for sales collateral, project materials, or info for new customers.
         </p>
-			</div>
-		</div>
-		<div class="slide copySlides">
-			<div class="intro">
-				<h1 class="home-h1">Copy from a Template</h1>
-				<p class="home-p">
+        <br>
+        <h1 class="home-h1">Copy from a Template</h1>
+        <p class="home-p">
           {{#if privateTemplates.count}}
             {{#if queue}}
               We're ready to copy from your existing Templates into <b>"{{queue.folderName}}."</b> Click the Copy button below to get started.
@@ -101,15 +92,11 @@
           {{/if}}
         </p>
         <br>
-        <a class="ui large inverted button" href="{{pathFor 'templates'}}">Let's Copy</a>
-			</div>
-		</div>
-		<div class="slide copySlides">
-			<div class="intro">
-				<p class="home-p">
+        <p class="home-p">
           Simply right-click on any folder in your Box account and select
           "Create from CloudTemplates" from the More Actions menu
         </p>
+        <a class="ui large inverted button" href="{{pathFor 'createTemplate'}}">Let's Create</a>
 			</div>
 		</div>
 	</div>

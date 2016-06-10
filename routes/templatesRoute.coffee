@@ -15,6 +15,9 @@ Router.map ->
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)
       @next()
+    onAfterAction: ->
+      $.fn.fullpage.destroy('all')
+      @next()
 
   @route 'managePrivate',
     path: '/manage/private'
