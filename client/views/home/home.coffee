@@ -1,4 +1,5 @@
 Template.home.onRendered -> (
+  # initialize FullPage.js
   $('#fullpage').fullpage(
     navigation: true,
     paddingBottom: '0px',
@@ -13,4 +14,26 @@ Template.home.onRendered -> (
       })
     ,500)
 
+  # unhide proper <div> for section1
+  if Template.find().count() > 0
+    $( "#copyBody" ).removeClass('hidden')
+  else
+    $( "#createBody" ).removeClass('hidden')
+
+)
+
+
+Template.home.events(
+
+  'click #createHeader': ->
+    $( "#copyHeader" ).removeClass('active')
+    $( "#createHeader" ).addClass('active')
+    $( "#createBody" ).removeClass('hidden')
+    $( "#copyBody" ).addClass('hidden')
+
+  'click #copyHeader': ->
+    $( "#createHeader" ).removeClass('active')
+    $( "#copyHeader" ).addClass('active')
+    $( "#copyBody" ).removeClass('hidden')
+    $( "#createBody" ).addClass('hidden')
 )

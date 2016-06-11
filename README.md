@@ -49,11 +49,13 @@ Keeping track of things I want to add in the future!
 + Scrolling (**_COMPLETE_**) (I think)
    + Use FP destroy() to make pages scrollable OR  <- this option was chosen for now
    + Add scroll bars to each section and auto-calculate section size
-+ Update home page slide 2
++ Update home page slide 2 (**_COMPLETE_**)
 + Make feedback button expand to say "Submit Feedback" instead of label, and add close button (**_COMPLETE_**)
 + Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
 
 ####MID TERM
++ Make existing Templates editable
+  + Allow adding and removing individual items from Templates
 + Add code to clean up FolderQueue objects so that only the most recent one remains
 + Standardize colors (specifically the blues)
 
@@ -62,3 +64,6 @@ Keeping track of things I want to add in the future!
    + Rename throughout structure? Only certain levels?
 + Enterprise / Group templates
    + Check if group has access to folder before creating (throw warning if not?)
+
+####BACKLOG
++ Figure out why Admin package isn't working

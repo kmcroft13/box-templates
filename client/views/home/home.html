@@ -65,13 +65,15 @@
         <br><br>
         <div id="steps" class="ui two steps">
           {{#if privateTemplates.count}}
-            <a id="createHeader" class="step">
+            <a id="createHeader" class="completed step">
+              <i class="plus icon"></i>
               <div class="content">
                 <div class="title">Create</div>
                 <div class="description">Create a Template of folders and files</div>
               </div>
             </a>
             <a id="copyHeader" class="active step">
+              <i class="refresh icon"></i>
               <div class="content">
                 <div class="title">Copy</div>
                 <div class="description">Copy from an existing Template into Box</div>
@@ -79,12 +81,14 @@
             </a>
           {{else}}
           <a id="createHeader" class="active step">
+            <i class="plus icon"></i>
             <div class="content">
               <div class="title">Create</div>
               <div class="description">Create a Template of folders and files</div>
             </div>
           </a>
           <a id="copyHeader" class="step">
+            <i class="refresh icon"></i>
             <div class="content">
               <div class="title">Copy</div>
               <div class="description">Copy from an existing Template into Box</div>
@@ -93,21 +97,22 @@
           {{/if}}
         </div>
         <br><br><br>
-        {{#if privateTemplates.count}}
-          <p id="copyBody" class="home-p">
+        <div id="copyBody" class="hidden">
+          <p class="home-p">
             Use your Templates to copy files and folders into other Box folders! Simply right-click on any folder in
             your Box account and select "Create from CloudTemplates" from the More Actions menu.
           </p>
           <br><br>
           <a class="ui large inverted blue button" href="{{pathFor 'templates'}}">Let's Copy</a>
-        {{else}}
-          <p id="createBody" class="home-p">
+        </div>
+        <div id="createBody" class="hidden">
+          <p class="home-p">
             Templates can contain multiple Box files and folders! They're designed to make the repetative task of copying
             content you use frequently much easier. Create one for sales collateral, project materials, or info for new customers.
           </p>
           <br><br>
           <a class="ui large inverted blue button" href="{{pathFor 'createTemplate'}}">Let's Create</a>
-        {{/if}}
+        </div>
 			</div>
 	</div>
 	<div class="section" id="section2">
