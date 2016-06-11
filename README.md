@@ -14,7 +14,7 @@ You will need to create a Meteor settings.json file and [start your app with it]
 ```JSON
 {
   "public": {
-    "environment" : "<environment_code>"
+    "environment" : "<ENVIRONMENT_CODE>"
   },
   "orion-cli": {
     "profile": "coffee",
@@ -24,8 +24,8 @@ You will need to create a Meteor settings.json file and [start your app with it]
   },
   "serviceConfigurations": {
     "box": {
-      "appId": "<box_app_client_id>",
-      "secret": "<box_app_secret>"
+      "appId": "<BOX_APP_CLIENT_ID>",
+      "secret": "<BOX_APP_SECRET>"
       }
   }
 }
@@ -67,3 +67,4 @@ Keeping track of things I want to add in the future!
 
 ####BACKLOG
 + Figure out why Admin package isn't working
++ Update Account templates like signIn and ensureSignedIn
