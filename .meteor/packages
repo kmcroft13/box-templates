@@ -15,6 +15,7 @@ browser-policy
 useraccounts:semantic-ui
 natestrauser:animate-css
 meteorhacks:fast-render
+admin
 
 meteor-base
 mobile-experience
@@ -38,7 +39,6 @@ useraccounts:iron-routing
 accounts-box
 momentjs:moment
 force-ssl
-yogiben:admin
 http
 audit-argument-checks
 standard-minifier-css
@@ -48,3 +48,4 @@ dburles:collection-helpers
 aldeed:simple-schema
 jamielob:transitions
 lawshe:full-page
+alanning:roles
