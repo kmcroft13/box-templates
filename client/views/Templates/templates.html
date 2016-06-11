@@ -1,5 +1,5 @@
 <template name="templates">
-<div id="content" class="transitions-content" style="overflow: auto !important;">
+<div id="content" class="transitions-content">
 
   <h2 class="ui header">
     <i class="refresh icon"></i>
@@ -13,7 +13,7 @@
 {{#if privateTemplates.count}}
 
       {{#if queue}}
-        <div id="prep" class="ui floating icon message" style="overflow:hidden; !important">
+        <div id="prep" class="ui floating icon white message" style="overflow: hidden !important;">
           <i class="folder icon"></i>
           <div class="content">
             <p>Choose a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
@@ -77,7 +77,6 @@
 
   <!-- TEMPLATE CREATION SECTION -->
   {{#if queue}}
-  <div class="scrollable">
     <div class="ui fixed raised segment">
       <div class="ui dividing header">
         <div id="selectTemplate" class="ui dropdown">
@@ -126,9 +125,8 @@
       <button id="copyTemplate" class="large positive ui button">Copy Template</button>
     </div>
   </div>
-</div>
-    {{/if}} <!-- if queue -->
-      <!-- END TEMPLATE CREATION SECTION -->
+  {{/if}} <!-- if queue -->
+    <!-- END TEMPLATE CREATION SECTION -->
 
 
 {{else}}

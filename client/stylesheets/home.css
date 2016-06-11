@@ -33,6 +33,9 @@
 #homeNav{
   padding: 40px;
 }
+#steps{
+  width: 600px;
+}
 
 /* Defining each section background and styles
 * --------------------------------------- */
@@ -42,8 +45,9 @@
   /*background-color: #1D91D4;*/
 }
 #section1{
-
-  /*background-color: #F3721B;*/
+	background-image: url(/images/assets/woman-pointing-file.jpeg);
+  background-size: cover;
+  /*background-color: #21BA45;*/
 }
 #section2{
   background-image: url(/images/assets/holding-box-folder.jpeg);
@@ -56,16 +60,4 @@
   background-size: cover;
   /*background-color: #004B85;*/
   padding: 6% 0 0 0;
-}
-/*Adding background for the slides
-* --------------------------------------- */
-.createSlides {
-  background-image: url(/images/assets/woman-pointing-file.jpeg);
-  background-size: cover;
-  /*background-color: #21BA45;*/
-}
-.copySlides {
-  background-image: url(/images/assets/man-holding-folders.jpeg);
-  background-size: cover;
-  /*background-color: #21BA45;*/
 }

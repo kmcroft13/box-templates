@@ -25,10 +25,12 @@ Template.templates.events(
     folderName = this.folderName
     folderId = this.folderId
     items = this.items
-    Session.set("itemsToCopy", items)
     $("#description").text(description)
     $('input[name="newFolderName"]').val(folderName)
-    $("#templateElements").transition('drop')
+    itemsCheck = Session.get("itemsToCopy")
+    if itemsCheck == undefined
+      $("#templateElements").transition('drop')
+    Session.set("itemsToCopy", items)
     console.log(this.name + " (" + this._id + ") selected. Session variable set for " + items)
 
 

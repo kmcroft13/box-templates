@@ -48,21 +48,21 @@ Template.createTemplate.events(
     Meteor.call('addTemplate', templateName, active, templateDescription, items, (error, result) -> (
         if error
            console.log(JSON.stringify(error,null,2))
-           $('.message').removeClass('positive')
-           $('.message').addClass('negative')
+           $('#createMessage').removeClass('positive')
+           $('#createMessage').addClass('negative')
            $("#messageTitle").text("Something went wrong")
            $("#messageBody").html("<b>" + error.reason + "</b>. Please try again.")
-           $('.message').removeClass('hidden')
+           $('#createMessage').removeClass('hidden')
            $('html, body').animate(
              scrollTop: 0, 300)
         else
            console.log(result)
            $('form').form('clear')
-           $('.message').removeClass('negative')
-           $('.message').addClass('positive')
+           $('#createMessage').removeClass('negative')
+           $('#createMessage').addClass('positive')
            $("#messageTitle").text("Success!")
            $("#messageBody").html("<b>" + templateName + "</b> was successfully created. Now <b><a href=\"/templates\">let's put it to work</a></b>!")
-           $('.message').removeClass('hidden')
+           $('#createMessage').removeClass('hidden')
            Session.set("items", undefined)
            $('html, body').animate(
              scrollTop: 0, 300)

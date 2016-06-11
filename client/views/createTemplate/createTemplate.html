@@ -11,7 +11,7 @@
   </h2>
   <div class="ui divider"></div>
 
-  <div class="hidden ui floating message">
+  <div id="createMessage" class="hidden ui floating message">
     <i class="close icon"></i>
     <div class="header">
       <span id="messageTitle"></span>
@@ -21,14 +21,13 @@
 
   <br>
 
-<div class="scrollable">
   <form class="ui form">
     <div class="ui fixed raised segment">
       <div class="ui error message">
       </div>
       <div class="field">
         <label>Template Name</label>
-        <input type="text" name="templateName" placeholder="Template Name">
+        <input type="text" name="templateName" placeholder="Template Name" autocomplete="off">
       </div>
       <div class="field">
         <label>Description</label>
@@ -62,6 +61,5 @@
   </form>
 
   <br><br>
-</div>
 </div>
 </template>

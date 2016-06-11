@@ -5,27 +5,59 @@ of files and folder and copy them into other folders as needed. The integration 
 from the **target** folder, rather than from the source folder, allowing users
 to create content directly in the target folder without visiting the source files individually first.
 
-# TODO
+##Box App
+Go to developers.box.com to create your Box application. This is required for the login and integrations to works properly. Once you create the app, you will need to use the client ID and secret to create a Meteor settings file.
 
--- Scrolling
-  -- Make window scrollable even after visiting home page first (CSS conflict with FullPage.js?)
-  -- OR
-  -- Add scroll bars to each section and auto-calculate section size
-  -- FP DESTROY AND REBUILD
--- Update home page with scroll section for slide 2
--- Make feedback button expand to say "Submit Feedback" instead of label
-  -- Maybe change to X when clicked (like Amsterdam)?
--- Fix bug when changing dropdown items on "Copy" page
-  -- Transition fires multiple times which hides item when it shouldn't
-  -- Do a check to see if session variable is set and if so don't fire transition?
+###Settings file
+Your settings file should look like the one below:
+
+```JSON
+{
+  "public": {
+    "environment" : "<environment_code>"
+  },
+  "orion-cli": {
+    "profile": "coffee",
+    "config": "private/orion-config.json"
+  },
+  "private": {
+  },
+  "serviceConfigurations": {
+    "box": {
+      "appId": "<box_app_client_id>",
+      "secret": "<box_app_secret>"
+      }
+  }
+}
+```
+
+####Environment
+Can be either "dev", "stage", or "prod"
+Allows the app to have different behavior depending on the environment (ie. if you have a test folder in Box you want to use for the Dev environment)
+####Orion
+The `orion-cli` section refers to the Orion scaffolding and dev tools that are packaged with this app
+Profile can be either "es6" or "coffee" depending on whether you want to use traditional javascript or coffee script files (I prefer coffee script)
+Visit the [Orion-CLI GitHub](https://github.com/matteodem/orion-cli) for more info
+####Service Configurations
+This is where you put the API keys and secrets of any apps you want to integrate with. Each additional integration should be a child object of `serviceConfigurations`. In this case, we only have Box so we take the client ID and secret from the Box app page and put them here.
 
 
--- Standardize colors (specifically the blues)
+## TODO
+Keeping track of things I want to add in the future!
 
+####SHORT TERM
++ Scrolling (**_COMPLETE_**) (I think)
+   + Use FP destroy() to make pages scrollable OR  <- this option was chosen for now
+   + Add scroll bars to each section and auto-calculate section size
++ Update home page slide 2
++ Make feedback button expand to say "Submit Feedback" instead of label, and add close button (**_COMPLETE_**)
++ Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
 
+####MID TERM
++ Standardize colors (specifically the blues)
 
-
--- Dynamic renaming
-  -- Rename throughout structure? Only certain levels?
--- Enterprise / Group templates
-  -- Check if group has access to folder before creating (throw warning if not?)
+####LONG TERM
++ Dynamic renaming
+   + Rename throughout structure? Only certain levels?
++ Enterprise / Group templates
+   + Check if group has access to folder before creating (throw warning if not?)

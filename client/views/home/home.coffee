@@ -1,7 +1,6 @@
 Template.home.onRendered -> (
   $('#fullpage').fullpage(
     navigation: true,
-    scrollOverflow: true,
     paddingBottom: '0px',
     css3: false
   )

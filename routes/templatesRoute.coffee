@@ -10,14 +10,13 @@ Router.map ->
       privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
       queue: FolderQueue.findOne({}, {sort: {addedAt: -1}})
     onBeforeAction: ->
+      Session.set("itemsToCopy", undefined)
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/templates')
       sync = Meteor.call("syncProfile")
       Accounts.onLogin(sync)
       @next()
-    onAfterAction: ->
-      $.fn.fullpage.destroy('all')
-      @next()
+
 
   @route 'managePrivate',
     path: '/manage/private'

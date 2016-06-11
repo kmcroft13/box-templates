@@ -5,11 +5,10 @@
 @box-blue-lighter:      lighten(#004B85, 13.5%);
 
 // Main styles
-html,body{
+html, body {
+  background-color: #f5f5f5;
   overflow-x: hidden;
-  overflow-y: auto !important;
 }
-
 
 .pusher {
   padding-left: 15px;
@@ -20,9 +19,10 @@ html,body{
   background-color: @box-cyan;
 }
 
-.scrollable {
-    height: 300px;
-    overflow:auto !important;
+.accountsWrapper {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .center-text {
