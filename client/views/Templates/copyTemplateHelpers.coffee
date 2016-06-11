@@ -32,10 +32,10 @@ Template.templates.events(
             $( "#itemsCopySuccess" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
             $( "#itemsCopyWarning" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
         if s == i
-          $( "#successStatus" ).append( s + " items were successfully created &nbsp;&nbsp;&nbsp;<a id=\"successDetails\" href=\"#\">More Details...</a>")
+          $( "#successStatus" ).html( s + " items were successfully created &nbsp;&nbsp;&nbsp;<a id=\"successDetails\" href=\"#\">More Details...</a>")
           Session.set("templateStatus","success")
         else
-          $( "#warningStatus" ).append( s + " items created and " + e + " items failed &nbsp;&nbsp;&nbsp;<a id=\"warningDetails\" href=\"#\">More Details...</a>")
+          $( "#warningStatus" ).html( s + " items created and " + e + " items failed &nbsp;&nbsp;&nbsp;<a id=\"warningDetails\" href=\"#\">More Details...</a>")
           Session.set("templateStatus","warning")
     )
 

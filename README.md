@@ -9,7 +9,7 @@ to create content directly in the target folder without visiting the source file
 Go to developers.box.com to create your Box application. This is required for the login and integrations to works properly. Once you create the app, you will need to use the client ID and secret to create a Meteor settings file.
 
 ###Settings file
-Your settings file should look like the one below:
+You will need to create a Meteor settings.json file and [start your app with it](http://docs.meteor.com/commandline.html#meteordeploy) to initialize the connection with your Box app (among a few other things). Your settings file should look like the one below:
 
 ```JSON
 {
@@ -54,6 +54,7 @@ Keeping track of things I want to add in the future!
 + Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
 
 ####MID TERM
++ Add code to clean up FolderQueue objects so that only the most recent one remains
 + Standardize colors (specifically the blues)
 
 ####LONG TERM
