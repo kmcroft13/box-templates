@@ -9,13 +9,11 @@ iron:router
 raix:handlebar-helpers
 matteodem:easy-security
 fastclick
-zimme:iron-router-active
 manuelschoebel:ms-seo
 browser-policy
 useraccounts:semantic-ui
 natestrauser:animate-css
 meteorhacks:fast-render
-admin
 
 meteor-base
 mobile-experience
@@ -49,3 +47,4 @@ aldeed:simple-schema
 jamielob:transitions
 lawshe:full-page
 alanning:roles
+zimme:active-route

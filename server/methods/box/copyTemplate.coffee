@@ -62,6 +62,7 @@ Meteor.methods(
           itemStatus["type"] = "error"
           itemStatus["name"] = name
           itemStatus["message"] = error.response.data.message
+          console.log(JSON.stringify(error.response))
           itemsStatus.push(itemStatus)
       else
         try
@@ -85,12 +86,35 @@ Meteor.methods(
           console.log("Success! " + response.data.name + " created")
 
         catch error
+          ###
+          if error.response.data.type == "error" && error.response.data.code == "item_name_in_use"
+            name = "(CloudTemplates Copy)" + " " + name
+            apiURL = "https://api.box.com/2.0/files/" + id + "/copy"
+            accessToken = Meteor.user().services.box.accessToken
+            response = HTTP.post(apiURL, {
+              params: {access_token: accessToken},
+              data: {
+                "parent": {
+                  "id" : targetFolder
+                },
+                "name": name
+              }
+            })
+
+            itemStatus = {}
+            itemStatus["type"] = "success"
+            itemStatus["name"] = name
+            itemStatus["message"] = "renamed and successfully created"
+            itemsStatus.push(itemStatus)
+            console.log("Success! " + response.data.name + " created")
+          else
+          ###
           itemStatus = {}
           itemStatus["type"] = "error"
           itemStatus["name"] = name
           itemStatus["message"] = error.response.data.message
+          console.log(JSON.stringify(error.response))
           itemsStatus.push(itemStatus)
-    console.log(itemsStatus.toString())
     return itemsStatus
 
 )

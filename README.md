@@ -46,12 +46,9 @@ This is where you put the API keys and secrets of any apps you want to integrate
 Keeping track of things I want to add in the future!
 
 ####SHORT TERM
-+ Scrolling (**_COMPLETE_**) (I think)
-   + Use FP destroy() to make pages scrollable OR  <- this option was chosen for now
-   + Add scroll bars to each section and auto-calculate section size
-+ Update home page slide 2 (**_COMPLETE_**)
-+ Make feedback button expand to say "Submit Feedback" instead of label, and add close button (**_COMPLETE_**)
-+ Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
++ Standardize labels
+  + Widths and padding need to be set with CSS
++ Allow multiple items to be copied into the same folder (automatically rename)
 
 ####MID TERM
 + Make existing Templates editable
@@ -68,3 +65,13 @@ Keeping track of things I want to add in the future!
 ####BACKLOG
 + Figure out why yogiben:admin package isn't working (switched to houston:admin for now)
 + Update Account templates like signIn and ensureSignedIn
+
+
+
+####COMPLETED
++ Scrolling (**_COMPLETE_**) (I think)
+   + Use FP destroy() to make pages scrollable OR  <- this option was chosen for now
+   + Add scroll bars to each section and auto-calculate section size
++ Update home page slide 2 (**_COMPLETE_**)
++ Make feedback button expand to say "Submit Feedback" instead of label, and add close button (**_COMPLETE_**)
++ Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
