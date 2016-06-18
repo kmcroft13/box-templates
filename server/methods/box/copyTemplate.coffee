@@ -59,10 +59,13 @@ Meteor.methods(
 
         catch error
           if error.response.data.type == "error" && error.response.data.code == "item_name_in_use"
-            i = 2
+            i = 1
             loop
               try
-                newName = "*CloudTemplates" + i + " " + name
+                if i == 1
+                  newName = "*CloudTemplates" + " " + name
+                else
+                  newName = "*CloudTemplates" + i + " " + name
                 apiURL = "https://api.box.com/2.0/folders/" + id + "/copy"
                 accessToken = Meteor.user().services.box.accessToken
                 response = HTTP.post(apiURL, {
@@ -85,7 +88,7 @@ Meteor.methods(
               catch error
                 i = i+1
                 response = {"statusCode": error.response.statusCode}
-                console.log(JSON.stringify(error.response))
+                console.log(JSON.stringify(error.response.data.code))
               break if response.statusCode == 201
           else
             itemStatus = {}
@@ -117,10 +120,13 @@ Meteor.methods(
 
         catch error
           if error.response.data.type == "error" && error.response.data.code == "item_name_in_use"
-            i = 2
+            i = 1
             loop
               try
-                newName = "*CloudTemplates" + i + " " + name
+                if i == 1
+                  newName = "*CloudTemplates" + " " + name
+                else
+                  newName = "*CloudTemplates" + i + " " + name
                 apiURL = "https://api.box.com/2.0/files/" + id + "/copy"
                 accessToken = Meteor.user().services.box.accessToken
                 response = HTTP.post(apiURL, {
@@ -143,7 +149,7 @@ Meteor.methods(
               catch error
                 i = i+1
                 response = {"statusCode": error.response.statusCode}
-                console.log(JSON.stringify(error.response))
+                console.log(JSON.stringify(error.response.data.code))
               break if response.statusCode == 201
           else
             itemStatus = {}
