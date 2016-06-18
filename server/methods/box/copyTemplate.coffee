@@ -58,12 +58,42 @@ Meteor.methods(
           console.log("Success! " + response.data.name + " created")
 
         catch error
-          itemStatus = {}
-          itemStatus["type"] = "error"
-          itemStatus["name"] = name
-          itemStatus["message"] = error.response.data.message
-          console.log(JSON.stringify(error.response))
-          itemsStatus.push(itemStatus)
+          if error.response.data.type == "error" && error.response.data.code == "item_name_in_use"
+            i = 2
+            loop
+              try
+                newName = "*CloudTemplates" + i + " " + name
+                apiURL = "https://api.box.com/2.0/folders/" + id + "/copy"
+                accessToken = Meteor.user().services.box.accessToken
+                response = HTTP.post(apiURL, {
+                  params: {access_token: accessToken},
+                  data: {
+                    "parent": {
+                      "id" : targetFolder
+                    },
+                    "name": newName
+                  }
+                })
+
+                i = i+1
+                itemStatus = {}
+                itemStatus["type"] = "success"
+                itemStatus["name"] = response.data.name
+                itemStatus["message"] = "created and renamed because an item with the original name already exists"
+                itemsStatus.push(itemStatus)
+                console.log("Success! " + response.data.name + " created")
+              catch error
+                i = i+1
+                response = {"statusCode": error.response.statusCode}
+                console.log(JSON.stringify(error.response))
+              break if response.statusCode == 201
+          else
+            itemStatus = {}
+            itemStatus["type"] = "error"
+            itemStatus["name"] = name
+            itemStatus["message"] = error.response.data.message
+            console.log(JSON.stringify(error.response))
+            itemsStatus.push(itemStatus)
       else
         try
           apiURL = "https://api.box.com/2.0/files/" + id + "/copy"
@@ -86,35 +116,42 @@ Meteor.methods(
           console.log("Success! " + response.data.name + " created")
 
         catch error
-          ###
           if error.response.data.type == "error" && error.response.data.code == "item_name_in_use"
-            name = "(CloudTemplates Copy)" + " " + name
-            apiURL = "https://api.box.com/2.0/files/" + id + "/copy"
-            accessToken = Meteor.user().services.box.accessToken
-            response = HTTP.post(apiURL, {
-              params: {access_token: accessToken},
-              data: {
-                "parent": {
-                  "id" : targetFolder
-                },
-                "name": name
-              }
-            })
+            i = 2
+            loop
+              try
+                newName = "*CloudTemplates" + i + " " + name
+                apiURL = "https://api.box.com/2.0/files/" + id + "/copy"
+                accessToken = Meteor.user().services.box.accessToken
+                response = HTTP.post(apiURL, {
+                  params: {access_token: accessToken},
+                  data: {
+                    "parent": {
+                      "id" : targetFolder
+                    },
+                    "name": newName
+                  }
+                })
 
-            itemStatus = {}
-            itemStatus["type"] = "success"
-            itemStatus["name"] = name
-            itemStatus["message"] = "renamed and successfully created"
-            itemsStatus.push(itemStatus)
-            console.log("Success! " + response.data.name + " created")
+                i = i+1
+                itemStatus = {}
+                itemStatus["type"] = "success"
+                itemStatus["name"] = response.data.name
+                itemStatus["message"] = "created and renamed because an item with the original name already exists"
+                itemsStatus.push(itemStatus)
+                console.log("Success! " + response.data.name + " created")
+              catch error
+                i = i+1
+                response = {"statusCode": error.response.statusCode}
+                console.log(JSON.stringify(error.response))
+              break if response.statusCode == 201
           else
-          ###
-          itemStatus = {}
-          itemStatus["type"] = "error"
-          itemStatus["name"] = name
-          itemStatus["message"] = error.response.data.message
-          console.log(JSON.stringify(error.response))
-          itemsStatus.push(itemStatus)
+            itemStatus = {}
+            itemStatus["type"] = "error"
+            itemStatus["name"] = name
+            itemStatus["message"] = error.response.data.message
+            console.log(JSON.stringify(error.response))
+            itemsStatus.push(itemStatus)
     return itemsStatus
 
 )
