@@ -25,12 +25,12 @@ Template.templates.events(
           i = i+1
           if type == "error"
             e = e+1
-            $( "#itemsCopySuccess" ).append( "<div class=\"ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br>")
-            $( "#itemsCopyWarning" ).append( "<div class=\"ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br>")
+            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br></div>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br></div>")
           else
             s = s+1
-            $( "#itemsCopySuccess" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
-            $( "#itemsCopyWarning" ).append( "<div class=\"ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br>")
+            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br></div>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br></div>")
         if s == i
           $( "#successStatus" ).html( s + " items were successfully created &nbsp;&nbsp;&nbsp;<a id=\"successDetails\" href=\"#\">More Details...</a>")
           Session.set("templateStatus","success")

@@ -34,15 +34,14 @@
     <div class="ui raised segment">
       <h4 class="ui header">
         Items in Template
-        <br>
-        <div class="ui divided list">
+      </h4>
+        <div class="ui list">
           {{#each template.items}}
             <div class="item">
-            <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
+              <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">File</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
             </div>
           {{/each}}
         </div>
-      </h4>
     </div>
   {{else}}
     <h2 class="ui center aligned icon disabled red header">

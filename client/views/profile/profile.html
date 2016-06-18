@@ -36,15 +36,14 @@
   <div class="ui raised segment">
     <h4 class="ui header">
       Box Groups
-      <br>
+    </h4>
       <div class="ui list">
         {{#each currentUser.profile.boxGroups}}
-          <div class="sub header item">
-              <p>{{#if isAdmin role}}<div class="ui blue horizontal label">&nbsp;&nbsp;Admin&nbsp;&nbsp;</div>{{/if}}{{#if isMember role}}<div class="ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
+          <div class="item" style="color: rgba(0, 0, 0, 0.6);">
+              <p>{{#if isAdmin role}}<div class="fixedProfileLabel ui blue horizontal label">Admin</div>{{/if}}{{#if isMember role}}<div class="fixedProfileLabel ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
           </div>
         {{/each}}
       </div>
-    </h4>
   </div>
   <br>
 </div>

@@ -46,7 +46,7 @@
             Success!
           </div>
           <p id="successStatus"></p>
-          <div id="itemsCopySuccess" class="hidden">
+          <div id="itemsCopySuccess" class="ui list hidden">
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
             Some items were not created
           </div>
           <p id="warningStatus"></p>
-          <div id="itemsCopyWarning" class="hidden">
+          <div id="itemsCopyWarning" class="ui list hidden">
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
         <div class="ui list">
           {{#each itemsToCopy}}
             <div class="item">
-            <p>{{#if isFile type}}<div class="ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
+              <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">File</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
             </div>
           {{/each}}
         </div>
