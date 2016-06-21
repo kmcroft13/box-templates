@@ -14,7 +14,14 @@ Meteor.methods({
       items: items
     })
     newTemplateId
-
+    ###
+    Email.send(
+      to: "k.croft@me.com",
+      from: "cloudtemplates@icloud.com",
+      subject: "Test Email",
+      text: "The contents of our email in plain text."
+    )
+    ###
     console.log("New Template (" + templateName + ") Created: " + newTemplateId)
 ),
 

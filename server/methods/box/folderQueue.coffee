@@ -22,17 +22,6 @@ Meteor.methods(
         folderId: folderId,
         boxUserId: userId,
         addedAt: new Date()
-      }, (error, result) ->
-        if error
-           console.log("Nothing added to queue: " + error)
-           status = 400
-           response = "Bad request"
-        else
-           console.log("Folder successfully submitted to queue: " + result)
-           status = 200
-           response = "Folder successfully submitted to queue."
+      }
     )
-
-    this.response.statusCode = status
-    this.response.end(response)
 )
