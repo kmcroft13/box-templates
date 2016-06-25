@@ -14,15 +14,8 @@ Meteor.methods({
       items: items
     })
     newTemplateId
-    ###
-    Email.send(
-      to: "k.croft@me.com",
-      from: "cloudtemplates@icloud.com",
-      subject: "Test Email",
-      text: "The contents of our email in plain text."
-    )
-    ###
-    console.log("New Template (" + templateName + ") Created: " + newTemplateId)
+
+    console.log('New Template (' + templateName + ') Created: ' + newTemplateId)
 ),
 
   deleteTemplate: (templateId) -> (
@@ -37,7 +30,7 @@ Meteor.methods({
     ###
 
     Template.remove(templateId)
-    console.log("Template Removed: " + templateId)
+    console.log('Template Removed: ' + templateId)
  ),
 
 ###
