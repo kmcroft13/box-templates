@@ -63,6 +63,7 @@ Keeping track of things I want to add in the future!
    + Check if group has access to folder before creating (throw warning if not?)
 
 ####BACKLOG
++ Create sample folder structure template. Share with other Boxers?
 + Figure out why yogiben:admin package isn't working
 + Update Account templates like signIn and ensureSignedIn
 
