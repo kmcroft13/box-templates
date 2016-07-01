@@ -20,7 +20,8 @@ You will need to create a Meteor settings.json file and [start your app with it]
     "profile": "coffee",
     "config": "private/orion-config.json"
   },
-  "private": {
+  "email": {
+    "sendinblueKey": "<TRANSACTIONAL_EMAIL_SERVICE_KEY"
   },
   "serviceConfigurations": {
     "box": {
@@ -40,6 +41,9 @@ Profile can be either "es6" or "coffee" depending on whether you want to use tra
 Visit the [Orion-CLI GitHub](https://github.com/matteodem/orion-cli) for more info
 ####Service Configurations
 This is where you put the API keys and secrets of any apps you want to integrate with. Each additional integration should be a child object of `serviceConfigurations`. In this case, we only have Box so we take the client ID and secret from the Box app page and put them here.
+####Email
+This app uses transactional email service SendInBlue to send emails to new users when their accounts are created.
+You can sign up with a transactional email account with SendInBlue (it's free!) or modify the code in  `server/lib/onCreateUser.js` to switch to the service of your choice (or remove this feature entirely).
 
 
 ## TODO
@@ -50,7 +54,6 @@ Keeping track of things I want to add in the future!
 ####MID TERM
 + Make existing Templates editable
   + Allow adding and removing individual items from Templates
-+ Add code to clean up FolderQueue objects so that only the most recent one remains
 + Standardize colors (specifically the blues)
 
 ####LONG TERM
@@ -60,12 +63,13 @@ Keeping track of things I want to add in the future!
    + Check if group has access to folder before creating (throw warning if not?)
 
 ####BACKLOG
-+ Figure out why yogiben:admin package isn't working (switched to houston:admin for now)
++ Figure out why yogiben:admin package isn't working
 + Update Account templates like signIn and ensureSignedIn
 
 
 
 ####COMPLETED
++ Add code to clean up FolderQueue objects so that only the most recent one remains (**_COMPLETE_**)
 + Allow multiple items to be copied into the same folder (automatically rename) (**_COMPLETE_**)
 + Standardize labels (**_COMPLETE_**)
   + Widths and padding need to be set with CSS
