@@ -9,7 +9,7 @@ Meteor.myFunctions = (
     refreshToken = Meteor.user().services.box.refreshToken
     console.log(refreshToken)
 
-    apiUrl = "https://app.box.com/api/oauth2/token"
+    apiUrl = "https://api.box.com/oauth2/token"
     result = HTTP.post( apiUrl, {
         params: {
             client_id: config.appId,
