@@ -9,6 +9,13 @@ Template.templates.onRendered -> (
         .transition('fade')
       Session.set('templateStatus','prep')
     )
+
+  $('.ui.checkbox')
+    .checkbox()
+
+  $('#renameHelp')
+    .popup()
+
 )
 
 
@@ -50,6 +57,52 @@ Template.templates.events(
   'click #warningDetails': ->
     $('#itemsCopyWarning').transition('vertical flip')
     $('#warningDetails').toggleClass('hidden')
+
+  'click #renameTemplate': ->
+    findReplaceArray = []
+    findValues = $('.findField').map(-> return this.value ).get()
+    replaceValues = $('.replaceField').map(-> return this.value ).get()
+    for index of findValues
+      obj = {}
+      obj["find"] = findValues[index]
+      obj["replace"] = replaceValues[index]
+      findReplaceArray.push(obj)
+    Meteor.call('renameContent', findReplaceArray)
+
+  'click #advancedCopy': ->
+    $('#advancedCopyOptions').toggleClass('hidden')
+    Session.set("advancedCopy", $('input[name="advancedCopyCheckbox"]').prop("checked"))
+
+
+
+  'click #addField': ->
+    addButtonParent = $("#addField").parent();
+
+    $( "#addField" ).remove();
+
+    addButtonParent.append($("<div class=\"ui tiny basic red icon button removeFields\"><i class=\"minus icon\"></i></div>"));
+
+    $( "#advancedCopyRename" ).append( "<div class=\"three fields fieldGroup\">" +
+    "<div class=\"field\">" +
+    "<input type=\"text\" class=\"findField smallFormInput\" name=\"find1\" placeholder=\"Find this in item names\">" +
+    "</div>" +
+    "<div class=\"field\">" +
+    "<input type=\"text\" class=\"replaceField smallFormInput\" name=\"replace1\" placeholder=\"Replace matches with this\">" +
+    "</div>" +
+    "<div class=\"field\">" +
+    "<div id=\"addField\" class=\"ui tiny basic blue icon button\">" +
+    "<i class=\"plus icon\"></i>" +
+    "</div>" +
+    "</div>" +
+    "</div>"
+    ).fadeIn("slow");
+
+
+  'click .removeFields': (evt, tmpl) ->
+    removeButtonDiv = evt.target;
+    removeButtonParentGroup = $( removeButtonDiv ).closest('.fieldGroup');
+    removeButtonParentGroup.remove();
+
 )
 
 

@@ -2,10 +2,23 @@ Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     evt.preventDefault()
     templateItems = Session.get("itemsToCopy")
+    findValues = $('.findField').map(-> return this.value ).get()
+    console.log(findValues.toString)
+    replaceValues = $('.replaceField').map(-> return this.value ).get()
+    console.log(replaceValues.toString)
+
+    findReplaceArray = []
+    findValues = $('.findField').map(-> return this.value ).get()
+    replaceValues = $('.replaceField').map(-> return this.value ).get()
+    for index of findValues
+      obj = {}
+      obj["find"] = findValues[index]
+      obj["replace"] = replaceValues[index]
+      findReplaceArray.push(obj)
 
     console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
-    Meteor.call('copyTemplate', templateItems, (error, result) ->
+    Meteor.call('copyTemplate2', templateItems, findReplaceArray, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
         console.log(error)
@@ -20,17 +33,34 @@ Template.templates.events(
         s = 0
         result.forEach (item) ->
           type = item.type
-          name = item.name
-          message = item.message
           i = i+1
           if type == "error"
             e = e+1
+            name = item.name
+            status = item.status
+            code = item.code
+            message = item.message
             $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br></div>")
             $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui red horizontal label\">Failed</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp; " + message + "<br></div>")
+          else if type == "success with conflict"
+            s = s+1
+            name = item.name
+            id = item.id
+            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp;copied and renamed because an item with the original name already exists<br></div>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;&nbsp;copied and renamed because an item with the original name already exists<br></div>")
+          else if type == "success with rename"
+            s = s+1
+            origName = item.origName
+            name = item.name
+            id = item.id
+            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + origName + "</b>&nbsp;&nbsp;copied and renamed to " + name + "<br></div>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + origName + "</b>&nbsp;&nbsp;copied and renamed to <b>" + name + "</b><br></div>")
           else
             s = s+1
-            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br></div>")
-            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;" + message + "<br></div>")
+            name = item.name
+            id = item.id
+            $( "#itemsCopySuccess" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;copied successfully<br></div>")
+            $( "#itemsCopyWarning" ).append( "<div class=\"item\"><div class=\"fixedStatusLabel ui green horizontal label\">Created</div>&nbsp; <b>" + name + "</b>&nbsp;copied successfully<br></div>")
         if s == i
           $( "#successStatus" ).html( s + " items were successfully created &nbsp;&nbsp;&nbsp;<a id=\"successDetails\" href=\"#\">More Details...</a>")
           Session.set("templateStatus","success")

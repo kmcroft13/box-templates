@@ -1,9 +1,11 @@
 Meteor.methods(
-  copyTemplate: (items) ->
+  copyTemplate: (items, findReplaceArray) ->
     # avoid blocking other method calls from the same client
     @unblock()
 
     check(items, Match.Any)
+    check(findReplaceArray, Match.Any)
+
 
     userBoxId = Meteor.user().services.box.id
     target = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}})
@@ -52,7 +54,8 @@ Meteor.methods(
 
           itemStatus = {}
           itemStatus["type"] = "success"
-          itemStatus["name"] = name
+          itemStatus["name"] = response.data.name
+          itemStatus["id"] = response.data.id
           itemStatus["message"] = "successfully created"
           itemsStatus.push(itemStatus)
           console.log("Success! " + response.data.name + " created")
@@ -82,6 +85,7 @@ Meteor.methods(
                 itemStatus = {}
                 itemStatus["type"] = "success"
                 itemStatus["name"] = response.data.name
+                itemStatus["id"] = response.data.id
                 itemStatus["message"] = "created and renamed because an item with the original name already exists"
                 itemsStatus.push(itemStatus)
                 console.log("Success! " + response.data.name + " created")
@@ -113,7 +117,8 @@ Meteor.methods(
 
           itemStatus = {}
           itemStatus["type"] = "success"
-          itemStatus["name"] = name
+          itemStatus["name"] = response.data.name
+          itemStatus["id"] = response.data.id
           itemStatus["message"] = "successfully created"
           itemsStatus.push(itemStatus)
           console.log("Success! " + response.data.name + " created")
@@ -143,6 +148,7 @@ Meteor.methods(
                 itemStatus = {}
                 itemStatus["type"] = "success"
                 itemStatus["name"] = response.data.name
+                itemStatus["id"] = response.data.id
                 itemStatus["message"] = "created and renamed because an item with the original name already exists"
                 itemsStatus.push(itemStatus)
                 console.log("Success! " + response.data.name + " created")
