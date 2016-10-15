@@ -21,6 +21,12 @@ Template.createTemplate.onRendered -> (
           ]
     )
 
+  $('.ui.checkbox')
+    .checkbox()
+
+  $('#renameHelp')
+    .popup()
+
 )
 
 
@@ -45,9 +51,11 @@ Template.createTemplate.events(
     active = true
     templateDescription = e.target.templateDescription.value
     items = Session.get("items")
-    Meteor.call('addTemplate', templateName, active, templateDescription, items, (error, result) -> (
+    findValues = $('.findField').map(-> return this.value ).get()
+    Meteor.call('addTemplate', templateName, active, templateDescription, items, findValues, (error, result) -> (
         if error
            console.log(JSON.stringify(error,null,2))
+           ga('send', 'event', 'TEMPLATE_CREATE', 'failed')
            $('#createMessage').removeClass('positive')
            $('#createMessage').addClass('negative')
            $("#messageTitle").text("Something went wrong")
@@ -57,7 +65,14 @@ Template.createTemplate.events(
              scrollTop: 0, 300)
         else
            console.log(result)
+
+           if findValues.length > 0
+              ga('send', 'event', 'TEMPLATE_CREATE', 'success_with_findReplace')
+           else
+              ga('send', 'event', 'TEMPLATE_CREATE', 'success')
+
            $('form').form('clear')
+           $('#advancedCopyOptions').toggleClass('hidden')
            $('#createMessage').removeClass('negative')
            $('#createMessage').addClass('positive')
            $("#messageTitle").text("Success!")
@@ -69,5 +84,37 @@ Template.createTemplate.events(
     ))
     console.log("Called addTemplate method: " + templateName);
   )
+
+
+  'click #advancedCopy': ->
+    $('#advancedCopyOptions').toggleClass('hidden')
+    Session.set("advancedCopy", $('input[name="advancedCopyCheckbox"]').prop("checked"))
+
+
+  'click #addField': ->
+    addButtonParent = $("#addField").parent();
+
+    $( "#addField" ).remove();
+
+    addButtonParent.append($("<div class=\"ui tiny basic red icon button removeFields\"><i class=\"minus icon\"></i></div>"));
+
+    $( "#advancedCopyRename" ).append( "<div class=\"two fields fieldGroup\">" +
+    "<div class=\"field\">" +
+    "<input type=\"text\" class=\"findField smallFormInput\" name=\"find1\" placeholder=\"Find this in item names\">" +
+    "</div>" +
+    "<div class=\"field\">" +
+    "<div id=\"addField\" class=\"ui tiny basic blue icon button\">" +
+    "<i class=\"plus icon\"></i>" +
+    "</div>" +
+    "</div>" +
+    "</div>"
+    ).fadeIn("slow");
+
+
+  'click .removeFields': (evt, tmpl) ->
+    removeButtonDiv = evt.target;
+    removeButtonParentGroup = $( removeButtonDiv ).closest('.fieldGroup');
+    removeButtonParentGroup.remove();
+
 
 )

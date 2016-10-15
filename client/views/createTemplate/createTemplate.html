@@ -54,6 +54,51 @@
       </div>
     </div>
 
+    <div class="ui fixed raised segment">
+      <div class="ui toggle checkbox" id="advancedCopy">
+        <input type="checkbox" name="advancedCopyCheckbox" tabindex="0" class="hidden">
+        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
+      </div>
+
+      <div id="advancedCopyOptions" class="hidden">
+        <br>
+          <p>
+            Find and replace words or phrases in the names of copied files and folders&nbsp;
+            <a class="ui mini grey circular label" id="renameHelp" data-title="Dynamic Rename (in Beta)"
+                data-content="Dynamic Rename allows CloudTemplates to automatically rename copied items using
+                the find terms below. CloudTemplates will search for the &quot;find&quot; terms in item names
+                and replace them with your &quot;replace&quot; term after copy. The &quot;replace&quot; term
+                is set on the &quot;Copy from Template&quot; page when you're ready to copy.
+                The &quot;find&quot; terms are case-sensitive.
+                While in Beta, only the first two levels of
+                your copied content will be affected (not all of the copied content will be searched)"
+                data-variation="inverted basic wide">?</a>
+                <br>
+            <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
+          </p>
+          <div id="advancedCopyRename" class="ui form">
+            <div class="two fields">
+              <div class="field">
+                <label>Find</label>
+              </div>
+              <div class="field">
+                <label>&nbsp;</label>
+              </div>
+            </div>
+            <div class="two fields fieldGroup">
+              <div class="field">
+                <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
+              </div>
+              <div class="field">
+                <div id="addField" class="ui tiny basic blue icon button">
+                  <i class="plus icon"></i>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
     <div class="ui fixed basic center aligned segment">
       <button class="large positive ui button" type="submit">Create Template</button>
     </div>

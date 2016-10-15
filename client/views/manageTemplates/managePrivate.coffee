@@ -8,6 +8,7 @@ Template.managePrivate.events(
           console.log("Calling deleteTask...")
           templateId = Session.get('templateToDelete')
           console.log("Calling deleteTask on: " + templateId)
+          ga('send', 'event', 'TEMPLATE_DELETE', 'success')
           Meteor.call('deleteTemplate', templateId)
           Session.set('templateToDelete', undefined)
       })

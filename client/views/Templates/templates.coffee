@@ -20,8 +20,8 @@ Template.templates.onRendered -> (
 
 
 Template.templates.helpers(
-  itemsToCopy: ->
-    Session.get('itemsToCopy')
+  template: ->
+    Session.get('template')
 )
 
 
@@ -34,10 +34,11 @@ Template.templates.events(
     items = this.items
     $("#description").text(description)
     $('input[name="newFolderName"]').val(folderName)
-    itemsCheck = Session.get("itemsToCopy")
+    itemsCheck = Session.get("template")
     if itemsCheck == undefined
       $("#templateElements").transition('drop')
-    Session.set("itemsToCopy", items)
+    Session.set("template", this)
+    ga('send', 'event', 'TEMPLATE_UI', 'select', this._id)
     console.log(this.name + " (" + this._id + ") selected. Session variable set for " + items)
 
 
@@ -57,17 +58,6 @@ Template.templates.events(
   'click #warningDetails': ->
     $('#itemsCopyWarning').transition('vertical flip')
     $('#warningDetails').toggleClass('hidden')
-
-  'click #renameTemplate': ->
-    findReplaceArray = []
-    findValues = $('.findField').map(-> return this.value ).get()
-    replaceValues = $('.replaceField').map(-> return this.value ).get()
-    for index of findValues
-      obj = {}
-      obj["find"] = findValues[index]
-      obj["replace"] = replaceValues[index]
-      findReplaceArray.push(obj)
-    Meteor.call('renameContent', findReplaceArray)
 
   'click #advancedCopy': ->
     $('#advancedCopyOptions').toggleClass('hidden')

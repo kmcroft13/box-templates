@@ -40,6 +40,13 @@ Schemas.Template = new SimpleSchema
   "items.$.url":
     type: String
 
+  findValues:
+    type: Array
+    blackbox: true
+
+  "findValues.$":
+    type: String
+
 
 Template.attachSchema Schemas.Template
 

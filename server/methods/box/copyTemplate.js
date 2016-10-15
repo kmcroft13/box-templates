@@ -1,5 +1,5 @@
 Meteor.methods({
-  copyTemplate2: function (items, findReplaceArray) {
+  copyTemplate: function (items, findReplaceArray) {
 
     // check variable types
     check(items, Match.Any);

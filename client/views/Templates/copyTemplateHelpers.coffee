@@ -1,12 +1,8 @@
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     evt.preventDefault()
-    templateItems = Session.get("itemsToCopy")
-    findValues = $('.findField').map(-> return this.value ).get()
-    console.log(findValues.toString)
-    replaceValues = $('.replaceField').map(-> return this.value ).get()
-    console.log(replaceValues.toString)
-
+    templateItems = Session.get("template").items
+    templateId = this._id
     findReplaceArray = []
     findValues = $('.findField').map(-> return this.value ).get()
     replaceValues = $('.replaceField').map(-> return this.value ).get()
@@ -18,13 +14,21 @@ Template.templates.events(
 
     console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
-    Meteor.call('copyTemplate2', templateItems, findReplaceArray, (error, result) ->
+
+    Meteor.call('copyTemplate', templateItems, findReplaceArray, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
         console.log(error)
         $("#errorDesc").text(error.reason)
         Session.set("templateStatus","fail")
+        ga('send', 'event', 'TEMPLATE_COPY', 'failed', templateId)
       else
+
+        if findReplaceArray.length > 0
+          ga('send', 'event', 'TEMPLATE_COPY', 'success_with_findReplace', templateId)
+        else
+          ga('send', 'event', 'TEMPLATE_COPY', 'success', templateId)
+
         $('form').form('clear')
         $( "#itemsCopySuccess" ).empty()
         $( "#itemsCopyWarning" ).empty()
