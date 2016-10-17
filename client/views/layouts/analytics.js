@@ -9,7 +9,7 @@ Template.basicLayout.rendered = function() {
     ga('set', 'userId', user); // Set the user ID using signed-in user_id
   }
 
-}
+};
 
 Template.homeLayout.rendered = function() {
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -22,4 +22,4 @@ Template.homeLayout.rendered = function() {
     ga('set', 'userId', user); // Set the user ID using signed-in user_id
   }
 
-}
+};

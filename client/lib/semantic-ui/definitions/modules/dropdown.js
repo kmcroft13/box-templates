@@ -328,7 +328,7 @@ $.fn.dropdown = function(parameters) {
                 module.set.multiple();
               }
               if ($input.prop('disabled')) {
-                module.debug('Disabling dropdown')
+                module.debug('Disabling dropdown');
                 $module.addClass(className.disabled)
               }
               $input
@@ -1391,7 +1391,7 @@ $.fn.dropdown = function(parameters) {
             if( module.can.activate( $(this) ) ) {
               module.set.selected(value, $(this));
               if(module.is.multiple() && !module.is.allFiltered()) {
-                return;
+
               }
               else {
                 module.hideAndClear();

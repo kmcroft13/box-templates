@@ -7,4 +7,4 @@ GARecordPage = function(pageLocation) {
   ga('send', 'pageview', {
     page: pageLocation
   });
-}
+};

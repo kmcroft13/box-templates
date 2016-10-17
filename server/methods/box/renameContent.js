@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'renameContent'(findReplaceArray) {
-    console.log("### STARTING RENAME ###")
+    console.log("### STARTING RENAME ###");
     check(findReplaceArray, Match.Any);
 
     var userBoxId = Meteor.user().services.box.id;
@@ -53,10 +53,9 @@ Meteor.methods({
         var find = new RegExp(findReplace.find,"g");
         var replace = findReplace.replace;
         var newName = newName.replace(find, replace);
-      };
-
-      if (item.name != newName) {
-        console.log("MATCH: Rename Box " + item.type + " (" + item.id + ") to: " + newName + "...")
+      }
+        if (item.name != newName) {
+        console.log("MATCH: Rename Box " + item.type + " (" + item.id + ") to: " + newName + "...");
         if (item.type == "file") {
           box.files.update(item.id, {name : newName}, function(err, file) {
             if (err)

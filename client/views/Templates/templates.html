@@ -154,13 +154,13 @@
               </div>
             </div>
             {{#each template.findValues}}
-              <div class="three fields">
+              <div class="three fields validate">
                 <div class="field">
                   {{this}}
                   <input type="hidden" class="findField smallFormInput" name="find_{{this}}" value="{{this}}">
                 </div>
                 <div class="required field">
-                  <input type="text" class="replaceField smallFormInput" name="replace_{{this}}" placeholder="Replace matches of &quot;{{this}}&quot; with...">
+                  <input type="text" class="replaceField smallFormInput" name="replace_{{this}}" placeholder="Replace matches of &quot;{{this}}&quot; with..." data-validate="autoReplace">
                 </div>
                 <div class="field">
                 </div>
