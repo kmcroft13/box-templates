@@ -51,3 +51,4 @@ zimme:active-route
 shell-server@0.2.1
 ecmascript@0.5.8_1
 meteorhacks:async
+percolate:synced-cron

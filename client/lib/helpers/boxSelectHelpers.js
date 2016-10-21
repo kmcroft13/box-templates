@@ -5,8 +5,9 @@ Template.createTemplate.onRendered(function() {
     var boxSelect = new BoxSelect();
     // Register a success callback handler
     boxSelect.success(function(response) {
-      console.log(response);
-      Session.set("items", response);
+        console.log(response);
+        Session.set("items", response);
+        $( "input:hidden[name=templateItems]" ).val(JSON.stringify(response));
 
     });
     // Register a cancel callback handler

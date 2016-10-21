@@ -11,13 +11,18 @@ Template.createTemplate.onRendered -> (
           rules: [
               type   : 'empty',
               prompt : 'Please enter a Template name'
-          ]
-        ,
+          ],
         templateDescription:
           identifier: 'templateDescription',
           rules: [
               type   : 'empty',
               prompt : 'Please enter a Template description'
+          ],
+        templateItems:
+          identifier: 'templateItems',
+          rules: [
+            type   : 'minLength[6]',
+            prompt : 'Please add files and folders using the &quot;Select from Box&quot; button'
           ]
     )
 

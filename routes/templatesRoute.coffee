@@ -13,8 +13,7 @@ Router.map ->
       Session.set("template", undefined)
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/templates')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 
@@ -27,8 +26,7 @@ Router.map ->
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/manage/private')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 
@@ -37,8 +35,7 @@ Router.map ->
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/template/create')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 
@@ -51,8 +48,7 @@ Router.map ->
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/template/:_id/view')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 

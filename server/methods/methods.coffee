@@ -1,4 +1,5 @@
 Meteor.methods({
+
   addTemplate: (templateName, active, templateDescription, items, findValues) -> (
     check(templateName, Match.Any)
     check(active, Match.Any)

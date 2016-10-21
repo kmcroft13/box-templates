@@ -1,6 +1,6 @@
 Meteor.methods(
   syncProfile: ->
-    # avoid blocking other method calls from the same client
+# avoid blocking other method calls from the same client
     @unblock()
     if Meteor.user()
       lastSync = Meteor.user().profile.lastSync
@@ -70,9 +70,20 @@ Meteor.methods(
 
 
         # Write everything to the user profile
-        Meteor.users.update({_id: Meteor.userId()}, {$set: {
-          "profile": {fullName: identity.name, avatar: identity.avatar_url, boxRole: role.role, boxTariff: enterprise.type, eid: enterprise.id, boxEntName: enterprise.name, boxGroups: Groups, lastSync: Date.now()}
-        }})
+        Meteor.users.update({_id: Meteor.userId()}, {
+          $set: {
+            "profile": {
+              fullName: identity.name,
+              avatar: identity.avatar_url,
+              boxRole: role.role,
+              boxTariff: enterprise.type,
+              eid: enterprise.id,
+              boxEntName: enterprise.name,
+              boxGroups: Groups,
+              lastSync: Date.now()
+            }
+          }
+        })
 
         console.log("Sync successful!")
       else

@@ -12,8 +12,7 @@ Router.map ->
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 
@@ -23,14 +22,18 @@ Router.map ->
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/profile')
-      sync = Meteor.call("syncProfile")
-      Accounts.onLogin(sync)
+      Meteor.call("syncProfile")
       @next()
 
 
   @route 'signOut',
-    path: '/sign-out'
+    path: '/logout'
     onBeforeAction: ->
       AccountsTemplates.logout()
       @redirect '/'
       @next()
+
+
+  @route 'staleSession',
+    path: '/stalesession'
+    layoutTemplate: 'accountsLayout'
