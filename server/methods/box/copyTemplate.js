@@ -209,6 +209,7 @@ Meteor.methods({
         } // end for loop
         console.log("### END COPY ###");
 
+        // TODO: implement findReplace for content after first level
         /*
          if (findReplaceArray) {
          const renameResults = Meteor.myFunctions.renameContent2(itemsCopyResult, findReplaceArray, accessToken);
