@@ -7,15 +7,17 @@ SyncedCron.add({
     job: function() {
 
         // 45 days in milliseconds
-        const inactivityTimeout = 3888000000
+        const inactivityTimeout = 3888000000;
 
         // set overdue timestamp to 45 days ago
-        const now = new Date()
+        const now = new Date();
         const overdueTimestamp = new Date(now-inactivityTimeout);
 
         // update all users to remove active sessions if lastSync was more than 45 days ago
-        const sessionsUpdated = Meteor.users.update({'profile.lastSync': {$lt: overdueTimestamp}},
+        const sessionsUpdated = Meteor.users.update({ $and: [ {'profile.lastSync': {$lt: overdueTimestamp}}, {'services.resume.loginTokens': {$ne: []}} ] },
             {$set: {'services.resume.loginTokens': []}});
+
+        console.log(`${sessionsUpdated} stale sessions terminated`);
 
         return `${sessionsUpdated} stale sessions terminated`
     }
