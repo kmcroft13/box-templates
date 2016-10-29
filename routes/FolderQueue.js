@@ -1,12 +1,12 @@
 Router.route('/folderqueue', function () {
-    console.log("Begin controllerFolderQueue...");
+    console.log("Calling addFolderQueue...");
     const folderId = this.request.body.folder_id
     const folderName = this.request.body.folder_name
     const userId = this.request.body.box_id
 
     let statusCode = 404;
 
-    Meteor.call('controllerFolderQueue', folderId, folderName, userId, (err, res) => {
+    Meteor.call('addFolderQueue', folderId, folderName, userId, (err, res) => {
         if (err) {
             console.log("Error. Nothing added to queue. " + err)
             statusCode = 400;
@@ -20,7 +20,6 @@ Router.route('/folderqueue', function () {
             };
 
         } else {
-            console.log("Success! Folder submitted to queue: " + res)
             statusCode = 200;
             const resultString = res.toString();
             responseJSON = {

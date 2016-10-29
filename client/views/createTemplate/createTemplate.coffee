@@ -53,11 +53,11 @@ Template.createTemplate.events(
     e.preventDefault()
     console.log("Form: " + e.type);
     templateName = e.target.templateName.value
-    active = true
     templateDescription = e.target.templateDescription.value
     items = Session.get("items")
-    findValues = $('.findField').map(-> return this.value ).get()
-    Meteor.call('addTemplate', templateName, active, templateDescription, items, findValues, (error, result) -> (
+    usesDynamicRename = $('input[name="advancedCopyCheckbox"]').is(':checked')
+    findValues = $('.findField').map(-> if this.value != null && this.value != "" then return this.value ).get()
+    Meteor.call('addTemplate', templateName, templateDescription, items, usesDynamicRename, findValues, (error, result) -> (
         if error
            console.log(JSON.stringify(error,null,2))
            ga('send', 'event', 'TEMPLATE_CREATE', 'failed')

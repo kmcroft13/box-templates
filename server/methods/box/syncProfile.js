@@ -4,12 +4,10 @@ Meteor.methods({
         // avoid blocking other method calls from the same client
         this.unblock();
 
-        const lastSync = Meteor.user().profile.lastSync;
-
-        if ( (Meteor.user()) && ((lastSync == undefined) || (Date.now() - lastSync - 43200000 > 0)) ) {
+        if ( (Meteor.user()) && ((Meteor.user().profile.lastSync == undefined) || (Date.now() - Meteor.user().profile.lastSync - 43200000 > 0)) ) {
+            console.log("### SYNC PROFILE ###");
 
             // Check if Box access token is expired
-            console.log("Checking token expiration...");
             const tokenExpiration = Meteor.user().services.box.expiresAt;
             if (Date.now() - tokenExpiration > 0) {
                 // Token is expired. Refresh access token.
@@ -84,11 +82,13 @@ Meteor.methods({
                 }
             });
 
-            console.log("Sync successful!");
+            console.log(JSON.stringify({
+                resource: "user",
+                action: "update",
+                details: "Profile synced with Box",
+                requester: Meteor.userId()
+            }));
 
-        } else {
-            // Didn't meet if criteria to Sync
-            console.log("Synced within last 12 hours");
         }
 
     }, // end syncProfile method

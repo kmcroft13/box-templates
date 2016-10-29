@@ -40,12 +40,35 @@ Schemas.Template = new SimpleSchema
   "items.$.url":
     type: String
 
-  findValues:
-    type: Array
+  dynamicRename:
+    type: Object
     blackbox: true
 
-  "findValues.$":
+  "dynamicRename.$.isUsing":
+    type: Boolean
+
+  "dynamicRename.$.findValues":
+    type: Array
+    optional: true
+
+  "dynamicRename.$.findValues.$":
     type: String
+
+  sharing:
+    type: Object
+    blackbox: true
+
+  "sharing.$.shared":
+    type: Boolean
+
+  "sharing.$.scope":
+    type: String
+    allowedValues: ['enterprise', 'group']
+    optional: true
+
+  "sharing.$.permissions"
+    type: [Object]
+    optional: true
 
 
 Template.attachSchema Schemas.Template
@@ -67,5 +90,4 @@ Template.helpers(
 	creator: ->
 		user = Meteor.users.findOne(@owner)
 		user.profile.fullName
-
 )

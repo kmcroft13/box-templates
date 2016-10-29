@@ -37,7 +37,7 @@ Can be either "dev", "stage", or "prod"
 Allows the app to have different behavior depending on the environment (ie. if you have a test folder in Box you want to use for the Dev environment)
 ####Orion
 The `orion-cli` section refers to the Orion scaffolding and dev tools that are packaged with this app
-Profile can be either "es6" or "coffee" depending on whether you want to use traditional javascript or coffee script files (I prefer coffee script)
+Profile can be either "es6" or "coffee" depending on whether you want to use traditional javascript or coffee script files
 Visit the [Orion-CLI GitHub](https://github.com/matteodem/orion-cli) for more info
 ####Service Configurations
 This is where you put the API keys and secrets of any apps you want to integrate with. Each additional integration should be a child object of `serviceConfigurations`. In this case, we only have Box so we take the client ID and secret from the Box app page and put them here.
@@ -54,11 +54,11 @@ Keeping track of things I want to add in the future!
 ####MID TERM
 + Make existing Templates editable
   + Allow adding and removing individual items from Templates
-+ Standardize colors (specifically the blues)
 
 ####LONG TERM
 + Dynamic renaming
    + Rename throughout structure? Only certain levels?
+   + _Currently in "Beta"_
 + Enterprise / Group templates
    + Check if group has access to folder before creating (throw warning if not?)
 
@@ -80,3 +80,4 @@ Keeping track of things I want to add in the future!
 + Update home page slide 2 (**_COMPLETE_**)
 + Make feedback button expand to say "Submit Feedback" instead of label, and add close button (**_COMPLETE_**)
 + Fix bug when changing dropdown items on "Copy" page (**_COMPLETE_**)
++ Standardize colors (specifically the blues) (**_COMPLETE_**)

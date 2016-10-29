@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    {{#if template.findValues}}
+    {{#if template.dynamicRename.isUsing}}
       <div class="ui raised segment">
         <h4 class="ui header">
           Dynamic Rename <a class="ui tiny green circular label" id="renameHelp" data-title="This Template uses Dynamic Rename"
@@ -55,7 +55,7 @@
         </h4>
         <p><strong>Find Values</strong></p>
         <div class="ui list">
-          {{#each template.findValues}}
+          {{#each template.dynamicRename.findValues}}
             <div class="item">
               <p>{{this}}</p>
             </div>
