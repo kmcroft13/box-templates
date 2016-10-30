@@ -77,15 +77,7 @@
         <br>
           <p>
             Find and replace words or phrases in the names of copied files and folders&nbsp;
-            <a class="ui mini grey circular label" id="renameHelp" data-title="Dynamic Rename (in Beta)"
-                data-content="Dynamic Rename allows CloudTemplates to automatically rename copied items using
-                the find terms below. CloudTemplates will search for the &quot;find&quot; terms in item names
-                and replace them with your &quot;replace&quot; term after copy. The &quot;replace&quot; term
-                is set on the &quot;Copy from Template&quot; page when you're ready to copy.
-                The &quot;find&quot; terms are case-sensitive.
-                While in Beta, only the first two levels of
-                your copied content will be affected (not all of the copied content will be searched)"
-                data-variation="inverted basic wide">?</a>
+            <a class="ui mini grey circular label" id="renameHelpLabelCreate">?</a>
                 <br>
             <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
           </p>
@@ -120,4 +112,36 @@
 
   <br><br>
 </div>
+{{>renameHelpCreate}}
+</template>
+
+
+<template name="renameHelpCreate">
+  <div id="renameHelpCreateModal" class="ui basic modal">
+    <div class="ui icon header">
+      <i class="wizard icon"></i>
+      Dynamic Rename
+    </div>
+    <div class="content">
+      <div class="description">
+        <p>CloudTemplates can automatically rename copied items with Dynamic Rename.
+        CloudTemplates will search for your &quot;find&quot; terms in newly copied folder and file names and replace it
+        with your &quot;replace&quot; term after copy. The &quot;replace&quot; term
+        is set on the &quot;Copy from Template&quot; page when you're ready to copy. 
+        For example, if you're copying a folder called &quot;CUSTOMER_NAME Project&quot; 
+        you can dynamically replace &quot;CUSTOMER_NAME&quot; with the actual name of your customer.
+        The &quot;find&quot; terms are case-sensitive. 
+        <br><br>
+        <b>While in Beta, only the first level of your copied content will be affected 
+        (not all of the copied content will be searched)</b>
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui basic green inverted button cancel">
+        <i class="check icon"></i>
+        Ok, Got It
+      </div>
+    </div>
+  </div>
 </template>

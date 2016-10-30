@@ -1,15 +1,17 @@
 Meteor.methods({
 
-    copyTemplate: function (items, findReplaceArray) {
+    copyTemplate: function (items, dynamicRename) {
 
         // check variable types
         check(items, Match.Any);
-        check(findReplaceArray, Match.Any);
+        check(dynamicRename, Match.Any);
 
         // set constants
         const userBoxId = Meteor.user().services.box.id;
         const target = FolderQueue.findOne({boxUserId: userBoxId}, {sort: {addedAt: -1}});
         const tokenExpiration = Meteor.user().services.box.expiresAt;
+        const usesDynamicRename = dynamicRename.usesDynamicRename;
+        const findReplaceArray = dynamicRename.findReplaceArray;
 
         // if Box token is expired, refresh token
         if (Date.now() - tokenExpiration > 0) {
@@ -65,17 +67,19 @@ Meteor.methods({
         // loop through each item in the Template and copy to Target
         for (let item of items) {
             const id = item.id;
-            const origName = item.name;
+            let origName = item.name;
             let name = item.name;
+            let newName = item.name;
             const type = item.type;
 
-            if (findReplaceArray) {
+            if (usesDynamicRename) {
                 console.log("Checking item for rename matches...");
                 for (let findReplace of findReplaceArray) {
                     const find = new RegExp(findReplace.find, "g");
                     const replace = findReplace.replace;
-                    name = name.replace(find, replace);
-                    if (origName != name) {
+                    newName = newName.replace(find, replace);
+                    if (name != newName) {
+                        name = newName;
                         console.log(`Match: ${origName} renamed to ${name}`);
                     }
                 }
@@ -211,7 +215,7 @@ Meteor.methods({
 
         // TODO: implement findReplace for content after first level
         /*
-         if (findReplaceArray) {
+         if (usesDynamicRename) {
          const renameResults = Meteor.myFunctions.renameContent2(itemsCopyResult, findReplaceArray, accessToken);
          }
          */

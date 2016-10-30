@@ -13,9 +13,6 @@ Template.templates.onRendered -> (
 	$('.ui.checkbox')
 		.checkbox()
 
-	$('#renameHelp')
-		.popup()
-
 	# initialize form validation
 	$('.validate')
 		.form(
@@ -34,6 +31,10 @@ Template.templates.onRendered -> (
 Template.templates.helpers(
 	template: ->
 		Session.get('template')
+
+	usesDynamicRename: ->
+		Session.get('usesDynamicRename')
+
 )
 
 
@@ -50,12 +51,21 @@ Template.templates.events(
 		if itemsCheck == undefined
 			$("#templateElements").transition('drop')
 		Session.set("template", this)
+		Session.set("usesDynamicRename", this.dynamicRename.isUsing)
 		ga('send', 'event', 'TEMPLATE_UI', 'select', this._id)
 		console.log(this.name + " (" + this._id + ") selected. Session variable set for " + items)
 
 
 	'click #folderQuestion': ->
 		$('#folderQuestionModal')
+			.modal({
+				blurring: true,
+			})
+			.modal('show')
+
+
+	'click #renameHelpLabel': ->
+		$('#renameHelpModal')
 			.modal({
 				blurring: true,
 			})
@@ -71,10 +81,9 @@ Template.templates.events(
 		$('#itemsCopyWarning').transition('vertical flip')
 		$('#warningDetails').toggleClass('hidden')
 
-	'click #advancedCopy': ->
-		$('#advancedCopyOptions').toggleClass('hidden')
-		Session.set("advancedCopy", $('input[name="advancedCopyCheckbox"]').prop("checked"))
 
+	'click #advancedCopy': ->
+		Session.set("usesDynamicRename", $('input[name="advancedCopyCheckbox"]').prop("checked"))
 
 
 	'click #addField': ->
@@ -111,5 +120,12 @@ Template.templates.events(
 Template.folderQuestion.events(
 	'click #confirm': ->
 		$('#folderQuestionModal')
+			.modal('hide')
+)
+
+
+Template.renameHelpCopy.events(
+	'click #confirm': ->
+		$('#renameHelpModal')
 			.modal('hide')
 )

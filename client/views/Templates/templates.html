@@ -14,9 +14,9 @@
 
       {{#if queue}}
         <div id="prep" class="ui floating icon white message" style="overflow: hidden !important;">
-          <i class="folder icon"></i>
+          <i class="cloud upload icon"></i>
           <div class="content">
-            <p>Choose a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
+            <p>Select a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
           </div>
         </div>
       {{else}}
@@ -80,7 +80,7 @@
     <div class="ui fixed raised segment">
       <div class="ui dividing header">
         <div id="selectTemplate" class="ui dropdown">
-          <div class="text"><h2>Choose Template...</h2></div>
+          <div class="text"><h2>Select a Template...</h2></div>
           <i class="dropdown icon"></i>
           <div class="menu">
             <div class="ui icon search input">
@@ -123,65 +123,68 @@
 
     <div class="ui fixed raised segment">
       <div class="ui toggle checkbox" id="advancedCopy">
-        <input type="checkbox" name="advancedCopyCheckbox" tabindex="0" class="hidden">
+        {{#if usesDynamicRename}}
+          <input type="checkbox" name="advancedCopyCheckbox" checked="" tabindex="0">
+        {{else}}
+          <input type="checkbox" name="advancedCopyCheckbox" tabindex="0">
+        {{/if}}
         <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
       </div>
 
-      <div id="advancedCopyOptions" class="hidden">
-        <br>
-          <p>
-            Find and replace words or phrases in the names of copied files and folders&nbsp;
-            <a class="ui mini grey circular label" id="renameHelp" data-title="Dynamic Rename (in Beta)"
-                data-content="Copied items can be renamed using the find and replace form fields below.
-                CloudTemplates will search for your &quot;find&quot; term in item names and replace it
-                with your &quot;replace&quot; term. The &quot;find&quot; terms are case-sensitive.
-                While in Beta, only the first two levels of
-                your copied content will be affected (not all of the copied content will be searched)"
-                data-variation="inverted basic wide">?</a>
-            <br>
-            <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
-          </p>
-          <div id="advancedCopyRename" class="ui form">
-            <div class="three fields">
-              <div class="field">
-                <label>Find</label>
-              </div>
-              <div class="field">
-                <label>Replace</label>
-              </div>
-              <div class="field">
-                <label>&nbsp;</label>
-              </div>
-            </div>
-            {{#each template.dynamicRename.findValues}}
-              <div class="three fields validate">
+      {{#if usesDynamicRename}}
+        <div id="advancedCopyOptions">
+          <br>
+            <p>
+              Find and replace words or phrases in the names of copied files and folders&nbsp;
+              <a class="ui mini grey circular label" id="renameHelpLabel">?</a>
+              <br>
+              <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
+            </p>
+            <div id="advancedCopyRename" class="ui form">
+              <div class="three fields">
                 <div class="field">
-                  {{this}}
-                  <input type="hidden" class="findField smallFormInput" name="find_{{this}}" value="{{this}}">
-                </div>
-                <div class="required field">
-                  <input type="text" class="replaceField smallFormInput" name="replace_{{this}}" placeholder="Replace matches of &quot;{{this}}&quot; with..." data-validate="autoReplace">
+                  <label>Find</label>
                 </div>
                 <div class="field">
+                  <label>Replace</label>
+                </div>
+                <div class="field">
+                  <label>&nbsp;</label>
                 </div>
               </div>
-            {{/each}}
-            <div class="three fields fieldGroup">
-              <div class="field">
-                <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
-              </div>
-              <div class="field">
-                <input type="text" class="replaceField smallFormInput" name="replace1" placeholder="Replace matches with...">
-              </div>
-              <div class="field">
-                <div id="addField" class="ui tiny basic blue icon button">
-                  <i class="plus icon"></i>
+              {{#each template.dynamicRename.findValues}}
+                <div class="three fields validate fieldGroup">
+                  <div class="field">
+                    {{this}}
+                    <input type="hidden" class="findField smallFormInput" name="find_{{this}}" value="{{this}}">
+                  </div>
+                  <div class="required field">
+                    <input type="text" class="replaceField smallFormInput" name="replace_{{this}}" placeholder="Replace matches of &quot;{{this}}&quot; with..." data-validate="autoReplace">
+                  </div>
+                  <div class="field">
+                    <div class="ui tiny basic red icon button removeFields">
+                      <i class="minus icon"></i>
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
+              <div class="three fields fieldGroup">
+                <div class="field">
+                  <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
+                </div>
+                <div class="field">
+                  <input type="text" class="replaceField smallFormInput" name="replace1" placeholder="Replace matches with...">
+                </div>
+                <div class="field">
+                  <div id="addField" class="ui tiny basic blue icon button">
+                    <i class="plus icon"></i>
+                  </div>
                 </div>
               </div>
-            </div>
-        </div>
-      </div>
-    </div>
+          </div>
+        </div> <!-- end AdvancedCopyOptions section -->
+      {{/if}}
+    </div> <!-- end dynamic rename segment -->
 
     <div class="ui fixed basic center aligned segment">
       <button id="copyTemplate" class="large positive ui button">Copy Template</button>
@@ -239,6 +242,7 @@
 {{/if}}
 
 {{> folderQuestion}}
+{{> renameHelpCopy}}
 </div>
 
 </template>
@@ -246,14 +250,43 @@
 
 <template name="folderQuestion">
   <div id="folderQuestionModal" class="ui basic modal">
-    <div class="centered header">
+    <div class="ui icon header">
+      <i class="cloud upload icon"></i>
       Copying Items into a Folder
     </div>
     <div class="content">
       <div class="description">
-        <p>This page allows you to copy items from your existing Templates into a Box folder.
+        <p>CloudTemplates lets you copy items from your existing Templates into another Box folder.
           It looks like <b>{{queue.folderName}}</b> is the last folder you tried to copy into, so we remembered it from last time.
-          If you want to copy into a different folder instead, <b>right-click on that folder in Box and choose "Copy from CloudTemplates" in the More Actions menu.</b>
+          If you want to copy into a different folder instead, <b>right-click on the target folder in Box and choose "Copy from CloudTemplates" in the Actions menu.</b>
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui basic green inverted button cancel">
+        <i class="check icon"></i>
+        Ok, Got It
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="renameHelpCopy">
+  <div id="renameHelpModal" class="ui basic modal">
+    <div class="ui icon header">
+      <i class="wizard icon"></i>
+      Dynamic Rename
+    </div>
+    <div class="content">
+      <div class="description">
+        <p>Copied items can be renamed using the find and replace fields in the Dynamic Rename section.
+        CloudTemplates will search for your &quot;find&quot; term in newly copied folder and file names and replace it
+        with your &quot;replace&quot; term. The &quot;find&quot; terms are case-sensitive. For example,
+        if you're copying a folder called &quot;CUSTOMER_NAME Project&quot; you can dynamically 
+        replace &quot;CUSTOMER_NAME&quot; with the actual name of your customer. 
+        <br><br>
+        <b>While in Beta, only the first level of your copied content will be affected 
+        (not all of the copied content will be searched)</b>
         </p>
       </div>
     </div>

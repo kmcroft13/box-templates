@@ -48,7 +48,6 @@ Template.createTemplate.events(
       .closest('.message')
       .transition('fade')
 
-
   'submit form': (e) -> (
     e.preventDefault()
     console.log("Form: " + e.type);
@@ -90,11 +89,9 @@ Template.createTemplate.events(
     console.log("Called addTemplate method: " + templateName);
   )
 
-
   'click #advancedCopy': ->
     $('#advancedCopyOptions').toggleClass('hidden')
     Session.set("advancedCopy", $('input[name="advancedCopyCheckbox"]').prop("checked"))
-
 
   'click #addField': ->
     addButtonParent = $("#addField").parent();
@@ -121,5 +118,14 @@ Template.createTemplate.events(
     removeButtonParentGroup = $( removeButtonDiv ).closest('.fieldGroup');
     removeButtonParentGroup.remove();
 
+  'click #renameHelpLabelCreate': ->
+    $('#renameHelpCreateModal').modal({blurring: true,}).modal('show')
 
+
+)
+
+Template.renameHelpCreate.events(
+	'click #confirm': ->
+		$('#renameHelpCreateModal')
+			.modal('hide')
 )

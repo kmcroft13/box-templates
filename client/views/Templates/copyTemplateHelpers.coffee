@@ -3,6 +3,7 @@ Template.templates.events(
     evt.preventDefault()
     templateItems = Session.get("template").items
     templateId = this._id
+    usesDynamicRename = Session.get("usesDynamicRename")
     findReplaceArray = []
     findValues = $('.findField').map(-> return this.value ).get()
     replaceValues = $('.replaceField').map(-> return this.value ).get()
@@ -11,11 +12,15 @@ Template.templates.events(
       obj["find"] = findValues[index]
       obj["replace"] = replaceValues[index]
       findReplaceArray.push(obj)
+    dynamicRename = {
+      usesDynamicRename: usesDynamicRename,
+      findReplaceArray: findReplaceArray
+    }
 
     console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
 
-    Meteor.call('copyTemplate', templateItems, findReplaceArray, (error, result) ->
+    Meteor.call('copyTemplate', templateItems, dynamicRename, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
         console.log(error)
