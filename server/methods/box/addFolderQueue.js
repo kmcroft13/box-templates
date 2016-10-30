@@ -8,7 +8,7 @@ Meteor.methods({
 
     //Remove all previous entries for this user in the queue
     const numRemoved = FolderQueue.remove({
-        boxUserId: userId
+        boxUserId: boxUserId
     });
 
     //Insert new entry for this user
@@ -41,5 +41,6 @@ Meteor.methods({
     }
 
     console.log(JSON.stringify(result));
+    return result;
   } //End addFolderQueue method
 });

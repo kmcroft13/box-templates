@@ -5,6 +5,7 @@ Router.route('/folderqueue', function () {
     const userId = this.request.body.box_id
 
     let statusCode = 404;
+    let responseJSON = {};
 
     Meteor.call('addFolderQueue', folderId, folderName, userId, (err, res) => {
         if (err) {
@@ -21,13 +22,9 @@ Router.route('/folderqueue', function () {
 
         } else {
             statusCode = 200;
-            const resultString = res.toString();
             responseJSON = {
                 status: "204", 
-                data: {
-                    id: resultString,
-                    message: "Folder submitted to queue"
-                }
+                data: res
             };
         }
     });
