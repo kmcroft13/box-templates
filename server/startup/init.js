@@ -9,3 +9,8 @@ sdk = new BoxSDK({
 
 //Initialize scheduled tasks
 SyncedCron.start();
+
+//Run any outstanding migrations
+Meteor.startup(() => {
+  Migrations.migrateTo('latest');
+});
