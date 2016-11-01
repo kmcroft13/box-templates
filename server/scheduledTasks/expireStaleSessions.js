@@ -2,7 +2,7 @@ SyncedCron.add({
     name: 'Expire stale sessions',
     schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('every 1 hours');
+        return parser.text('at 2:00 am');
     },
     job: function() {
 
