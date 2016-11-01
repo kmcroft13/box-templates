@@ -38,6 +38,10 @@ Template.createTemplate.onRendered -> (
 Template.createTemplate.helpers(
   templateItems: ->
     Session.get('items')
+    
+  usesDynamicRenameCreate: ->
+    Session.get('usesDynamicRenameCreate')
+
 )
 
 
@@ -83,15 +87,17 @@ Template.createTemplate.events(
            $("#messageBody").html("<b>" + templateName + "</b> was successfully created. Now <b><a href=\"/templates\">let's put it to work</a></b>!")
            $('#createMessage').removeClass('hidden')
            Session.set("items", undefined)
+           Session.set("usesDynamicRenameCreate", undefined)
            $('html, body').animate(
              scrollTop: 0, 300)
     ))
     console.log("Called addTemplate method: " + templateName);
   )
 
+
   'click #advancedCopy': ->
-    $('#advancedCopyOptions').toggleClass('hidden')
-    Session.set("advancedCopy", $('input[name="advancedCopyCheckbox"]').prop("checked"))
+    Session.set("usesDynamicRenameCreate", $('input[name="advancedCopyCheckbox"]').prop("checked"))
+
 
   'click #addField': ->
     addButtonParent = $("#addField").parent();

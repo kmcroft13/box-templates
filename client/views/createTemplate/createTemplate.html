@@ -73,36 +73,38 @@
         <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
       </div>
 
-      <div id="advancedCopyOptions" class="hidden">
-        <br>
-          <p>
-            Find and replace words or phrases in the names of copied files and folders&nbsp;
-            <a class="ui mini grey circular label" id="renameHelpLabelCreate">?</a>
-                <br>
-            <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
-          </p>
-          <div id="advancedCopyRename" class="ui form">
-            <div class="two fields">
-              <div class="field">
-                <label>Find</label>
-              </div>
-              <div class="field">
-                <label>&nbsp;</label>
-              </div>
-            </div>
-            <div class="two fields fieldGroup">
-              <div class="field">
-                <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
-              </div>
-              <div class="field">
-                <div id="addField" class="ui tiny basic blue icon button">
-                  <i class="plus icon"></i>
+      {{#if usesDynamicRenameCreate}}
+        <div id="advancedCopyOptions">
+          <br>
+            <p>
+              Find and replace words or phrases in the names of copied files and folders&nbsp;
+              <a class="ui mini grey circular label" id="renameHelpLabelCreate">?</a>
+                  <br>
+              <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
+            </p>
+            <div id="advancedCopyRename" class="ui form">
+              <div class="two fields">
+                <div class="field">
+                  <label>Find</label>
+                </div>
+                <div class="field">
+                  <label>&nbsp;</label>
                 </div>
               </div>
-            </div>
-        </div>
-      </div>
-    </div>
+              <div class="two fields fieldGroup">
+                <div class="field">
+                  <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
+                </div>
+                <div class="field">
+                  <div id="addField" class="ui tiny basic blue icon button">
+                    <i class="plus icon"></i>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div> <!-- end advancedCopyRename -->
+      {{/if}}
+    </div> <!-- end dyanmicRename section -->
 
     <div class="ui fixed basic center aligned segment">
       <button class="large positive ui button" type="submit">Create Template</button>
