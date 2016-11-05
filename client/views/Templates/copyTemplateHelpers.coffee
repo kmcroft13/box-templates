@@ -2,24 +2,33 @@ Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     evt.preventDefault()
     templateItems = Session.get("template").items
+    templateFindValues = Session.get("template").dynamicRename.findValues
     templateId = this._id
     usesDynamicRename = Session.get("usesDynamicRename")
     findReplaceArray = []
     findValues = $('.findField').map(-> return this.value ).get()
     replaceValues = $('.replaceField').map(-> return this.value ).get()
+    console.log(findValues);
+
     for index of findValues
-      obj = {}
-      obj["find"] = findValues[index]
-      obj["replace"] = replaceValues[index]
-      findReplaceArray.push(obj)
+      if findValues[index] != "" && replaceValues[index] != "" && findValues[index] != replaceValues[index]
+        obj = {}
+        obj["find"] = findValues[index]
+        obj["replace"] = replaceValues[index]
+        findReplaceArray.push(obj)
+
+    if findReplaceArray.length == 0
+      usesDynamicRename = false
+
     dynamicRename = {
       usesDynamicRename: usesDynamicRename,
       findReplaceArray: findReplaceArray
     }
 
+    console.log(dynamicRename);
     console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
-
+    throw new Error();
     Meteor.call('copyTemplate', templateItems, dynamicRename, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
@@ -29,7 +38,7 @@ Template.templates.events(
         ga('send', 'event', 'TEMPLATE_COPY', 'failed', templateId)
       else
 
-        if findReplaceArray.length > 0
+        if usesDynamicRename
           ga('send', 'event', 'TEMPLATE_COPY', 'success_with_findReplace', templateId)
         else
           ga('send', 'event', 'TEMPLATE_COPY', 'success', templateId)

@@ -57,8 +57,7 @@ Keeping track of things I want to add in the future!
 
 ####LONG TERM
 + Dynamic renaming
-   + Rename throughout structure? Only certain levels?
-   + _Currently in "Beta"_
+   + Rename throughout structure? Only certain levels? (_Currently in "Beta"_)
 + Enterprise / Group templates
    + Check if group has access to folder before creating (throw warning if not?)
 
