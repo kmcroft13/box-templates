@@ -28,7 +28,6 @@ Template.templates.events(
     console.log(dynamicRename);
     console.log("Preparing to copy items...")
     Session.set("templateStatus","copy")
-    throw new Error();
     Meteor.call('copyTemplate', templateItems, dynamicRename, (error, result) ->
       # The method call sets the Session variable to the callback value
       if error
