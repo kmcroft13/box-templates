@@ -33,18 +33,20 @@
     </h4>
   </div>
 
-  <div class="ui raised segment">
-    <h4 class="ui header">
-      Box Groups
-    </h4>
-      <div class="ui list">
-        {{#each currentUser.profile.boxGroups}}
-          <div class="item" style="color: rgba(0, 0, 0, 0.6);">
-              <p>{{#if isAdmin role}}<div class="fixedProfileLabel ui blue horizontal label">Admin</div>{{/if}}{{#if isMember role}}<div class="fixedProfileLabel ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
-          </div>
-        {{/each}}
-      </div>
-  </div>
+  {{#if currentUser.profile.boxGroups}}
+    <div class="ui raised segment">
+      <h4 class="ui header">
+        Box Groups
+      </h4>
+        <div class="ui list">
+          {{#each currentUser.profile.boxGroups}}
+            <div class="item" style="color: rgba(0, 0, 0, 0.6);">
+                <p>{{#if isAdmin role}}<div class="fixedProfileLabel ui blue horizontal label">Admin</div>{{/if}}{{#if isMember role}}<div class="fixedProfileLabel ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
+            </div>
+          {{/each}}
+        </div>
+    </div>
+  {{/if}}
   <br>
 </div>
 </template>
