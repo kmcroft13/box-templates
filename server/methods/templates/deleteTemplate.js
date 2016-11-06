@@ -3,8 +3,13 @@ Meteor.methods({
   'deleteTemplate'(templateId) {
     console.log("### DELETING TEMPLATE ###");
     check(templateId, Match.Any);
-    
-    Template.remove(templateId);
+    const templateObject = Template.findOne(templateId);
+
+    if (templateObject.owner != Meteor.userId()) {
+      throw new Meteor.Error(401, "This user is not authorized to complete this request");
+    } else {
+      Template.remove(templateId);
+    }
 
     console.log(JSON.stringify({
         resource: "template",
