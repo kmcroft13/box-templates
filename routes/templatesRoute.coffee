@@ -20,8 +20,8 @@ Router.map ->
       @next()
 
 
-  @route 'managePrivate',
-    path: '/manage/private'
+  @route 'manageTemplates',
+    path: '/manage'
     waitOn: ->
       Meteor.subscribe 'Template'
       Meteor.subscribe 'sharedTemplate'
@@ -32,7 +32,7 @@ Router.map ->
       sharedTemplates: Template.find({owner: { $ne: userId }, "sharing.shared": true}, {sort: {name: 1}})
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
-        GARecordPage('/manage/private')
+        GARecordPage('/manage')
       Meteor.call("syncProfile")
       @next()
 

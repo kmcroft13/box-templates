@@ -3,7 +3,7 @@ Template.privateTemplate.onRendered -> (
     .popup()
 )
 
-Template.managePrivate.events(
+Template.manageTemplates.events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)
     $('#deleteTemplateModal')
