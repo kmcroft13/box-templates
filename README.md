@@ -50,16 +50,18 @@ You can sign up with a transactional email account with SendInBlue (it's free!) 
 Keeping track of things I want to add in the future!
 
 ####SHORT TERM
++ Expand sharing section to show sharing with Enterprise (required for Groups support)
++ Make Templates editable
+  + Allow adding and removing individual items from Templates
++ Differentiate create and copy pages
 
 ####MID TERM
-+ Make existing Templates editable
-  + Allow adding and removing individual items from Templates
-
-####LONG TERM
-+ Dynamic renaming
-   + Rename throughout structure? Only certain levels? (_Currently in "Beta"_)
-+ Enterprise / Group templates
-   + Check if group has access to folder before creating (throw warning if not?)
++ Dynamic Renaming (_Currently in "Beta"_)
+   + Rename throughout structure? Only certain levels?
++ Shared Templates
+  + Enterprise Templates (_Currently in "Beta"_)
+  + Group Templates
+    + Check if group has access to folder before creating (throw warning if not?)
 
 ####BACKLOG
 + Create sample folder structure template. Share with other Boxers?
