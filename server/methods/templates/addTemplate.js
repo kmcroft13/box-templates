@@ -1,12 +1,28 @@
 Meteor.methods({
 
-  'addTemplate'(templateName, templateDescription, items, usesDynamicRename, findValues) {
+  'addTemplate'(templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues) {
     console.log("### ADDING TEMPLATE ###");
     check(templateName, Match.Any);
     check(templateDescription, Match.Any);
     check(items, Match.Any);
+    check(usesSharing, Match.Any);
     check(usesDynamicRename, Match.Any);
     check(findValues, Match.Any);
+
+    let sharingObj;
+    let dynamicRenameObj;
+    const boxRole = Meteor.user().profile.boxRole;
+
+    if (usesSharing == true && (boxRole == "admin" || boxRole == "coadmin")) {
+      sharingObj = {
+        shared: true,
+        eid: Meteor.user().profile.eid
+      }
+    } else {
+      sharingObj = {
+        shared: false
+      }
+    }
 
     if (usesDynamicRename == true) {
       dynamicRenameObj = {
@@ -27,9 +43,7 @@ Meteor.methods({
       description: templateDescription,
       items: items,
       dynamicRename: dynamicRenameObj,
-      sharing: {
-          shared: false
-      },
+      sharing: sharingObj,
     });
 
     console.log(JSON.stringify({
