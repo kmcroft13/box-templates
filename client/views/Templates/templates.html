@@ -88,10 +88,27 @@
               <input type="text" placeholder="Search templates...">
             </div>
             <div class="divider"></div>
+            {{#if privateTemplates.count}}
+              <div class="header">
+                <i class="user icon"></i>
+                Owned by You
+              </div>
+            {{/if}}
             {{#each privateTemplates}}
               <div class="item dropdown-item">
                 {{name}}
-                <span class="description">Private</span>
+              </div>
+            {{/ each}}
+            {{#if sharedTemplates.count}}
+              <div class="divider"></div>
+              <div class="header">
+                <i class="users icon"></i>
+                Shared with You
+              </div>
+            {{/if}}
+            {{#each sharedTemplates}}
+              <div class="item dropdown-item">
+                {{name}}
               </div>
             {{/ each}}
           </div>

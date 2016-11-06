@@ -1,3 +1,8 @@
+Template.privateTemplate.onRendered -> (
+  $('#sharedIcon')
+    .popup()
+)
+
 Template.managePrivate.events(
   'click .delete': ->
     Session.set('templateToDelete', this._id)

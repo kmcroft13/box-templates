@@ -10,10 +10,24 @@
     </h2>
     <div class="ui divider"></div>
 
-    <div class="ui icon yellow floating message">
-      <i class="warning icon"></i>
-      Content is not yet editable
-    </div>
+    {{#if isOwnerAndShared}}
+      <div class="ui icon blue floating message">
+        <i class="users icon"></i>
+        You are sharing this Template with others in your Organization. Content is not yet editable.
+      </div>
+    {{else}}
+      {{#if isOwner}}
+        <div class="ui icon grey floating message">
+          <i class="user icon"></i>
+          Only you can see this Template. Content is not yet editable.
+        </div>
+      {{else}}
+        <div class="ui icon blue floating message">
+          <i class="users icon"></i>
+           This Template is shared with you by&nbsp;<b>{{template.creator}}</b>. You cannot make changes to this Template.
+        </div>
+      {{/if}}
+    {{/if}}
 
     <div class="ui raised segment">
       <h4 class="ui header">
@@ -44,25 +58,51 @@
         </div>
     </div>
 
-    {{#if template.dynamicRename.isUsing}}
+    <div class="ui raised segment">
+      <h4 class="ui header">
+        Sharing <a class="ui tiny grey circular label" id="sharingHelp" data-title="Template Sharing"
+            data-content="Templates can be shared with others in your Organization. Shared Templates can 
+            be viewed and used by others, but cannot be deleted or edited. Users MUST have collaboration
+            access to the Box content being copied, or else will receive an error when copying!"
+            data-variation="inverted basic wide">?</a>
+      </h4>
+      <div class="ui toggle checkbox" id="shared">
+        {{#if template.sharing.shared}}
+            <input type="checkbox" name="sharedCheckbox" checked="" readonly="" tabindex="0">
+        {{else}}
+            <input type="checkbox" name="sharedCheckbox" readonly="" tabindex="0">
+        {{/if}}
+        <label><strong>Share Template with Colleagues</strong></label>
+      </div>
+    </div>
+
       <div class="ui raised segment">
         <h4 class="ui header">
-          Dynamic Rename <a class="ui tiny grey circular label" id="renameHelp" data-title="This Template uses Dynamic Rename"
+          Dynamic Rename <a class="ui tiny grey circular label" id="renameHelp" data-title="Dynamic Rename"
               data-content="Dynamic Rename allows CloudTemplates to automatically rename copied items using the find values below.
               When you copy from this Template you will see these find values and you can choose to replace instances of these values
               with the &quot;replace&quot; term, which you can set on the &quot;Copy from Template&quot; page."
               data-variation="inverted basic wide">?</a>
         </h4>
-        <p><strong>Find Values</strong></p>
-        <div class="ui list">
-          {{#each template.dynamicRename.findValues}}
-            <div class="item">
-              <p>{{this}}</p>
-            </div>
-          {{/each}}
+        <div class="ui toggle checkbox" id="shared">
+          {{#if template.dynamicRename.isUsing}}
+              <input type="checkbox" name="renameCheckbox" checked="" readonly="" tabindex="0">
+              <label><strong>Use Dynamic Rename</strong></label> <br>
+              <p><strong>Find Values</strong></p>
+              <div class="ui list">
+                {{#each template.dynamicRename.findValues}}
+                  <div class="item">
+                    <p>{{this}}</p>
+                  </div>
+                {{/each}}
+              </div>
+          {{else}}
+              <input type="checkbox" name="renameCheckbox" readonly="" tabindex="0">
+              <label><strong>Use Dynamic Rename</strong></label>
+          {{/if}}
         </div>
       </div>
-    {{/if}}
+      <br>
 
   {{else}}
     <h2 class="ui center aligned icon disabled red header">

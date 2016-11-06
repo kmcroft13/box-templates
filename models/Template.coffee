@@ -66,8 +66,12 @@ Schemas.Template = new SimpleSchema
     allowedValues: ['enterprise', 'group']
     optional: true
 
-  "sharing.$.permissions"
+  "sharing.$.groups"
     type: [Object]
+    optional: true
+
+  "sharing.$.eid"
+    type: String
     optional: true
 
 
@@ -89,5 +93,5 @@ Template.allow(
 Template.helpers(
 	creator: ->
 		user = Meteor.users.findOne(@owner)
-		user.profile.fullName
+		if user then user.profile.fullName else "Unknown"
 )

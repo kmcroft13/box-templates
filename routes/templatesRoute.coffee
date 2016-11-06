@@ -4,10 +4,13 @@ Router.map ->
     path: '/templates'
     waitOn: ->
       Meteor.subscribe 'Template'
+      Meteor.subscribe 'sharedTemplate'
       Meteor.subscribe 'FolderQueue'
       Meteor.subscribe 'UserData'
     data: ->
-      privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
+      userId = Meteor.userId()
+      privateTemplates: Template.find({owner: userId}, {sort: {name: 1}})
+      sharedTemplates: Template.find({owner: { $ne: userId }, "sharing.shared": true}, {sort: {name: 1}})
       queue: FolderQueue.findOne({}, {sort: {addedAt: -1}})
     onBeforeAction: ->
       Session.set("template", undefined)
@@ -21,8 +24,12 @@ Router.map ->
     path: '/manage/private'
     waitOn: ->
       Meteor.subscribe 'Template'
+      Meteor.subscribe 'sharedTemplate'
+      Meteor.subscribe 'UserProfiles'
     data: ->
-      privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {createdAt: 1}})
+      userId = Meteor.userId()
+      privateTemplates: Template.find({owner: userId}, {sort: {createdAt: 1}})
+      sharedTemplates: Template.find({owner: { $ne: userId }, "sharing.shared": true}, {sort: {name: 1}})
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/manage/private')
@@ -43,8 +50,10 @@ Router.map ->
     path: '/template/:_id/view'
     waitOn: ->
       Meteor.subscribe 'Template'
+      Meteor.subscribe 'sharedTemplate'
+      Meteor.subscribe 'UserProfiles'
     data: ->
-      template: Template.findOne({$and: [{_id: this.params._id},{owner: Meteor.userId()}]})
+      template: Template.findOne(this.params._id)
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/template/:_id/view')

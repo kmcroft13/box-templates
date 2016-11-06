@@ -13,13 +13,15 @@
   {{#if privateTemplates.count}}
   <div class="sidebar">
     <div class="ui fixed raised segment">
-
+      <h3>Templates Owned by You</h3>
       <table class="ui unstackable very basic fixed single line table">
         <thead>
-          <tr><th class="five wide">Name</th>
-          <th class="six wide">Description</th>
-          <th class="three wide">Created</th>
-          <th class="two wide"></th>
+          <tr>
+            <th class="four wide">Name</th>
+            <th class="one wide"></th>
+            <th class="six wide">Description</th>
+            <th class="three wide">Created</th>
+            <th class="two wide"></th>
         </tr></thead>
         <tbody>
           {{#each privateTemplates}}
@@ -29,24 +31,86 @@
       </table>
     </div>
   </div>
+  <br><br>
     {{> deleteModal}}
-  {{else}}
+  {{/if}}
+
+  {{#if sharedTemplates.count}}
+  <div class="sidebar">
+    <div class="ui fixed raised segment">
+      <h3>Templates Shared with You</h3>
+      <table class="ui unstackable very basic fixed single line table">
+        <thead>
+          <tr>
+            <th class="five wide">Name</th>
+            <th class="six wide">Description</th>
+            <th class="three wide">Created</th>
+            <th class="two wide">Owner</th>
+        </tr></thead>
+        <tbody>
+          {{#each sharedTemplates}}
+            {{> sharedTemplate}}
+          {{/ each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#unless privateTemplates.count}}
+  {{#unless sharedTemplates.count}}
     <h2 class="ui center aligned icon disabled header">
       <i class="help circle icon"></i>
       You don't have any Templates yet<br>
       <a href="{{pathFor 'createTemplate'}}"><u>Create one</u></a>
     </h2>
-  {{/if}}
+  {{/unless}}
+  {{/unless}}
 </div>
+<br>
 </template>
 
 
 <template name="privateTemplate">
   <tr>
-    <td><a href="{{pathFor 'viewTemplate'}}">{{name}}</a></td>
-    <td>{{description}}</td>
-    <td>{{shortDate createdAt}}</td>
-    <td class="right aligned"><a href="#" class="ui negative delete">Remove</a></td>
+    <td>
+      <a href="{{pathFor 'viewTemplate'}}">{{name}}</a>
+    </td>
+    <td class="right aligned">
+      {{#if sharing.shared}}
+        <a class="tiny ui icon" id="sharedIcon" 
+            data-content="You are sharing this Template with others in your Organization"
+            data-variation="inverted basic">
+          <i class="icon users"></i>
+        </a>
+      {{/if}}
+    </td>
+    <td>
+      {{description}}
+    </td>
+    <td>
+      {{shortDate createdAt}}
+    </td>
+    <td class="right aligned">
+      <a href="#" class="ui negative delete">Remove</a>
+    </td>
+  </tr>
+</template>
+
+<template name="sharedTemplate">
+  <tr>
+    <td>
+      <a href="{{pathFor 'viewTemplate'}}">{{name}}</a>
+    </td>
+    <td>
+      {{description}} 
+    </td>
+    <td>
+      {{shortDate createdAt}}
+      </td>
+    <td>
+      {{creator}}
+    </td>
   </tr>
 </template>
 

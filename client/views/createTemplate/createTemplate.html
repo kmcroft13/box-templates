@@ -57,20 +57,21 @@
       </div>
     </div>
 
-<!-- HIDE THIS SECTION UNTIL READY FOR PRODUCTION
-    <div class="ui fixed raised segment">
-      <div class="ui toggle checkbox" id="shared">
-        <input type="checkbox" name="sharedCheckbox" tabindex="0" class="hidden">
-        <label><strong>Share Template with your Organization</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
+    {{#if isAdminOrCoadmin}}
+      <div class="ui fixed raised segment">
+        <div class="ui toggle checkbox" id="shared">
+          <input type="checkbox" name="sharedCheckbox" tabindex="0" class="hidden">
+          <label><strong>Share Template with Colleagues</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label" id="sharingHelpLabel">BETA</div></label>
+        </div>
       </div>
-
-    </div>
--->
+      {{>sharingCollabConfirm}}
+      {{>sharingHelp}}
+    {{/if}}
 
     <div class="ui fixed raised segment">
       <div class="ui toggle checkbox" id="advancedCopy">
         <input type="checkbox" name="advancedCopyCheckbox" tabindex="0" class="hidden">
-        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
+        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label" id="renameHelpLabelCreate">BETA</div></label>
       </div>
 
       {{#if usesDynamicRenameCreate}}
@@ -112,7 +113,7 @@
 
   </form>
 
-  <br><br>
+  <br>
 </div>
 {{>renameHelpCreate}}
 </template>
@@ -143,6 +144,70 @@
       <div class="ui basic green inverted button cancel">
         <i class="check icon"></i>
         Ok, Got It
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="sharingHelp">
+  <div id="sharingHelpModal" class="ui basic modal">
+    <div class="ui icon header">
+      <i class="users icon"></i>
+      Shared Templates
+    </div>
+    <div class="content">
+      <div class="description">
+        <p>
+          Templates can be shared with others in your Organization. Shared Templates can 
+          be viewed and used by others but cannot be deleted or edited. Only Box Admins or Co-Admins 
+          in your Organization can create Shared Templates. Users MUST have collaboration
+          access to the Box content being copied, or else will receive an error when copying!
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui basic green inverted button cancel">
+        <i class="check icon"></i>
+        Ok, Got It
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="sharingCollabConfirm">
+  <div id="sharingCollabConfirmModal" class="ui basic modal">
+    <div class="ui icon header">
+      <i class="users icon"></i>
+      Can Your Organization Access These Items?
+    </div>
+    <div class="content">
+        <div class="ui grid">
+          <div class="eight wide column">
+            <p>Please ensure that CloudTemplates users in your Organization have access to the 
+              items in this Template. Your users must have <b>Viewer access or higher</b> to these
+              items in Box, otherwise they will receive an error when copying from this Template!
+            </p>
+          </div>
+          <div class="eight wide column">
+            <div class="ui divided list">
+              {{#each templateItems}}
+                <div class="item">
+                <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="actions">
+      <div class="ui inverted buttons">
+        <div class="ui basic inverted button deny">
+          Don't Create this Template Yet
+        </div>
+        <div class="ui basic green inverted button approve">
+          <i class="check icon"></i>
+          Users Can Access These Items
+        </div>
       </div>
     </div>
   </div>

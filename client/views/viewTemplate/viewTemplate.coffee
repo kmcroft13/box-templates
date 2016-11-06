@@ -5,4 +5,18 @@ Template['viewTemplate'].onRendered -> (
   $('#renameHelp')
     .popup()
 
+  $('#sharingHelp')
+    .popup()
+
+)
+
+
+Template['viewTemplate'].helpers(
+  isOwnerAndShared: ->
+    isOwner = this.template.owner == Meteor.userId()
+    isShared = this.template.sharing.shared
+    isOwner && isShared
+
+  isOwner: ->
+    this.template.owner == Meteor.userId()
 )
