@@ -35,6 +35,10 @@ Template.templates.helpers(
 	usesDynamicRename: ->
 		Session.get('usesDynamicRename')
 
+	hasTemplates: ->
+		numTemplates = Template.find().count()
+		console.log(numTemplates)
+		numTemplates > 0
 )
 
 
