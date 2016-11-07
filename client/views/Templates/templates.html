@@ -16,7 +16,7 @@
         <div id="prep" class="ui floating icon white message" style="overflow: hidden !important;">
           <i class="cloud upload icon"></i>
           <div class="content">
-            <p>Select a template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
+            <p>Select a Template below to copy items into <b>{{queue.folderName}}</b> <a id="folderQuestion" class="ui green right corner label"><i class="question icon"></i></a></p>
           </div>
         </div>
       {{else}}
@@ -145,7 +145,7 @@
         {{else}}
           <input type="checkbox" name="advancedCopyCheckbox" tabindex="0">
         {{/if}}
-        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label">BETA</div></label>
+        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label" id="renameHelpLabel">BETA</div></label>
       </div>
 
       {{#if usesDynamicRename}}
