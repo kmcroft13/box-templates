@@ -37,7 +37,6 @@ Template.templates.helpers(
 
 	hasTemplates: ->
 		numTemplates = Template.find().count()
-		console.log(numTemplates)
 		numTemplates > 0
 )
 

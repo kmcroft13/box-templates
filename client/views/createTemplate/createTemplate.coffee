@@ -50,10 +50,14 @@ Helpers = {
       else
           console.log(result)
 
-          if findValues.length > 0
-            ga('send', 'event', 'TEMPLATE_CREATE', 'success_with_findReplace')
+          if usesDynamicRename && usesSharing
+            ga('send', 'event', 'TEMPLATE_CREATE', 'success_shared_with_rename')
+          else if usesDynamicRename
+            ga('send', 'event', 'TEMPLATE_CREATE', 'success_private_with_rename')
+          else if usesSharing
+            ga('send', 'event', 'TEMPLATE_CREATE', 'success_shared')
           else
-            ga('send', 'event', 'TEMPLATE_CREATE', 'success')
+            ga('send', 'event', 'TEMPLATE_CREATE', 'success_private')
 
           $('form').form('clear')
           $('#advancedCopyOptions').toggleClass('hidden')

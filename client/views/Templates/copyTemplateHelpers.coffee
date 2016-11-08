@@ -1,8 +1,10 @@
 Template.templates.events(
   'click #copyTemplate': (evt, tpl) ->
     evt.preventDefault()
-    templateItems = Session.get("template").items
-    templateFindValues = Session.get("template").dynamicRename.findValues
+    template = Session.get("template")
+    templateItems = template.items
+    templateOwnerId = template.owner
+    templateFindValues = template.dynamicRename.findValues
     templateId = this._id
     usesDynamicRename = Session.get("usesDynamicRename")
     findReplaceArray = []
@@ -37,10 +39,14 @@ Template.templates.events(
         ga('send', 'event', 'TEMPLATE_COPY', 'failed', templateId)
       else
 
-        if usesDynamicRename
-          ga('send', 'event', 'TEMPLATE_COPY', 'success_with_findReplace', templateId)
+        if usesDynamicRename && templateOwnerId != Meteor.userId()
+          ga('send', 'event', 'TEMPLATE_COPY', 'success_shared_with_rename', templateId)
+        else if templateOwnerId != Meteor.userId()
+          ga('send', 'event', 'TEMPLATE_COPY', 'success_shared', templateId)
+        else if usesDynamicRename
+          ga('send', 'event', 'TEMPLATE_COPY', 'success_private_with_rename', templateId)
         else
-          ga('send', 'event', 'TEMPLATE_COPY', 'success', templateId)
+          ga('send', 'event', 'TEMPLATE_COPY', 'success_private', templateId)
 
         $('form').form('clear')
         $( "#itemsCopySuccess" ).empty()
