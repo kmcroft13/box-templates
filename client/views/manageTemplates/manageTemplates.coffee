@@ -1,5 +1,5 @@
 Template.privateTemplate.onRendered -> (
-  $('#sharedIcon')
+  $('.shared')
     .popup()
 )
 
