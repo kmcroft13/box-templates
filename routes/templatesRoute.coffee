@@ -20,6 +20,15 @@ Router.map ->
       @next()
 
 
+  @route 'createTemplate',
+    path: '/template/create'
+    onBeforeAction: ->
+      if Meteor.settings.public.environment == "prod"
+        GARecordPage('/template/create')
+      Meteor.call("syncProfile")
+      @next()
+      
+
   @route 'manageTemplates',
     path: '/manage'
     waitOn: ->
@@ -37,17 +46,8 @@ Router.map ->
       @next()
 
 
-  @route 'createTemplate',
-    path: '/template/create'
-    onBeforeAction: ->
-      if Meteor.settings.public.environment == "prod"
-        GARecordPage('/template/create')
-      Meteor.call("syncProfile")
-      @next()
-
-
   @route 'viewTemplate',
-    path: '/template/:_id/view'
+    path: '/manage/:_id'
     waitOn: ->
       Meteor.subscribe 'Template'
       Meteor.subscribe 'sharedTemplate'
@@ -56,7 +56,7 @@ Router.map ->
       template: Template.findOne(this.params._id)
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"
-        GARecordPage('/template/:_id/view')
+        GARecordPage('/manage/:_id')
       Meteor.call("syncProfile")
       @next()
 
