@@ -14,7 +14,8 @@ Helpers = {
 
 Template['viewTemplate'].onRendered -> (
   # initialize checkboxes
-  this.$('.ui.checkbox').checkbox()
+  $('.ui.checkbox')
+    .checkbox()
 
   $('#renameHelp')
     .popup()
@@ -43,6 +44,11 @@ Template['viewTemplate'].helpers(
 Template['viewTemplate'].events(
   'click #updateTemplateInfoEdit': () ->
     Session.set("isEditingTemplateInfo", true)
+    return false
+
+  'click #updateTemplateInfoCancel': () ->
+    Session.set("isEditingTemplateInfo", false)
+    return false
 
   'click #updateTemplateInfoSave': (evt, tpl) ->
     evt.preventDefault()

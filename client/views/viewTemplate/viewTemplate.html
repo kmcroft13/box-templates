@@ -5,13 +5,13 @@
     {{#if isOwnerAndShared}}
       <div class="ui icon blue floating message">
         <i class="users icon"></i>
-        You are sharing this Template with others in your Organization. Content is not yet editable.
+        You are sharing this Template with others in your Organization. Some content is not yet editable.
       </div>
     {{else}}
       {{#if isOwner}}
         <div class="ui icon grey floating message">
           <i class="user icon"></i>
-          Only you can see this Template. Content is not yet editable.
+          Only you can see this Template. Some content is not yet editable.
         </div>
       {{else}}
         <div class="ui icon blue floating message">
@@ -27,8 +27,12 @@
         <form>
           <h3 class="ui header">
             Edit "{{template.name}}"
+            
             <button type="submit" class="ui mini green right floated button" id="updateTemplateInfoSave">
               Save
+            </button>
+            <button class="ui mini green right floated inverted button" id="updateTemplateInfoCancel">
+              Cancel
             </button>
           </h3>
 
@@ -52,9 +56,11 @@
       {{else}}
         <h3 class="ui header">
           {{template.name}}
-          <button class="ui mini green basic right floated button" id="updateTemplateInfoEdit">
-            Edit
-          </button>
+          {{#if isOwner}}
+            <button class="ui mini green basic right floated button" id="updateTemplateInfoEdit">
+              Edit
+            </button>
+          {{/if}}
           <div class="sub header">
             {{template.description}}
           </div>
