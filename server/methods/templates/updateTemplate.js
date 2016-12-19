@@ -7,6 +7,13 @@ Meteor.methods({
     check(templateDescription, Match.Any);
     check(activeStatus, Match.Any);
 
+    const templateObject = Template.findOne(templateId);
+
+    if (templateObject.owner != Meteor.userId()) {
+      console.log(`ERROR: Could not update template ${templateId} because requestor was not owner`)
+      throw new Meteor.Error(401, "This user is not authorized to complete this request");
+    }
+
     Template.update(templateId, { $set: { 
         name: templateName,
         description: templateDescription,

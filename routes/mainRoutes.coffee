@@ -5,9 +5,13 @@ Router.map ->
     layoutTemplate: 'homeLayout'
     waitOn: ->
       Meteor.subscribe 'Template'
+      Meteor.subscribe 'sharedTemplate'
       Meteor.subscribe 'FolderQueue'
+      Meteor.subscribe 'UserData'
     data: ->
+      userId = Meteor.userId()
       privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
+      sharedTemplates: Template.find({owner: { $ne: userId }, "sharing.shared": true}, {sort: {name: 1}})
       queue: FolderQueue.findOne({}, {sort: {addedAt: -1}})
     onBeforeAction: ->
       if Meteor.settings.public.environment == "prod"

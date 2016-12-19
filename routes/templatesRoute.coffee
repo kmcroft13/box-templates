@@ -55,6 +55,7 @@ Router.map ->
     data: ->
       template: Template.findOne(this.params._id)
     onBeforeAction: ->
+      Session.set("isEditingTemplateInfo", false)
       if Meteor.settings.public.environment == "prod"
         GARecordPage('/manage/:_id')
       Meteor.call("syncProfile")

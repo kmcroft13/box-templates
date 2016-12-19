@@ -27,7 +27,7 @@ random@1.0.10
 ejson@1.0.13
 spacebars@1.0.12
 check@1.2.4
-coffeescript@1.11.1_2
+coffeescript@1.11.1_4
 semantic:ui
 flemay:less-autoprefixer
 service-configuration@1.0.11
@@ -49,7 +49,7 @@ lawshe:full-page
 alanning:roles
 zimme:active-route
 shell-server@0.2.1
-ecmascript@0.5.9
+ecmascript@0.6.1
 meteorhacks:async
 percolate:synced-cron
 percolate:migrations
