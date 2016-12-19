@@ -23,6 +23,14 @@ Template.home.onRendered -> (
 )
 
 
+Template.home.helpers(
+
+	hasTemplates: ->
+		numTemplates = Template.find().count()
+		numTemplates > 0
+)
+
+
 Template.home.events(
 
   'click #createHeader': ->

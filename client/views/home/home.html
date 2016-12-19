@@ -20,7 +20,7 @@
               </div>
             </div>
           {{else}}
-            <a class="ui inverted button" href="{{pathFor 'signin'}}">Log in</a>&nbsp;&nbsp;
+            <a class="ui inverted button" href="{{pathFor 'signin'}}">Sign In</a>&nbsp;&nbsp;
             <a class="ui inverted button" href="{{pathFor 'signin'}}">Sign Up</a>
           {{/if}}
         </div>
@@ -53,10 +53,14 @@
         {{/if}}
       </p>
       <br>
-      {{#if privateTemplates.count}}
-        <a class="ui huge inverted button" href="{{pathFor 'templates'}}">Copy from Template <i class="right arrow icon"></i></a>
+      {{#if isLoggedIn}}
+        {{#if hasTemplates}}
+          <a class="ui huge button" href="{{pathFor 'templates'}}">Copy from Template <i class="right arrow icon"></i></a>
+        {{else}}
+          <a class="ui huge button" href="{{pathFor 'createTemplate'}}">Create a Template <i class="right arrow icon"></i></a>
+        {{/if}}
       {{else}}
-        <a class="ui huge inverted button" href="{{pathFor 'createTemplate'}}">Create a Template <i class="right arrow icon"></i></a>
+        <a class="ui huge button" href="{{pathFor 'signin'}}">Sign In to Your Account <i class="right arrow icon"></i></a>
       {{/if}}
     </div>
 	</div>
