@@ -7,7 +7,6 @@ Router.map ->
       Meteor.subscribe 'Template'
       Meteor.subscribe 'sharedTemplate'
       Meteor.subscribe 'FolderQueue'
-      Meteor.subscribe 'UserData'
     data: ->
       userId = Meteor.userId()
       privateTemplates: Template.find({owner: Meteor.userId()}, {sort: {name: 1}})
