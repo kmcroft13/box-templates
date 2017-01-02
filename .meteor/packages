@@ -36,7 +36,6 @@ useraccounts:core
 useraccounts:iron-routing
 accounts-box
 momentjs:moment
-force-ssl@1.0.13
 http@1.2.10
 audit-argument-checks@1.0.7
 standard-minifier-css@1.3.2
