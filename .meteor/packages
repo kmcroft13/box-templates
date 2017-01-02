@@ -52,3 +52,4 @@ ecmascript@0.6.1
 meteorhacks:async
 percolate:synced-cron
 percolate:migrations
+force-ssl
