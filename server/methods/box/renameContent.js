@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'renameContent'(findReplaceArray) {
-    console.log("### STARTING RENAME ###");
+    console.log("### BEGIN renameContent METHOD ###");
     check(findReplaceArray, Match.Any);
 
     var userBoxId = Meteor.user().services.box.id;
@@ -37,8 +37,7 @@ Meteor.methods({
 
 
     if (getItems.error != undefined) {
-      console.log("ERROR: getItems");
-      console.log(JSON.stringify(getItems.error));
+      console.log("Failed to get items from Box: " + JSON.stringify(getItems.error));
       throw Error( 500, 'There was an error processing the request to Box' );
     } else {
       containingFolderItems = getItems.result.entries;
@@ -46,7 +45,6 @@ Meteor.methods({
 
 
     for (let item of containingFolderItems) {
-      console.log("Checking item: " + item.name);
       var newName = item.name;
 
       for (let findReplace of findReplaceArray) {
@@ -55,25 +53,71 @@ Meteor.methods({
         var newName = newName.replace(find, replace);
       }
         if (item.name != newName) {
-        console.log("MATCH: Rename Box " + item.type + " (" + item.id + ") to: " + newName + "...");
-        if (item.type == "file") {
-          box.files.update(item.id, {name : newName}, function(err, file) {
-            if (err)
-              console.log("ERROR: " + JSON.stringify(err));
-            else
-              console.log("FILE RENAMED: " + JSON.stringify(file));
-          });
-        } else { //is folder
-          box.folders.update(item.id, {name : newName}, function(err, folder) {
-            if (err)
-              console.log("ERROR: " + JSON.stringify(err));
-            else
-              console.log("FOLDER RENAMED: " + JSON.stringify(folder));
-          });
-        }
+          if (item.type == "file") {
+            box.files.update(item.id, {name : newName}, function(err, file) {
+              if (err) {
+                console.log(JSON.stringify({
+                  item: item.id,
+                  action: "skip",
+                  details: {
+                    status: "ERROR",
+                    itemType: "file",
+                    response: err
+                  },
+                  callingMethod: "renameContent"
+                }));
+              } else {
+                console.log(JSON.stringify({
+                  item: item.id,
+                  action: "rename",
+                  details: {
+                    status: "SUCCESS",
+                    itemType: "file",
+                    oldName: item.name,
+                    newName: file
+                  },
+                  callingMethod: "renameContent"
+                }));
+              }
+            });
+          } else { //is folder
+            box.folders.update(item.id, {name : newName}, function(err, folder) {
+              if (err) {
+                console.log(JSON.stringify({
+                  item: item.id,
+                  action: "skip",
+                  details: {
+                    status: "ERROR",
+                    itemType: "folder",
+                    response: err
+                  },
+                  callingMethod: "renameContent"
+                }));
+              } else {
+                console.log(JSON.stringify({
+                  item: item.id,
+                  action: "rename",
+                  details: {
+                    status: "SUCCESS",
+                    itemType: "folder",
+                    oldName: item.name,
+                    newName: folder
+                  },
+                  callingMethod: "renameContent"
+                }));
+              }
+            });
+          }
+      } else {
+        console.log(JSON.stringify({
+          item: item.name,
+          action: "skip",
+          details: "no match",
+          callingMethod: "renameContent"
+        }));
       }
     }
 
-    console.log("### FINISHING RENAME ###")
+    console.log("### END renameContent METHOD ###");
   } //End renameContent method
 });

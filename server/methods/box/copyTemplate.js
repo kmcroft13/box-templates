@@ -1,6 +1,7 @@
 Meteor.methods({
 
     copyTemplate: function (items, dynamicRename) {
+        console.log("### BEGIN copyTemplate METHOD ###");
 
         // check variable types
         check(items, Match.Any);
@@ -36,7 +37,6 @@ Meteor.methods({
         console.log(`Box Basic Client created: ${Meteor.user().profile.fullName}`);
 
         // begin copy
-        console.log("### BEGIN COPY ###");
         console.log(`Copying template for ${Meteor.userId()} (userId) to "${target.folderName}" (${targetFolderId})...`);
 
         // array to push status of each copy
@@ -72,15 +72,31 @@ Meteor.methods({
             let newName = item.name;
             const type = item.type;
 
+            // rename items if template uses Dynamic Rename
             if (usesDynamicRename) {
-                console.log("Checking item for rename matches...");
                 for (let findReplace of findReplaceArray) {
                     const find = new RegExp(findReplace.find, "g");
                     const replace = findReplace.replace;
                     newName = newName.replace(find, replace);
-                    if (name != newName) {
+                    if (name != newName) { // item needs to be renamed
                         name = newName;
-                        console.log(`Match: ${origName} renamed to ${name}`);
+                        console.log(JSON.stringify({
+                            item: id,
+                            action: "rename",
+                            details: {
+                                itemType: type,
+                                oldName: origName,
+                                newName: newName
+                            },
+                            callingMethod: "copyTemplate"
+                        }));
+                    } else {
+                        console.log(JSON.stringify({
+                            item: origName,
+                            action: "skip",
+                            details: "no match",
+                            callingMethod: "copyTemplate"
+                        }));
                     }
                 }
             }
@@ -98,7 +114,7 @@ Meteor.methods({
                             name: copyStatus.result.name,
                             id: copyStatus.result.id
                         };
-                        console.log(itemCopyResult);
+                        console.log(JSON.stringify(itemCopyResult));
                         itemsCopyResult.push(itemCopyResult);
                     } else {
                         const itemCopyResult = {
@@ -106,7 +122,7 @@ Meteor.methods({
                             name: copyStatus.result.name,
                             id: copyStatus.result.id
                         };
-                        console.log(itemCopyResult);
+                        console.log(JSON.stringify(itemCopyResult));
                         itemsCopyResult.push(itemCopyResult);
                     }
                 } // end if copy file successful
@@ -123,7 +139,7 @@ Meteor.methods({
                                 name: copyStatus.result.name,
                                 id: copyStatus.result.id
                             };
-                            console.log(itemCopyResult);
+                            console.log(JSON.stringify(itemCopyResult));
                             itemsCopyResult.push(itemCopyResult);
 
                             break;
@@ -142,7 +158,7 @@ Meteor.methods({
                         code: copyStatus.error.response.body.code,
                         message: copyStatus.error.response.body.message
                     };
-                    console.log(itemCopyResult);
+                    console.log(JSON.stringify(itemCopyResult));
                     itemsCopyResult.push(itemCopyResult);
                 } // end if copy unsuccessful for some other reason
             } // end if file
@@ -158,7 +174,7 @@ Meteor.methods({
                             name: copyStatus.result.name,
                             id: copyStatus.result.id
                         };
-                        console.log(itemCopyResult);
+                        console.log(JSON.stringify(itemCopyResult));
                         itemsCopyResult.push(itemCopyResult);
                     } else {
                         const itemCopyResult = {
@@ -166,7 +182,7 @@ Meteor.methods({
                             name: copyStatus.result.name,
                             id: copyStatus.result.id
                         };
-                        console.log(itemCopyResult);
+                        console.log(JSON.stringify(itemCopyResult));
                         itemsCopyResult.push(itemCopyResult);
                     }
                 } // end if copy file successful
@@ -183,7 +199,7 @@ Meteor.methods({
                                 name: copyStatus.result.name,
                                 id: copyStatus.result.id
                             };
-                            console.log(itemCopyResult);
+                            console.log(JSON.stringify(itemCopyResult));
                             itemsCopyResult.push(itemCopyResult);
 
                             break;
@@ -202,7 +218,7 @@ Meteor.methods({
                         code: copyStatus.error.response.body.code,
                         message: copyStatus.error.response.body.message
                     };
-                    console.log(itemCopyResult);
+                    console.log(JSON.stringify(itemCopyResult));
                     itemsCopyResult.push(itemCopyResult);
                 } // end if copy unsuccessful for some other reason
             } // end if folder
@@ -211,7 +227,6 @@ Meteor.methods({
                 throw new Meteor.Error(400, "Item type is unknown.");
             }
         } // end for loop
-        console.log("### END COPY ###");
 
         // TODO: implement findReplace for content after first level
         /*
@@ -219,6 +234,7 @@ Meteor.methods({
          const renameResults = Meteor.myFunctions.renameContent2(itemsCopyResult, findReplaceArray, accessToken);
          }
          */
+        console.log("### END copyTemplate METHOD ###");
         return itemsCopyResult;
     } // end 'copyTemplate' method
 

@@ -13,3 +13,4 @@ BrowserPolicy.framing.restrictToOrigin('*.box.com');
 BrowserPolicy.content.allowConnectOrigin("ws://localhost:*");
 BrowserPolicy.content.allowConnectOrigin("wss://cloudtemplates-stage.herokuapp.com:*");
 BrowserPolicy.content.allowConnectOrigin("wss://cloudtemplates-prod.herokuapp.com:*");
+BrowserPolicy.content.allowConnectOrigin("wss://www.cloudtemplates.co:*");

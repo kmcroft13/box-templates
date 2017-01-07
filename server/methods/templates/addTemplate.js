@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'addTemplate'(templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues) {
-    console.log("### ADDING TEMPLATE ###");
+    console.log("### BEGIN addTemplate METHOD ###");
     check(templateName, Match.Any);
     check(templateDescription, Match.Any);
     check(items, Match.Any);
@@ -49,12 +49,16 @@ Meteor.methods({
     console.log(JSON.stringify({
         resource: "template",
         action: "create",
+        callingMethod: "addTemplate",
         details: {
           templateName: templateName,
           id: newTemplateId,
         },
         requester: Meteor.userId()
     }));
+
     return newTemplateId;
+
+    console.log("### END addTemplate METHOD ###");
   } //End addTemplate method
 });

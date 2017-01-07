@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'deleteTemplate'(templateId) {
-    console.log("### DELETING TEMPLATE ###");
+    console.log("### BEGIN deleteTemplate METHOD ###");
     check(templateId, Match.Any);
     const templateObject = Template.findOne(templateId);
 
@@ -14,10 +14,13 @@ Meteor.methods({
     console.log(JSON.stringify({
         resource: "template",
         action: "delete",
+        callingMethod: "deleteTemplate",
         details: {
           id: templateId,
         },
         requester: Meteor.userId()
     }));
+
+    console.log("### END deleteTemplate METHOD ###");
   } //End deleteTemplate method
 });

@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'addFolderQueue'(folderId, folderName, boxUserId) {
-    console.log("### ADD FOLDER TO QUEUE ###");
+    console.log("### BEGIN addFolderQueue METHOD ###");
     check(folderId, Match.Any);
     check(folderName, Match.Any);
     check(boxUserId, Match.Any);
@@ -25,6 +25,7 @@ Meteor.methods({
         result = {
             resource: "folderQueue",
             action: "replace",
+            callingMethod: "addFolderQueue",
             details: {
                 newEntryId: newEntryId,
                 numRemoved: numRemoved
@@ -34,6 +35,7 @@ Meteor.methods({
         result = {
             resource: "folderQueue",
             action: "create",
+            callingMethod: "addFolderQueue",
             details: {
                 newEntryId: newEntryId
             }
@@ -42,5 +44,6 @@ Meteor.methods({
 
     console.log(JSON.stringify(result));
     return result;
+    console.log("### END addFolderQueue METHOD ###");
   } //End addFolderQueue method
 });

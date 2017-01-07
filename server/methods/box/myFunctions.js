@@ -1,15 +1,16 @@
 Meteor.myFunctions = {
 
     refreshToken: function () {
+        console.log("### BEGIN refreshToken METHOD ###");
+
+        const userId = Meteor.userId();
+
         const config = ServiceConfiguration.configurations.findOne({service: 'box'});
         if (!config) {
             throw new ServiceConfiguration.ConfigError();
         }
 
-        console.log("Trying to exchange Refresh Token...");
-
         const refreshToken = Meteor.user().services.box.refreshToken;
-        console.log(refreshToken);
 
         const apiUrl = "https://api.box.com/oauth2/token";
         const result = HTTP.post(apiUrl, {
@@ -22,18 +23,33 @@ Meteor.myFunctions = {
         });
 
         if (result.data.access_token) {
-            Meteor.users.update({_id: Meteor.userId()}, {
+            const newAccessToken = result.data.access_token;
+            const newExpiresAt = (+new Date) + (1000 * result.data.expires_in);
+            const newRefreshToken = result.data.refresh_token;
+
+            Meteor.users.update({_id: userId}, {
                 $set: {
-                    'services.box.accessToken': result.data.access_token,
-                    'services.box.expiresAt': (+new Date) + (1000 * result.data.expires_in),
-                    'services.box.refreshToken': result.data.refresh_token
+                    'services.box.accessToken': newAccessToken,
+                    'services.box.expiresAt': newExpiresAt,
+                    'services.box.refreshToken': newRefreshToken
                 }
             });
 
-            console.log("Success! New access token...");
-            console.log(result.data.access_token);
-            console.log("Proceeding with call to Box API");
+            console.log(JSON.stringify({
+                resource: "user",
+                action: "update",
+                callingMethod: "refreshToken",
+                details: {
+                    accessToken: newAccessToken,
+                    expiresAt: newExpiresAt,
+                    refreshToken: newRefreshToken
+                },
+                requester: userId
+            }));
+            console.log("### END refreshToken METHOD ###");
+            console.log("Proceeding with calling method...");
         }
+        return false;
     },
 
 

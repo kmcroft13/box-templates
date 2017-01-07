@@ -1,7 +1,7 @@
 Meteor.methods({
 
   'submitFeedback'(feedbackType, feedbackText) {
-    console.log("### SUBMIT FEEDBACK ###");
+    console.log("### BEGIN submitFeedback METHOD ###");
     check(feedbackType, Match.Any);
     check(feedbackText, Match.Any);
     
@@ -78,11 +78,14 @@ Meteor.methods({
     console.log(JSON.stringify({
         resource: "feedback",
         action: "create",
+        callingMethod: "submitFeedback",
         details: {
-          status: "Card sent to Trello",
+          status: "Request made to Trello",
           response: response
         },
         requester: userId
     }));
+
+    console.log("### END submitFeedback METHOD ###");
   } //End submitFeedback method
 });
