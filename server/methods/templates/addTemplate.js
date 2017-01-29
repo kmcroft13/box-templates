@@ -1,19 +1,14 @@
 Meteor.methods({
 
-  'addTemplate'(templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues) {
+  'addTemplate'(newTemplateObj) {
     console.log("### BEGIN addTemplate METHOD ###");
-    check(templateName, Match.Any);
-    check(templateDescription, Match.Any);
-    check(items, Match.Any);
-    check(usesSharing, Match.Any);
-    check(usesDynamicRename, Match.Any);
-    check(findValues, Match.Any);
+    check(newTemplateObj, Match.Any);
 
     let sharingObj;
     let dynamicRenameObj;
     const boxRole = Meteor.user().profile.boxRole;
 
-    if (usesSharing == true && (boxRole == "admin" || boxRole == "coadmin")) {
+    if (newTemplateObj.usesSharing == true && (boxRole == "admin" || boxRole == "coadmin")) {
       sharingObj = {
         shared: true,
         eid: Meteor.user().profile.eid
@@ -24,7 +19,7 @@ Meteor.methods({
       }
     }
 
-    if (usesDynamicRename == true) {
+    if (newTemplateObj.usesDynamicRename == true) {
       dynamicRenameObj = {
         isUsing: true,
         findValues: findValues
@@ -36,12 +31,12 @@ Meteor.methods({
     }
 
     const newTemplateId = Template.insert({
-      name: templateName,
+      name: newTemplateObj.templateName,
       active: true,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      description: templateDescription,
-      items: items,
+      description: newTemplateObj.templateDescription,
+      items: newTemplateObj.items,
       dynamicRename: dynamicRenameObj,
       sharing: sharingObj,
     });
@@ -51,7 +46,7 @@ Meteor.methods({
         action: "create",
         callingMethod: "addTemplate",
         details: {
-          templateName: templateName,
+          templateName: newTemplateObj.templateName,
           id: newTemplateId,
         },
         requester: Meteor.userId()

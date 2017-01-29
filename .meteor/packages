@@ -28,7 +28,6 @@ ejson@1.0.13
 spacebars@1.0.12
 check@1.2.4
 coffeescript@1.11.1_4
-semantic:ui
 flemay:less-autoprefixer
 service-configuration@1.0.11
 email@1.1.18

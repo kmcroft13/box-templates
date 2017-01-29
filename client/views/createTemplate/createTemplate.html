@@ -1,77 +1,79 @@
 <template name="createTemplate">
 <div id="content" class="transitions-content">
 
-  <h2 class="ui header">
+  <h4>
     <i class="plus icon"></i>
-    <div class="content">
       Create a Template
-      <div class="sub header">Create new Templates of Box files and folders. This Template will only be available
-        to you and cannot be used by other members of your organization.</div>
-    </div>
-  </h2>
-  <div class="ui divider"></div>
-
-  <div id="createMessage" class="hidden ui floating message">
-    <i class="close icon"></i>
-    <div class="header">
-      <span id="messageTitle"></span>
-    </div>
-    <p id="messageBody"></p>
-  </div>
-
+      <h6>
+        Create new Templates of Box files and folders. This Template will only be available
+        to you and cannot be used by other members of your organization.
+      </h6>
+  </h4>
   <br>
-
-  <form class="ui form">
-    <div class="ui fixed raised segment">
+  <div class="divider"></div>
+  <br>
+  <form class="form">
+    <div class="card-panel">
       <div class="ui error message">
       </div>
-      <div class="field">
-        <label>Template Name</label>
-        <input type="text" name="templateName" placeholder="Template Name" autocomplete="off">
+      <div class="input-field">
+        <input type="text" name="templateName" class="validate" autocomplete="off" required="" aria-required="true">
+        <label for="templateName">Template Name</label>
       </div>
-      <div class="field">
-        <label>Description</label>
-        <textarea name="templateDescription" placeholder="Description" rows="3"></textarea>
+      <div class="input-field">
+        <textarea name="templateDescription" class="materialize-textarea validate" required="" aria-required="true"></textarea>
+        <label for="templateDescription">Description</label>
       </div>
     </div>
 
-
-    <div class="ui fixed raised segment">
-      <div class="field">
-        <label>Choose Items for Template</label>
-        <input type="hidden" name="templateItems" value="empty">
-        <div class="ui grid">
-          <div class="six wide column">
-            <div id="box-select" data-link-type="shared" data-multiselect="true" data-client-id="s453dffkrhqzhm8nol7ca4i523a4wn7c"></div>
-          </div>
-          <div class="ten wide column">
-            <div class="ui divided list">
-              {{#each templateItems}}
-                <div class="item">
-                <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
-                </div>
-              {{/each}}
-            </div>
-          </div>
+    <div class="card-panel">
+      <div class="row">
+        <div class="col s4">
+          <label>Choose Items for Template</label>
+          <div id="box-select" data-link-type="shared" data-multiselect="true" data-client-id="s453dffkrhqzhm8nol7ca4i523a4wn7c"></div>
+        </div>
+        <div class="col s8">
+          {{#each templateItems}}
+            <p>
+              {{#if isFile type}}
+                <span class="fixedLabel new badge blue">&nbsp; FILE &nbsp;</span>
+              {{/if}}
+              {{#if isFolder type}}
+                <span class="fixedLabel new badge green">FOLDER</span>
+              {{/if}}
+              <div class="truncate">
+                {{name}}
+              </div>
+            </p>
+          {{/each}}
         </div>
       </div>
     </div>
 
     {{#if isAdminOrCoadmin}}
-      <div class="ui fixed raised segment">
-        <div class="ui toggle checkbox" id="shared">
-          <input type="checkbox" name="sharedCheckbox" tabindex="0" class="hidden">
-          <label><strong>Share Template with Colleagues</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label" id="sharingHelpLabel">BETA</div></label>
+      <div class="card-panel">
+        <div class="switch" id="shared">
+          <label>
+            <input type="checkbox" name="sharedCheckbox" id="sharedCheckbox">
+            <span class="lever"></span>
+            Share Template with Colleagues
+          </label>
+          <span class="fixedLabel new badge orange tooltipped" id="sharingHelpLabel" data-position="top" data-delay="50" data-tooltip="This feature is still in Beta">BETA</span>
         </div>
+        
       </div>
       {{>sharingCollabConfirm}}
       {{>sharingHelp}}
     {{/if}}
 
-    <div class="ui fixed raised segment">
-      <div class="ui toggle checkbox" id="advancedCopy">
-        <input type="checkbox" name="advancedCopyCheckbox" tabindex="0" class="hidden">
-        <label><strong>Use Dynamic Rename</strong>&nbsp;&nbsp;&nbsp;&nbsp;<div class="ui small orange horizontal label" id="renameHelpLabelCreate">BETA</div></label>
+    <div class="card-panel">
+      <div class="switch" id="advancedCopy">
+        <label>
+          <input type="checkbox" name="advancedCopyCheckbox">
+          <span class="lever"></span>
+          Use Dynamic Rename
+        </label>
+        <span class="fixedLabel new badge orange tooltipped" id="renameHelpLabelCreate" data-position="top" data-delay="50" data-tooltip="This feature is still in Beta">BETA</span>
       </div>
 
       {{#if usesDynamicRenameCreate}}
@@ -79,26 +81,26 @@
           <br>
             <p>
               Find and replace words or phrases in the names of copied files and folders&nbsp;
-              <a class="ui mini grey circular label" id="renameHelpLabelCreate">?</a>
+              <a class="chip" href="#renameHelpCreateModal" id="renameHelpLabelCreate">?</a>
                   <br>
               <small><i>For example: Find all instances of the word "Customer" in your copied items and replace them with the name of your actual customer</i></small>
             </p>
             <div id="advancedCopyRename" class="ui form">
-              <div class="two fields">
-                <div class="field">
+              <div class="row">
+                <div class="input-field col s8">
                   <label>Find</label>
                 </div>
-                <div class="field">
+                <div class="sol s4">
                   <label>&nbsp;</label>
                 </div>
               </div>
-              <div class="two fields fieldGroup">
-                <div class="field">
-                  <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this in item names">
+              <div class="row fieldGroup">
+                <div class="input-field col s8">
+                  <input type="text" class="findField smallFormInput" name="find1" placeholder="Find this word in item names">
                 </div>
-                <div class="field">
-                  <div id="addField" class="ui tiny basic blue icon button">
-                    <i class="plus icon"></i>
+                <div class="col s4">
+                  <div id="addField" class="btn-floating btn-small waves-effect waves-light blue">
+                    <i class="material-icons">add</i>
                   </div>
                 </div>
               </div>
@@ -107,27 +109,29 @@
       {{/if}}
     </div> <!-- end dyanmicRename section -->
 
-    <div class="ui fixed basic center aligned segment">
-      <button class="large positive ui button" type="submit">Create Template</button>
+    <div class="section">
+      <button class="waves-effect waves-light btn" type="submit">
+        Create Template
+      </button>
+      <br>
+      <br>
     </div>
-
   </form>
-
-  <br>
 </div>
-{{>renameHelpCreate}}
+  {{>renameHelpCreate}}
 </template>
 
 
 <template name="renameHelpCreate">
-  <div id="renameHelpCreateModal" class="ui basic modal">
-    <div class="ui icon header">
-      <i class="wizard icon"></i>
-      Dynamic Rename
-    </div>
-    <div class="content">
-      <div class="description">
-        <p>CloudTemplates can automatically rename copied items with Dynamic Rename.
+  <div id="renameHelpCreateModal" class="modal">
+    <div class="modal-content">
+      <h4>
+        <i class="wizard icon"></i>
+        Dynamic Rename
+      </h4>
+
+      <p>
+        CloudTemplates can automatically rename copied items with Dynamic Rename.
         CloudTemplates will search for your &quot;find&quot; terms in newly copied folder and file names and replace it
         with your &quot;replace&quot; term after copy. The &quot;replace&quot; term
         is set on the &quot;Copy from Template&quot; page when you're ready to copy. 
@@ -135,14 +139,15 @@
         you can dynamically replace &quot;CUSTOMER_NAME&quot; with the actual name of your customer.
         The &quot;find&quot; terms are case-sensitive. 
         <br><br>
-        <b>While in Beta, only the first level of your copied content will be affected 
-        (not all of the copied content will be searched)</b>
-        </p>
-      </div>
+        <b>
+          While in Beta, only the first level of your copied content will be affected 
+          (not all of the copied content will be searched)
+        </b>
+      </p>
     </div>
-    <div class="actions">
-      <div class="ui basic green inverted button cancel">
-        <i class="check icon"></i>
+    <div class="modal-footer">
+      <div class="modal-action modal-close waves-effect waves-light btn green">
+        <i class="material-icons left">check</i>
         Ok, Got It
       </div>
     </div>
@@ -150,24 +155,26 @@
 </template>
 
 <template name="sharingHelp">
-  <div id="sharingHelpModal" class="ui basic modal">
-    <div class="ui icon header">
-      <i class="users icon"></i>
-      Shared Templates
-    </div>
-    <div class="content">
-      <div class="description">
-        <p>
+  <div id="sharingHelpModal" class="modal">
+    <div class="modal-content">
+      <h4>
+        <i class="users icon"></i>
+        Shared Templates
+      </h4>
+      <p>
           Templates can be shared with others in your Organization. Shared Templates can 
           be viewed and used by others but cannot be deleted or edited. Only Box Admins or Co-Admins 
-          in your Organization can create Shared Templates. Users MUST have collaboration
-          access to the Box content being copied, or else will receive an error when copying!
+          in your Organization can create Shared Templates.
+          <br><br>
+          <b>
+            Users MUST have collaboration
+            access to the Box content being copied, or else will receive an error when copying!
+          </b>
         </p>
-      </div>
     </div>
-    <div class="actions">
-      <div class="ui basic green inverted button cancel">
-        <i class="check icon"></i>
+    <div class="modal-footer">
+      <div class="modal-action modal-close waves-effect waves-light btn green">
+        <i class="material-icons left">check</i>
         Ok, Got It
       </div>
     </div>
@@ -175,40 +182,44 @@
 </template>
 
 <template name="sharingCollabConfirm">
-  <div id="sharingCollabConfirmModal" class="ui basic modal">
-    <div class="ui icon header">
-      <i class="users icon"></i>
-      Can Your Organization Access These Items?
-    </div>
-    <div class="content">
-        <div class="ui grid">
-          <div class="eight wide column">
-            <p>Please ensure that CloudTemplates users in your Organization have access to the 
-              items in this Template. Your users must have <b>Viewer access or higher</b> to these
-              items in Box, otherwise they will receive an error when copying from this Template!
+  <div id="sharingCollabConfirmModal" class="modal">
+    <div class="modal-content">
+      <h4>
+        <i class="users icon"></i>
+        Can Your Organization Access These Items?
+      </h4>
+
+      <div class="row">
+        <div class="col s6">
+          <p>Please ensure that CloudTemplates users in your Organization have access to the 
+            items in this Template. Your users must have <b>Viewer access or higher</b> to these
+            items in Box, otherwise they will receive an error when copying from this Template!
+          </p>
+        </div>
+        <div class="col s5 offset-s1">
+          {{#each templateItems}}
+            <p>
+              {{#if isFile type}}
+                <span class="fixedLabel new badge blue">&nbsp; FILE &nbsp;</span>
+              {{/if}}
+              {{#if isFolder type}}
+                <span class="fixedLabel new badge green">FOLDER</span>
+              {{/if}}
+              <div class="truncate">
+                {{name}}
+              </div>
             </p>
-          </div>
-          <div class="eight wide column">
-            <div class="ui divided list">
-              {{#each templateItems}}
-                <div class="item">
-                <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
-                </div>
-              {{/each}}
-            </div>
-          </div>
+          {{/each}}
         </div>
-    </div>
-    <div class="actions">
-      <div class="ui inverted buttons">
-        <div class="ui basic inverted button deny">
-          Don't Create this Template Yet
-        </div>
-        <div class="ui basic green inverted button approve">
-          <i class="check icon"></i>
-          Users Can Access These Items
-        </div>
+      </div>
+    <div class="modal-footer">
+      <div id="userAccessConfirm" class="modal-action modal-close waves-effect waves-light btn green">
+        Users Can Access These Items
+      </div>
+      <div class="modal-action modal-close waves-effect waves-red btn btn-flat">
+        Cancel
       </div>
     </div>
   </div>
+</div>
 </template>

@@ -1,0 +1,39 @@
+<template name="navbar">
+
+<nav class="teal">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo center ct-logo">
+      <img src="/images/logo/CloudTemplates-white-54px.png">
+    </a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li class="{{#if isActiveRoute name="templates"}}active{{/if}}"><a href="{{pathFor 'templates'}}">Copy</a></li>
+      <li class="{{#if isActiveRoute name="createTemplate"}}active{{/if}}"><a href="{{pathFor 'createTemplate'}}">Create</a></li>
+      <li class="{{#if isActiveRoute name="manageTemplates"}}active{{/if}}"><a href="{{pathFor 'manageTemplates'}}">Manage</a></li>
+    </ul>
+
+    {{#if isLoggedIn}}
+      <!-- Dropdown Trigger -->
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="{{#if isActiveRoute name="profile"}}active{{/if}}">
+          <a class="dropdown-button valign-wrapper" href="#!" data-activates="profileDropdown">
+            <img class="circle profilePic" src="{{currentUser.profile.avatar}}">
+            {{currentUser.profile.fullName}}
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+        </li>
+      </ul>
+    {{/if}}
+  </div>
+</nav>
+
+<!-- Dropdown Structure -->
+<ul id="profileDropdown" class="dropdown-content">
+  <li><a href="{{pathFor 'profile'}}">Profile</a></li>
+  {{#if isInRole 'admin'}}
+    <a href="/admin">Admin</a>
+  {{/if}}
+  <li class="divider"></li>
+  <li><a href="{{pathFor 'signOut'}}">Sign Out</a></li>
+</ul>
+
+</template>

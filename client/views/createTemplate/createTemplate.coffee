@@ -1,75 +1,50 @@
 Template.createTemplate.onRendered -> (
-  # initialize checkboxes
-  this.$('.ui.checkbox').checkbox()
-
-  # initialize form validation
-  $('.ui.form')
-    .form(
-      fields:
-        templateName:
-          identifier: 'templateName',
-          rules: [
-              type   : 'empty',
-              prompt : 'Please enter a Template name'
-          ],
-        templateDescription:
-          identifier: 'templateDescription',
-          rules: [
-              type   : 'empty',
-              prompt : 'Please enter a Template description'
-          ],
-        templateItems:
-          identifier: 'templateItems',
-          rules: [
-            type   : 'minLength[6]',
-            prompt : 'Please add files and folders using the &quot;Select from Box&quot; button'
-          ]
-    )
-
-  $('.ui.checkbox')
-    .checkbox()
-
-  $('#renameHelp')
-    .popup()
+  # initialize tooltips
+  this.$('.tooltipped').tooltip({delay: 50})
+  # initialize modals
+  $('.modal').modal()
+  # initialize options for sharing collab modal
+  $('#sharingCollabConfirmModal').modal({
+    dismissible: false,
+    opacity: .5,
+    complete: ->
+      confirmed = Session.get('userAccessConfirm')
+      newTemplateObj = Session.get('newTemplateObj')
+      console.log(newTemplateObj)
+      if confirmed == true
+        Helpers.createTemplate(newTemplateObj)
+      else
+        throw new Error('User cancelled Template creation')
+  })
 
 )
 
 Helpers = {
-  createTemplate: (templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues) -> 
-    Meteor.call('addTemplate', templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues, (error, result) -> (
+  createTemplate: (newTemplateObj) -> 
+    Meteor.call('addTemplate', newTemplateObj, (error, result) -> (
       if error
           console.log(JSON.stringify(error,null,2))
           ga('send', 'event', 'TEMPLATE_CREATE', 'failed')
-          $('#createMessage').removeClass('positive')
-          $('#createMessage').addClass('negative')
-          $("#messageTitle").text("Something went wrong")
-          $("#messageBody").html("<b>" + error.reason + "</b>. Please try again.")
-          $('#createMessage').removeClass('hidden')
-          $('html, body').animate(
-            scrollTop: 0, 300)
+          $toastCreateError = "<b>" + error.reason + "</b>. Please try again."
+          Materialize.toast($toastCreateError, 5000, 'red')
       else
           console.log(result)
 
-          if usesDynamicRename && usesSharing
+          if newTemplateObj.usesDynamicRename && newTemplateObj.usesSharing
             ga('send', 'event', 'TEMPLATE_CREATE', 'success_shared_with_rename')
-          else if usesDynamicRename
+          else if newTemplateObj.usesDynamicRename
             ga('send', 'event', 'TEMPLATE_CREATE', 'success_private_with_rename')
-          else if usesSharing
+          else if newTemplateObj.usesSharing
             ga('send', 'event', 'TEMPLATE_CREATE', 'success_shared')
           else
             ga('send', 'event', 'TEMPLATE_CREATE', 'success_private')
 
-          $('form').form('clear')
-          $('#advancedCopyOptions').toggleClass('hidden')
-          $('#createMessage').removeClass('negative')
-          $('#createMessage').addClass('positive')
-          $("#messageTitle").text("Success!")
-          $("#messageBody").html("<b>" + templateName + "</b> was successfully created. Now <b><a href=\"/templates\">let's put it to work</a></b>!")
-          $('#createMessage').removeClass('hidden')
+          $("form").trigger('reset')
+          $toastCreateSuccess = "<b>" + newTemplateObj.templateName + "</b>&nbsp;was successfully created. Now <a href=\"/templates\">&nbsp;put it to work</a>!"
+          Materialize.toast($toastCreateSuccess, 7000, 'green')
           Session.set("items", undefined)
           Session.set("usesDynamicRenameCreate", undefined)
-          $('html, body').animate(
-            scrollTop: 0, 300)
+          Session.set("newTemplateObj", undefined)
     ))
 }
 
@@ -92,6 +67,11 @@ Template.createTemplate.helpers(
 
 Template.createTemplate.events(
 
+  'click #toast-container .toast': ->
+    $(this).fadeOut( -> 
+      $(this).remove() 
+    )
+
   'click .message .close': ->
     $('.message')
       .closest('.message')
@@ -99,27 +79,45 @@ Template.createTemplate.events(
 
   'submit form': (e) -> (
     e.preventDefault()
-    console.log("Form: " + e.type);
+    console.log("Form: " + e.type)
+
     templateName = e.target.templateName.value
     templateDescription = e.target.templateDescription.value
     items = Session.get("items")
-    usesSharing = $('input[name="sharedCheckbox"]').prop("checked")
+    usesSharing = $('#sharedCheckbox').prop('checked')
     usesDynamicRename = $('input[name="advancedCopyCheckbox"]').is(':checked')
     findValues = $('.findField').map(-> if this.value != null && this.value != "" then return this.value ).get()
+    newTemplateObj = {
+      templateName: templateName,
+      templateDescription: templateDescription,
+      items: items,
+      usesSharing: usesSharing,
+      usesDynamicRename: usesDynamicRename,
+      findValues: findValues
+    }
+    invalid = false
+    Session.set('newTemplateObj', newTemplateObj)
+    if !templateName
+      $('input[name="templateName"]').addClass('invalid')
+      Materialize.toast('Please enter a Template name', 5000, 'red')
+      invalid = true
+
+    if !templateDescription
+      $('textarea[name="templateDescription"]').addClass('invalid')
+      Materialize.toast('Please enter a Template description', 5000, 'red')
+      invalid = true
+
+    if !items
+      Materialize.toast('Please choose Template items by clicking &quot;Select from Box&quot;', 5000, 'red')
+      invalid = true
+      
+    if (invalid == true)
+      throw new Error('Form did not pass validation')
 
     if usesSharing
-      $('#sharingCollabConfirmModal').modal({
-        blurring: true
-        closable: false
-        onDeny: () ->
-          console.log("User denied Template creation")
-        onApprove: () ->
-          console.log("User approved Template creation")
-          Helpers.createTemplate(templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues)
-      })
-      .modal('show')
+      $('#sharingCollabConfirmModal').modal('open')
     else
-      Helpers.createTemplate(templateName, templateDescription, items, usesSharing, usesDynamicRename, findValues)
+      Helpers.createTemplate(newTemplateObj)
       
     console.log("Called addTemplate method: " + templateName);
   )
@@ -136,15 +134,15 @@ Template.createTemplate.events(
 
     $( "#addField" ).remove();
 
-    addButtonParent.append($("<div class=\"ui tiny basic red icon button removeFields\"><i class=\"minus icon\"></i></div>"));
+    addButtonParent.append($("<div class=\"btn-floating btn-small waves-effect waves-light red removeFields\"><i class=\"material-icons\">remove</i></div>"));
 
-    $( "#advancedCopyRename" ).append( "<div class=\"two fields fieldGroup\">" +
-    "<div class=\"field\">" +
-    "<input type=\"text\" class=\"findField smallFormInput\" name=\"find1\" placeholder=\"Find this in item names\">" +
+    $( "#advancedCopyRename" ).append( "<div class=\"row fieldGroup\">" +
+    "<div class=\"input-field col s8\">" +
+    "<input type=\"text\" class=\"findField smallFormInput\" name=\"find1\" placeholder=\"Find this word in item names\">" +
     "</div>" +
-    "<div class=\"field\">" +
-    "<div id=\"addField\" class=\"ui tiny basic blue icon button\">" +
-    "<i class=\"plus icon\"></i>" +
+    "<div class=\"col s4\">" +
+    "<div id=\"addField\" class=\"btn-floating btn-small waves-effect waves-light blue\">" +
+    "<i class=\"material-icons\">add</i>" +
     "</div>" +
     "</div>" +
     "</div>"
@@ -157,26 +155,12 @@ Template.createTemplate.events(
     removeButtonParentGroup.remove();
 
   'click #renameHelpLabelCreate': ->
-    $('#renameHelpCreateModal').modal({blurring: true,}).modal('show')
+    $('#renameHelpCreateModal').modal('open')
 
   'click #sharingHelpLabel': ->
-    $('#sharingHelpModal').modal({blurring: true,}).modal('show')
+    $('#sharingHelpModal').modal('open')
 
 
-)
-
-
-Template.renameHelpCreate.events(
-	'click #confirm': ->
-		$('#renameHelpCreateModal')
-			.modal('hide')
-)
-
-
-Template.sharingHelp.events(
-	'click #confirm': ->
-		$('#sharingHelpModal')
-			.modal('hide')
 )
 
 
@@ -184,4 +168,9 @@ Template.sharingCollabConfirm.helpers(
   templateItems: ->
     Session.get('items')
 
+)
+
+Template.sharingCollabConfirm.events(
+  'click #userAccessConfirm': ->
+    Session.set('userAccessConfirm', true)
 )

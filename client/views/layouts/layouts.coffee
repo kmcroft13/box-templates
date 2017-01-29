@@ -1,8 +1,6 @@
 Template.basicLayout.onRendered -> (
 
-  # initialize accordian
-  $('#sidebar')
-    .accordion()
+  $(".dropdown-button").dropdown()
 
 
   if (typeof $.fn.fullpage.destroy() != 'function')

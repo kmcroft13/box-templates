@@ -1,50 +1,26 @@
 Template.feedbackForm.onRendered -> (
   # initialize dropdown
-  this.$('.ui.dropdown').dropdown()
-
-  $('.ui.form')
-    .form(
-      fields:
-        feedbackType:
-          identifier: 'feedbackType',
-          rules: [
-              type   : 'empty',
-              prompt : 'Please select a feedback type'
-          ]
-        ,
-        feedbackText:
-          identifier: 'feedbackText',
-          rules: [
-              type   : 'empty',
-              prompt : 'Please enter some feedback text'
-          ]
-    )
-
-  this.$('#feedbackButton').hover(
-    ->
-      feedbackIconClass = $('#feedbackIcon').attr('class')
-      if feedbackIconClass != 'icon close'
-        $('#feedbackIcon').addClass('hidden')
-        $('#feedbackLabel').removeClass('hidden')
-    ,
-    ->
-      feedbackIconClass = $('#feedbackIcon').attr('class')
-      if feedbackIconClass != 'icon close'
-        $('#feedbackLabel').addClass('hidden')
-        $('#feedbackIcon').removeClass('hidden')
-  )
+  this.$('select').material_select()
+  # initialize tooltip
+  this.$('.tooltipped').tooltip()
 
 )
 
 Template.feedbackForm.events(
 
   'click #feedbackButton': ->
-    $('#feedbackIcon').toggleClass('question')
-    $('#feedbackIcon').toggleClass('close')
-    $('#feedbackIcon').removeClass('hidden')
-    $('#feedbackLabel').addClass('hidden')
-    $('#feedbackButton').toggleClass('active')
-    $('#feedbackForm').transition('fly up')
+    feedbackButtonClass = $('#feedbackButton').attr('data-active')
+    if feedbackButtonClass == 'false'
+      $('#feedbackButton').attr('data-active', 'true')
+      $("#feedbackButton").text("X")
+      $('#feedbackButton').addClass('red')
+      $('.tooltipped').tooltip('remove')
+    else
+      $('#feedbackButton').attr('data-active', 'false')
+      $("#feedbackButton").text("?")
+      $('#feedbackButton').removeClass('red')
+      $('.tooltipped').tooltip()
+    $('#feedbackForm').toggleClass('scale-out')
 
 
   'submit form': (e) -> (

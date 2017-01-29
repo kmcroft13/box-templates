@@ -1,44 +1,40 @@
 <template name="feedbackForm">
-  <div class="ui card transition hidden" id="feedbackForm">
-    <div class="content">
-      <div class="header">Submit Feedback</div>
-      <div class="meta">Let us know your thoughts about how we can improve this app. We're working to make improvements all the time!</div>
-    </div>
-    <div class="content">
-      <div id="feedbackMessage" class="hidden ui floating message">
-        <div class="header">
-          <span id="feedbackMessageTitle"></span>
-        </div>
-        <p id="feedbackMessageBody"></p>
-      </div>
+  <div class="card-panel scale-transition scale-out" id="feedbackForm">
+    <h4>Submit Feedback</h4>
+    <p>Let us know your thoughts about how we can improve this app. We're working to make improvements all the time!</p>
 
-      <form class="ui small form">
-        <div class="ui error message">
-        </div>
-        <div class="field">
-          <label>Type of Feedback</label>
-          <select name="feedbackType" class="ui dropdown">
-            <option value="">Select Feedback Type</option>
-            <option value="Bug">Something's not working</option>
-            <option value="Suggestion">Submit a suggestion</option>
-            <option value="Question">Ask a question</option>
-            <option value="Other">Report something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Tell us more...</label>
-          <textarea name="feedbackText" placeholder="Put your feedback here"></textarea>
-        </div>
-        <button class="ui small basic blue right floated button">Submit Feedback</button>
-      </form>
+    <div id="feedbackMessage" class="hidden ui floating message">
+      <div class="header">
+        <span id="feedbackMessageTitle"></span>
+      </div>
+      <p id="feedbackMessageBody"></p>
     </div>
+
+    <form class="section">
+      <div class="ui error message">
+      </div>
+      <div class="input-field">
+        <select name="feedbackType">
+          <option value="" disabled selected>Select Feedback Type</option>
+          <option value="Bug">Something's not working</option>
+          <option value="Suggestion">Submit a suggestion</option>
+          <option value="Question">Ask a question</option>
+          <option value="Other">Report something else</option>
+        </select>
+        <label for="feedbackType">Type of Feedback</label>
+      </div>
+      <div class="input-field">
+        <textarea name="feedbackText" class="materialize-textarea"></textarea>
+        <label for="feedbackText">Tell us more...</label>
+      </div>
+      <button class="btn waves-effect waves-light teal">Submit Feedback</button>
+    </form>
   </div>
 
   <div id="feedbackButtons">
-    <div class="ui black right pointing label hidden">
-      Submit Feedback
-    </div>
-    <button id="feedbackButton" class="ui small basic blue icon button"><i id="feedbackIcon" class="icon question"></i> <span id="feedbackLabel" class="hidden"> Submit Feedback </span> </button>
+    <button id="feedbackButton" class="tooltipped btn-floating btn-small waves-effect waves-light" data-active="false" data-position="left" data-delay="50" data-tooltip="Submit Feedback">
+      ?
+    </button>
   </div>
 
 </template>
