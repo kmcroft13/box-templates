@@ -53,3 +53,4 @@ meteorhacks:async
 percolate:synced-cron
 percolate:migrations
 force-ssl
+materialize:materialize
