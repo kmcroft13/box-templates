@@ -1,6 +1,6 @@
 Template.createTemplate.onRendered -> (
   # initialize tooltips
-  this.$('.tooltipped').tooltip({delay: 50})
+  this.$('.tooltipped').tooltip()
   # initialize modals
   $('.modal').modal()
   # initialize options for sharing collab modal
@@ -10,11 +10,11 @@ Template.createTemplate.onRendered -> (
     complete: ->
       confirmed = Session.get('userAccessConfirm')
       newTemplateObj = Session.get('newTemplateObj')
-      console.log(newTemplateObj)
       if confirmed == true
         Helpers.createTemplate(newTemplateObj)
       else
-        throw new Error('User cancelled Template creation')
+        Session.set("newTemplateObj", undefined)
+        console.log('User cancelled Template creation')
   })
 
 )

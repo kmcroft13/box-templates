@@ -3,160 +3,182 @@
 
   {{#if template}}
     {{#if isOwnerAndShared}}
-      <div class="ui icon blue floating message">
-        <i class="users icon"></i>
+      <div class="card-panel blue-grey lighten-3">
+        <i class="material-icons left">people</i>
         You are sharing this Template with others in your Organization. Some content is not yet editable.
       </div>
     {{else}}
       {{#if isOwner}}
-        <div class="ui icon grey floating message">
-          <i class="user icon"></i>
+        <div class="card-panel blue-grey lighten-3">
+          <i class="material-icons left">person</i>
           Only you can see this Template. Some content is not yet editable.
         </div>
       {{else}}
-        <div class="ui icon blue floating message">
-          <i class="users icon"></i>
+        <div class="card-panel blue-grey lighten-3">
+          <i class="material-icons left">people</i>
            This Template is shared with you by&nbsp;<b>{{template.creator}}</b>. You cannot make changes to this Template.
         </div>
       {{/if}}
     {{/if}}
 
+    <br>
+
     <!--TEMPLATE INFO SECTION-->
-    <div class="ui raised segment">
+    <div class="card">
       {{#if isEditingTemplateInfo}}
         <form>
-          <h3 class="ui header">
-            Edit "{{template.name}}"
-            
-            <button type="submit" class="ui mini green right floated button" id="updateTemplateInfoSave">
-              Save
+          <div class="card-image">
+            <button class="btn-floating halfway-fab right waves-effect waves-light" id="updateTemplateInfoSave">
+              <i class="material-icons left">done</i>
             </button>
-            <button class="ui mini green right floated inverted button" id="updateTemplateInfoCancel">
-              Cancel
+            <button style="margin-right: 50px;" class="btn-floating halfway-fab right waves-effect waves-light grey" id="updateTemplateInfoCancel">
+              <i class="material-icons left">clear</i>
             </button>
-          </h3>
-
-          <div class="ui form">
-            <div class="field">
-              <label>Template Name</label>
+          </div>
+          <div class="card-content">
+            <span class="card-title">Edit "{{template.name}}"</span>
+            <br>
+            <div class="input-field">
               <input type="text" name="templateName" value="{{template.name}}" autocomplete="off">
+              <label for="templateName" class="active">Template Name</label>
             </div>
-            <div class="field">
-              <label>Description</label>
-              <textarea name="templateDescription" value="{{template.description}}" rows="3"></textarea>
+            <div class="input-field">
+              <textarea name="templateDescription" class="materialize-textarea" value="{{template.description}}"></textarea>
+              <label for="templateDescription" class="active">Description</label>
             </div>
-            <div class="field">
-              <div class="ui toggle checkbox">
-                <input type="checkbox" name="templateActive" tabindex="0" checked="{{template.active}}">
-                <label><b>Active</b></label>
+            <div class="input-field">
+              <div class="switch">
+                <label>
+                  Inactive
+                  <input name="templateActive" type="checkbox" checked="{{template.active}}">
+                  <span class="lever"></span>
+                  Active
+                </label>
               </div>
+              <br><br>
             </div>
           </div>
         </form>
       {{else}}
-        <h3 class="ui header">
-          {{template.name}}
-          {{#if isOwner}}
-            <button class="ui mini green basic right floated button" id="updateTemplateInfoEdit">
-              Edit
+        {{#if isOwner}}
+          <div class="card-image">
+            <button class="btn-floating halfway-fab right waves-effect waves-light" id="updateTemplateInfoEdit">
+              <i class="material-icons left">mode_edit</i>
             </button>
-          {{/if}}
-          <div class="sub header">
-            {{template.description}}
           </div>
-        </h3>
-        <h4 class="ui header">
-          Date Created
-          <div class="sub header">{{longDate template.createdAt}}</div>
-        </h4>
-
-        <h4 class="ui header">
-          Active
-          <div class="sub header">
-            <div class="ui toggle checkbox">
-              <input type="checkbox" tabindex="0" checked="{{template.active}}" readonly="">
-            </div>
+        {{/if}}
+        <div class="card-content">
+          <h5>{{template.name}}</h5>
+          <p>{{template.description}}</p>
+          <br>
+          <h5>Date Created</h5>
+          <p>{{longDate template.createdAt}}</p>
+          <br>
+          <h5>Active</h5>
+          <div class="switch">
+            <label>
+              <input disabled type="checkbox" checked="{{template.active}}">
+              <span class="lever"></span>
+            </label>
           </div>
-        </h4>
+        </div>
       {{/if}}
     </div>
     <!--END TEMPLATE INFO SECTION-->
 
     <!--TEMPLATE ITEMS SECTION-->
-    <div class="ui raised segment">
-      <h3 class="ui header">
-        Items in Template
-        <!-- HIDING UNTIL SECTION READY
-        <button class="ui mini green basic right floated button">
-          Edit
+    <div class="card">
+      <div class="card-image">
+        <!-- HIDING UNTIL READY
+        <button class="btn-floating halfway-fab right waves-effect waves-light" id="updateTemplateItemsEdit">
+          <i class="material-icons left">mode_edit</i>
         </button>
         -->
-      </h3>
-
-        <div class="ui list">
-          {{#each template.items}}
-            <div class="item">
-              <p>{{#if isFile type}}<div class="fixedLabel ui blue horizontal label">File</div>{{/if}}{{#if isFolder type}}<div class="fixedLabel ui green horizontal label">Folder</div>{{/if}}&nbsp;&nbsp; {{name}}</p>
+      </div>
+      <div class="card-panel">
+        <span class="card-title">Items in Template</span>
+        {{#each template.items}}
+          <p>
+            {{#if isFile type}}
+              <span class="fixedLabel new badge blue">&nbsp; FILE &nbsp;</span>
+            {{/if}}
+            {{#if isFolder type}}
+              <span class="fixedLabel new badge green">FOLDER</span>
+            {{/if}}
+            <div class="truncate">
+              {{name}}
             </div>
-          {{/each}}
-        </div>
+          </p>
+        {{/each}}
+      </div>
     </div>
     <!--END TEMPLATE ITEMS SECTION-->
 
     <!--TEMPLATE SHARING SECTION-->
-    <div class="ui raised segment">
-      <h3 class="ui header">
-        Sharing <a class="ui tiny grey circular label" id="sharingHelp" data-title="Template Sharing"
-            data-content="Templates can be shared with others in your Organization. Shared Templates can 
-            be viewed and used by others, but cannot be deleted or edited. Users MUST have collaboration
-            access to the Box content being copied, or else will receive an error when copying!"
-            data-variation="inverted basic wide">?</a>
-        <!-- HIDING UNTIL SECTION READY
-        <button class="ui mini green basic right floated button">
-          Edit
+    <div class="card">
+      <div class="card-image">
+        <!-- HIDING UNTIL READY
+        <button class="btn-floating halfway-fab right waves-effect waves-light" id="updateTemplateItemsEdit">
+          <i class="material-icons left">mode_edit</i>
         </button>
         -->
-      </h3>
-      <div class="ui toggle checkbox" id="shared">
-        {{#if template.sharing.shared}}
-            <input type="checkbox" name="sharedCheckbox" checked="" readonly="" tabindex="0">
-        {{else}}
-            <input type="checkbox" name="sharedCheckbox" readonly="" tabindex="0">
-        {{/if}}
-        <label><strong>Share Template with Colleagues</strong></label>
+      </div>
+      <div class="card-panel">
+        <span class="card-title">Share Template with Colleagues</span>
+        <p>
+          Templates can be shared with others in your Organization. Shared Templates can 
+          be viewed and used by others, but cannot be deleted or edited. Users <b>must</b> have collaboration
+          access to the Box content being copied, or else will receive an error when copying!
+        </p>
+        <div class="switch">
+          <label>
+            Off
+            <input disabled type="checkbox" checked="{{template.sharing.shared}}">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
       </div>
     </div>
     <!--END TEMPLATE SHARING SECTION-->
 
     <!--TEMPLATE RENAME SECTION-->
-    <div class="ui raised segment">
-      <h3 class="ui header">
-        Dynamic Rename <a class="ui tiny grey circular label" id="renameHelp" data-title="Dynamic Rename"
-            data-content="Dynamic Rename allows CloudTemplates to automatically rename copied items using the find values below.
-            When you copy from this Template you will see these find values and you can choose to replace instances of these values
-            with the &quot;replace&quot; term, which you can set on the &quot;Copy from Template&quot; page."
-            data-variation="inverted basic wide">?</a>
-        <!-- HIDING UNTIL SECTION READY
-        <button class="ui mini green basic right floated button">
-          Edit
+
+    <div class="card">
+      <div class="card-image">
+        <!-- HIDING UNTIL READY
+        <button class="btn-floating halfway-fab right waves-effect waves-light" id="updateTemplateItemsEdit">
+          <i class="material-icons left">mode_edit</i>
         </button>
         -->
-      </h3>
-      <div class="ui toggle checkbox" id="shared">
+      </div>
+      <div class="card-panel">
+        <span class="card-title">Dynamic Rename</span>
+        <p>
+          Dynamic Rename allows CloudTemplates to automatically rename copied items using the find values below.
+          When you copy from this Template you will see these find values and you can choose to replace instances of these values
+          with the "replace" term, which you can set on the "Copy from Template" page.
+        </p>
+        <div class="switch">
+          <label>
+            Off
+            <input disabled type="checkbox" checked="{{template.dynamicRename.isUsing}}">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+
         {{#if template.dynamicRename.isUsing}}
-            <input type="checkbox" name="renameCheckbox" checked="" readonly="" tabindex="0">
-            <label><strong>Use Dynamic Rename</strong></label> <br>
-            <p><strong>Find Values</strong></p>
-            <div class="ui list">
-              {{#each template.dynamicRename.findValues}}
-                <div class="item">
-                  <p>{{this}}</p>
-                </div>
-              {{/each}}
-            </div>
-        {{else}}
-            <input type="checkbox" name="renameCheckbox" readonly="" tabindex="0">
-            <label><strong>Use Dynamic Rename</strong></label>
+          <br>
+          <span class="card-title">Find Values</span>
+          <div class="ui list">
+            {{#each template.dynamicRename.findValues}}
+              <div class="input-field">
+                <input disabled value="{{this}}" type="text">
+                <label></label>
+              </div>
+            {{/each}}
+          </div>
         {{/if}}
       </div>
     </div>
@@ -165,11 +187,10 @@
     <br>
 
   {{else}}
-    <h2 class="ui center aligned icon disabled red header">
-      <i class="warning sign icon"></i>
-      This Template doesn't exist or you do not have permission to view it<br>
-      <a href="{{pathFor 'manageTemplates'}}"><u>Manage your Templates</u></a>
-    </h2>
+    <div class="card-panel red">
+      <i class="material-icons left">warning</i>
+      This Template does not exist or you do not have permission to view it
+    </div>
   {{/if}}
 </div>
 </template>

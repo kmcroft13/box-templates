@@ -1,51 +1,66 @@
 <template name="profile">
 <div id="content" class="transitions-content">
 
-  <h2 class="ui header">
-    <img class="ui avatar image header" src="{{currentUser.profile.avatar}}">
-    <div class="content">
-      {{currentUser.profile.fullName}}
-      <div class="sub header">This infomation is synced with Box every 12 hours</div>
-    </div>
-  </h2>
+  <h4 class="valign-wrapper">
+    <img class="circle" src="{{currentUser.profile.avatar}}">&nbsp;
+    {{currentUser.profile.fullName}}
+  </h4>
+  <h6>
+    This infomation is synced with Box every 12 hours
+  </h6>
+
+  <br>
   <div class="ui divider"></div>
   <br>
 
-  <div class="ui raised segment">
-    <h4 class="ui header">
-      Box Enterprise
-      <div class="sub header">{{currentUser.profile.boxEntName}}</div>
-    </h4>
-
-    <h4 class="ui header">
-      Box Role
-      <div class="sub header">{{currentUser.profile.boxRole}}</div>
-    </h4>
-
-    <h4 class="ui header">
-      Box Tariff
-      <div class="sub header">{{currentUser.profile.boxTariff}}</div>
-    </h4>
-
-    <h4 class="ui header">
-      Box EID
-      <div class="sub header">{{currentUser.profile.eid}}</div>
-    </h4>
+  <div class="card">
+    <div class="card-image">
+    </div>
+    <div class="card-panel">
+      <span class="card-title">Box Enterprise</span>
+      <p>
+        {{currentUser.profile.boxEntName}}
+      </p>
+      <br>
+      <span class="card-title">Box Role</span>
+      <p>
+        {{currentUser.profile.boxRole}}
+      </p>
+      <br>
+      <span class="card-title">Box Tariff</span>
+      <p>
+        {{currentUser.profile.boxTariff}}
+      </p>
+      <br>
+      <span class="card-title">Box EID</span>
+      <p>
+        {{currentUser.profile.eid}}
+      </p>
+    </div>
   </div>
 
   {{#if currentUser.profile.boxGroups}}
-    <div class="ui raised segment">
-      <h4 class="ui header">
-        Box Groups
-      </h4>
-        <div class="ui list">
-          {{#each currentUser.profile.boxGroups}}
-            <div class="item" style="color: rgba(0, 0, 0, 0.6);">
-                <p>{{#if isAdmin role}}<div class="fixedProfileLabel ui blue horizontal label">Admin</div>{{/if}}{{#if isMember role}}<div class="fixedProfileLabel ui green horizontal label">Member</div>{{/if}}&nbsp; {{name}}</p>
-            </div>
-          {{/each}}
-        </div>
+
+    <div class="card">
+      <div class="card-image">
+      </div>
+      <div class="card-panel">
+        <span class="card-title">Box Groups</span>
+
+        {{#each currentUser.profile.boxGroups}}
+          <p>
+            {{#if isAdmin role}}
+              <span class="fixedProfileLabel new badge blue">Admin</span>
+            {{/if}}
+            {{#if isMember role}}
+              <span class="fixedProfileLabel new badge green">Member</span>
+            {{/if}}
+            {{name}}
+          </p>
+        {{/each}}
+      </div>
     </div>
+
   {{/if}}
   <br>
 </div>

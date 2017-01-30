@@ -1,27 +1,29 @@
 <template name="manageTemplates">
 <div id="content" class="transitions-content">
-  <h2 class="ui header">
-    <i class="edit icon"></i>
-    <div class="content">
-      Manage your Templates
-      <div class="sub header">View and manage all of your Templates</div>
-    </div>
-  </h2>
-  <div class="ui divider"></div>
+
+  <h4>
+    Manage your Templates
+    <h6>
+      View and manage all of your Templates
+    </h6>
+  </h4>
+  <br>
+  <div class="divider"></div>
   <br>
 
   {{#if privateTemplates.count}}
-  <div class="sidebar">
-    <div class="ui fixed raised segment">
-      <h3>Templates Owned by You</h3>
-      <table class="ui unstackable very basic fixed single line table">
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Templates Owned by You</span>
+      <table>
         <thead>
           <tr>
-            <th class="four wide">Name</th>
-            <th class="one wide"></th>
-            <th class="six wide">Description</th>
-            <th class="three wide">Created</th>
-            <th class="two wide"></th>
+            <th>Name</th>
+            <th></th>
+            <th>Description</th>
+            <th>Created</th>
+            <th></th>
         </tr></thead>
         <tbody>
           {{#each privateTemplates}}
@@ -31,30 +33,30 @@
       </table>
     </div>
   </div>
-  <br><br>
     {{> deleteModal}}
   {{/if}}
 
   {{#if sharedTemplates.count}}
-  <div class="sidebar">
-    <div class="ui fixed raised segment">
-      <h3>Templates Shared with You</h3>
-      <table class="ui unstackable very basic fixed single line table">
-        <thead>
-          <tr>
-            <th class="five wide">Name</th>
-            <th class="six wide">Description</th>
-            <th class="three wide">Created</th>
-            <th class="two wide">Owner</th>
-        </tr></thead>
-        <tbody>
-          {{#each sharedTemplates}}
-            {{> sharedTemplate}}
-          {{/ each}}
-        </tbody>
-      </table>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Templates Shared with You</span>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Created</th>
+              <th>Owner</th>
+          </tr></thead>
+          <tbody>
+            {{#each sharedTemplates}}
+              {{> sharedTemplate}}
+            {{/ each}}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
   {{/if}}
 
   {{#unless privateTemplates.count}}
@@ -76,7 +78,7 @@
     <td>
       <a href="{{pathFor 'viewTemplate'}}">{{name}}</a>
     </td>
-    <td class="right aligned">
+    <td class="right">
       {{#if sharing.shared}}
         <a class="tiny ui icon shared" id="sharedIcon" 
             data-content="You are sharing this Template with others in your Organization"
@@ -91,8 +93,8 @@
     <td>
       {{shortDate createdAt}}
     </td>
-    <td class="right aligned">
-      <a href="#" class="ui negative delete">Remove</a>
+    <td class="right">
+      <a href="#" class="deleteConfirm">Remove</a>
     </td>
   </tr>
 </template>
@@ -115,24 +117,21 @@
 </template>
 
 <template name="deleteModal">
-  <div id="deleteTemplateModal" class="ui basic modal">
-    <div class="centered header">
-      Delete Template
+  <div id="deleteTemplateModal" class="modal">
+    <div class="modal-content">
+      <h4>
+        Delete Template
+      </h4>
+      <p>
+        You will be unable to use this Template from now on.  Are you sure you want to delete?
+      </p>
     </div>
-    <div class="content">
-      <div class="description">
-        <p>You will be unable to use this Template from now on.  Are you sure you want to delete?</p>
+    <div class="modal-footer">
+      <div class="modal-action modal-close waves-effect waves-light btn red delete">
+        Delete
       </div>
-    </div>
-    <div class="actions">
-      <div class="ui inverted buttons">
-        <div class="ui basic inverted button cancel">
-          Cancel
-        </div>
-        <div class="ui red basic inverted button approve">
-          <i class="remove icon"></i>
-          Delete
-        </div>
+      <div class="modal-action modal-close waves-effect waves-light btn btn-flat">
+        Cancel
       </div>
     </div>
   </div>
