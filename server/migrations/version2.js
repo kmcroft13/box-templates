@@ -15,16 +15,6 @@ Migrations.add({
         console.log(result);
       },
   down: function() {
-      //code to migrate down to version 1
-        const result = Template.update({ $or: [ "dynamicRename": {$exists: true}, "sharing": {$exists: true} ] }, {
-            $unset: {
-                dynamicRename: "",
-                sharing: ""
-            }
-        },
-        { multi: true }
-        );
 
-        console.log(result);
   }
 });
